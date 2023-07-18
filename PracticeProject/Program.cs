@@ -1,7 +1,10 @@
-﻿internal class Program
+﻿using PracticeProject.Tasks;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        DataTypesAndConsoleTask task1 = new();
+        task1.RetrieveAndPrintTheData();
     }
 }
