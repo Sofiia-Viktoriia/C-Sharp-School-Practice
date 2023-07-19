@@ -2,7 +2,7 @@
 
 namespace PracticeProject.Tasks
 {
-    internal class DataTypesAndConsoleTask
+    internal class UserData
     {
         private string _name = string.Empty;
         private string _email = string.Empty;
