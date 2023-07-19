@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PracticeProject.Tasks
 {
@@ -27,6 +28,7 @@ namespace PracticeProject.Tasks
 
     internal class UserDataBuilder
     {
+        private static int _passwordLength = 4;
         private string _name = string.Empty;
         private string _email = string.Empty;
         private int _age;
@@ -65,7 +67,7 @@ namespace PracticeProject.Tasks
             {
                 Console.WriteLine("Enter your age:");
                 result = Console.ReadLine();
-            } while (string.IsNullOrWhiteSpace(result) || !int.TryParse(result, out _age));
+            } while (!int.TryParse(result, out _age));
             return this;
         }
 
@@ -73,41 +75,20 @@ namespace PracticeProject.Tasks
         {
             Console.WriteLine("Enter your password:\n****");
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            string result = "";
-            ConsoleKeyInfo currCharacter;
-            for (int i = 0; i < 4; i++)
+            StringBuilder result = new StringBuilder();
+            char currCharacter;
+            while (result.Length < _passwordLength)
             {
-                currCharacter = Console.ReadKey();
-                while (!char.IsDigit(currCharacter.KeyChar))
+                do
                 {
-                    if (currCharacter.Key == ConsoleKey.Backspace)
-                    {
-                        Console.Write('*');
-                        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                        if (result.Length != 0)
-                        {
-                            result = result.Substring(0, result.Length - 1);
-                            i--;
-                        }
-                        currCharacter = Console.ReadKey();
-                    }
-                    else if (currCharacter.Key == ConsoleKey.Enter)
-                    {
-                        Console.SetCursorPosition(result.Length, Console.CursorTop);
-                        currCharacter = Console.ReadKey();
-                    }
-                    else
-                    {
-                        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                        Console.Write('*');
-                        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                        currCharacter = Console.ReadKey();
-                    }
-
-                }
-                result += currCharacter.KeyChar;
+                    currCharacter = Console.ReadKey(true).KeyChar;
+                } while (!char.IsDigit(currCharacter));
+                result.Append(currCharacter);
+                Console.SetCursorPosition(0, Console.CursorTop);
+                Console.Write(result.ToString() + new string('*', _passwordLength - result.Length));
+                Console.SetCursorPosition(result.Length, Console.CursorTop);
             }
-            _password = Convert.ToInt32(result);
+            _password = Convert.ToInt32(result.ToString());
             return this;
         }
 
