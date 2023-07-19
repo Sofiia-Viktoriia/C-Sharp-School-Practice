@@ -9,45 +9,67 @@ namespace PracticeProject.Tasks
         private int _age;
         private int _password;
 
-        public void RetrieveAndPrintTheData()
+        public UserData(string name, string email, int age, int password)
         {
-            RetrieveName();
-            RetrieveEmail();
-            RetrieveAge();
-            RetrievePassword();
-            PrintResult();
+            _name = name;
+            _email = email;
+            _age = age;
+            _password = password;
         }
 
-        private void RetrieveName()
+        public void PrintResult()
         {
-            Console.WriteLine("Enter your name:");
-            _name = Console.ReadLine();
+            Console.Clear();
+            Console.Write($"----------\n\tName: {_name}\n\tEmail: {_email}\n\tAge: {_age}\n\tPassword: " +
+                $"{_password}\n\tLength of name: {_name.Length}\n----------\n");
+        }
+    }
+
+    internal class UserDataBuilder
+    {
+        private string _name = string.Empty;
+        private string _email = string.Empty;
+        private int _age;
+        private int _password;
+
+        public UserDataBuilder SetName()
+        {
+            string result;
+            do
+            {
+                Console.WriteLine("Enter your name:");
+                result = Console.ReadLine();
+            } while (string.IsNullOrWhiteSpace(result));
+
+            _name = result;
+            return this;
         }
 
-        private void RetrieveEmail()
+        public UserDataBuilder SetEmail()
         {
             string result;
             do
             {
                 Console.WriteLine("Enter valid email:");
                 result = Console.ReadLine();
-            } while (!Regex.IsMatch(result, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase));
+            } while (string.IsNullOrWhiteSpace(result) || !Regex.IsMatch(result, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase));
 
             _email = result;
+            return this;
         }
 
-        private void RetrieveAge()
+        public UserDataBuilder SetAge()
         {
             string result;
             do
             {
                 Console.WriteLine("Enter your age:");
                 result = Console.ReadLine();
-            } while (result.Length == 0 || Regex.IsMatch(result, @"^\D+$"));
-            _age = Convert.ToInt32(result);
+            } while (string.IsNullOrWhiteSpace(result) || !int.TryParse(result, out _age));
+            return this;
         }
 
-        private void RetrievePassword()
+        public UserDataBuilder SetPassword()
         {
             Console.WriteLine("Enter your password:\n****");
             Console.SetCursorPosition(0, Console.CursorTop - 1);
@@ -86,13 +108,12 @@ namespace PracticeProject.Tasks
                 result += currCharacter.KeyChar;
             }
             _password = Convert.ToInt32(result);
+            return this;
         }
 
-        private void PrintResult()
+        public UserData Build()
         {
-            Console.Clear();
-            Console.Write("----------\n\tName: {0}\n\tEmail: {1}\n\tAge: {2}\n\tPassword: {3}\n\t" +
-                "Length of name: {4}\n----------\n", _name, _email, _age, _password, _name.Length);
+            return new UserData(_name, _email, _age, _password);
         }
     }
 }
