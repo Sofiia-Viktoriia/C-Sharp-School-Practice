@@ -1,4 +1,4 @@
-﻿namespace PracticeProject.Tasks
+﻿namespace PracticeProject
 {
     internal class Matrix
     {
@@ -24,26 +24,28 @@
             {
                 for (int j = 0; j < _matrixSize; j++)
                 {
-                    if (_matrix[i,j] > 0 && _matrix[i,j] % 2 == 1)
+                    if (_matrix[i, j] > 0 && _matrix[i, j] % 2 == 1)
                     {
-                        Console.Write(_matrix[i,j] + "\t");
+                        Console.Write(_matrix[i, j] + "\t");
                         if (++count % 5 == 0)
                         {
                             Console.WriteLine();
                         }
-                        max = _matrix[i,j] > max ? _matrix[i,j] : max;
+                        max = _matrix[i, j] > max ? _matrix[i, j] : max;
                     }
                 }
             }
 
-            if (count == 0) {
+            if (count == 0)
+            {
                 Console.WriteLine("\nThere are no odd positive numbers in the matrix");
-            } else
+            }
+            else
             {
                 Console.WriteLine($"\nThe amount of odd positive numbers: {count}");
                 Console.WriteLine($"The biggest odd positive number: {max}");
             }
-            
+
         }
     }
 }
