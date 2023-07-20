@@ -5,16 +5,16 @@
         private const string _firstOperandMessage = "Please, enter the first operand:";
         private const string _secondOperandMessage = "Please, enter the second operand:";
         private const string _divideByZeroMessage = "The second operand can't be equal to zero.";
-        private char _currOption;
 
         public void Start()
         {
-            while (_currOption != '5')
+            char currOption = '0';
+            while (currOption != '5')
             {
                 PrintMenu();
-                _currOption = Console.ReadKey().KeyChar;
+                currOption = Console.ReadKey().KeyChar;
                 Console.Clear();
-                switch (_currOption)
+                switch (currOption)
                 {
                     case '1':
                         AddNumbers();
