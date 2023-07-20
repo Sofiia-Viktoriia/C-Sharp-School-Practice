@@ -22,7 +22,7 @@ namespace PracticeProject.Tasks
         {
             Console.Clear();
             Console.Write($"----------\n\tName: {_name}\n\tEmail: {_email}\n\tAge: {_age}\n\tPassword: " +
-                $"{_password}\n\tLength of name: {_name.Length}\n----------\n");
+                $"{_password:D4}\n\tLength of name: {_name.Length}\n----------\n");
         }
     }
 }
