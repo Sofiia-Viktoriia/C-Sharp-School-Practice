@@ -5,7 +5,6 @@ namespace PracticeProject.Tasks
 {
     internal class UserDataBuilder
     {
-        private static int _passwordLength = 4;
         private string _name = string.Empty;
         private string _email = string.Empty;
         private int _age;
@@ -50,25 +49,22 @@ namespace PracticeProject.Tasks
 
         public UserDataBuilder SetPassword()
         {
-            Console.WriteLine("Enter your password:\n****");
-            Console.SetCursorPosition(0, Console.CursorTop - 1);
+            Console.Write("Enter your password:\n****");
+            Console.CursorLeft = 0;
             StringBuilder result = new("****");
-            ConsoleKeyInfo currCharacter;
-            for (int i = 0; !int.TryParse(result.ToString(), out _password);)
+            while (!int.TryParse(result.ToString(), out _password))
             {
-                currCharacter = Console.ReadKey(true);
-                if (char.IsDigit(currCharacter.KeyChar))
+                char currCharacter = Console.ReadKey(true).KeyChar;
+                if (char.IsDigit(currCharacter))
                 {
-                    result[i] = currCharacter.KeyChar;
-                    Console.CursorLeft = 0;
-                    Console.Write(result.ToString());
-                    Console.CursorLeft = ++i;
-                } else if (currCharacter.Key == ConsoleKey.Backspace && result[0] != '*')
+                    result[Console.CursorLeft] = currCharacter;
+                    Console.Write(currCharacter);
+                }
+                if (currCharacter == (char)ConsoleKey.Backspace)
                 {
-                    result[--i] = '*';
-                    Console.CursorLeft = 0;
-                    Console.Write(result.ToString());
-                    Console.CursorLeft = i;
+                    Console.Write(currCharacter);
+                    Console.Write('*');
+                    Console.CursorLeft--;
                 }
             }
             return this;
