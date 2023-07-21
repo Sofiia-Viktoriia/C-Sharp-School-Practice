@@ -7,11 +7,10 @@
             int[] array = new int[size];
             for (int i = 0; i < size; i++)
             {
-                string result;
-                do
+                while (!int.TryParse(Console.ReadLine(), out array[i]))
                 {
-                    result = Console.ReadLine();
-                } while (!int.TryParse(result, out array[i]));
+                    Console.WriteLine("The value is invalid. Please, enter the integer");
+                }
             }
             return array;
         }
