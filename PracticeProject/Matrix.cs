@@ -2,36 +2,48 @@
 {
     internal class Matrix
     {
-        private const int _matrixSize = 8;
-        private int[,] _matrix = new int[_matrixSize, _matrixSize];
+        private readonly int _matrixWidth;
+        private readonly int _matrixHeight;
+        private int[,] _matrix;
 
-        public void FillMatrixRandomly()
+        private Matrix(int width, int height)
         {
+            _matrixWidth = width;
+            _matrixHeight = height;
+            _matrix = new int[width, height];
+        }
+
+        public static Matrix GetMatrix(int width, int height)
+        {
+            var matrix = new Matrix(width, height);
             var rand = new Random();
-            for (int i = 0; i < _matrixSize; i++)
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < _matrixSize; j++)
+                for (int j = 0; j < height; j++)
                 {
-                    _matrix[i, j] = rand.Next(-50, 51);
+                    matrix._matrix[i, j] = rand.Next(-50, 51);
                 }
             }
+            return matrix;
         }
 
         public void PrintInformation()
         {
-            int count = 0, max = 0;
-            for (int i = 0; i < _matrixSize; i++)
+            int count = 0;
+            int max = 0;
+            for (int i = 0; i < _matrixWidth; i++)
             {
-                for (int j = 0; j < _matrixSize; j++)
+                for (int j = 0; j < _matrixHeight; j++)
                 {
-                    if (_matrix[i, j] > 0 && _matrix[i, j] % 2 == 1)
+                    int element = _matrix[i, j];
+                    if (element > 0 && element % 2 == 1)
                     {
-                        Console.Write(_matrix[i, j] + "\t");
+                        Console.Write(element + "\t");
                         if (++count % 5 == 0)
                         {
                             Console.WriteLine();
                         }
-                        max = _matrix[i, j] > max ? _matrix[i, j] : max;
+                        max = element > max ? element : max;
                     }
                 }
             }

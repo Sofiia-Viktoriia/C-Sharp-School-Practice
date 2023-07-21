@@ -4,8 +4,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        var matrix = new Matrix();
-        matrix.FillMatrixRandomly();
+        var matrix = Matrix.GetMatrix(8, 8);
         matrix.PrintInformation();
     }
 }
