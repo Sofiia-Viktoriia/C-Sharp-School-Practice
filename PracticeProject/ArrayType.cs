@@ -28,9 +28,7 @@
                 {
                     if (array[loop] < array[loop + 1])
                     {
-                        int temp = array[loop + 1];
-                        array[loop + 1] = array[loop];
-                        array[loop] = temp;
+                        (array[loop], array[loop + 1]) = (array[loop + 1], array[loop]);
                     }
                 }
             }
