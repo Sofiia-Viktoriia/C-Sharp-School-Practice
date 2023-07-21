@@ -1,4 +1,6 @@
-﻿namespace PracticeProject
+﻿using System.Text;
+
+namespace PracticeProject
 {
     internal class Matrix
     {
@@ -31,6 +33,7 @@
         {
             int count = 0;
             int max = 0;
+            StringBuilder result = new StringBuilder();
             for (int i = 0; i < _matrixWidth; i++)
             {
                 for (int j = 0; j < _matrixHeight; j++)
@@ -38,10 +41,10 @@
                     int element = _matrix[i, j];
                     if (element > 0 && element % 2 == 1)
                     {
-                        Console.Write(element + "\t");
+                        result.Append(element + "\t");
                         if (++count % 5 == 0)
                         {
-                            Console.WriteLine();
+                            result.Append('\n');
                         }
                         max = element > max ? element : max;
                     }
@@ -50,12 +53,13 @@
 
             if (count == 0)
             {
-                Console.WriteLine("\nThere are no odd positive numbers in the matrix");
+                result.Append("\nThere are no odd positive numbers in the matrix");
+                Console.WriteLine(result);
             }
             else
             {
-                Console.WriteLine($"\nThe amount of odd positive numbers: {count}");
-                Console.WriteLine($"The biggest odd positive number: {max}");
+                result.Append($"\nThe amount of odd positive numbers: {count}\nThe biggest odd positive number: {max}");
+                Console.WriteLine(result);
             }
 
         }
