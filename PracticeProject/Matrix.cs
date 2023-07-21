@@ -41,10 +41,12 @@ namespace PracticeProject
                     int element = _matrix[i, j];
                     if (element > 0 && element % 2 == 1)
                     {
-                        result.Append(element + "\t");
                         if (++count % 5 == 0)
                         {
-                            result.Append('\n');
+                            result.AppendLine(element.ToString());
+                        } else
+                        {
+                            result.Append(element + "\t");
                         }
                         max = element > max ? element : max;
                     }
@@ -54,14 +56,13 @@ namespace PracticeProject
             if (count == 0)
             {
                 result.Append("\nThere are no odd positive numbers in the matrix");
-                Console.WriteLine(result);
             }
             else
             {
                 result.Append($"\nThe amount of odd positive numbers: {count}\nThe biggest odd positive number: {max}");
-                Console.WriteLine(result);
             }
 
+            Console.WriteLine(result);
         }
     }
 }
