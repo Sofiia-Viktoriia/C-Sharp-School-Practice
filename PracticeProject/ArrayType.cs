@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PracticeProject
+﻿namespace PracticeProject
 {
     internal class ArrayType
     {
@@ -24,17 +18,14 @@ namespace PracticeProject
 
         public static void PrintArray(int[] array)
         {
-            foreach (int item in array)
-            {
-                Console.Write(item + "\t");
-            }
+            Console.WriteLine(string.Join('\t', array));
         }
 
-        public static void SortDesc(ref int[] array)
+        public static void SortDesc(int[] array)
         {
-            for (int pass = 0; pass <= array.Length - 2; pass++)
+            for (int pass = 0; pass < array.Length - 1; pass++)
             {
-                for (int loop = 0; loop <= array.Length - 2; loop++)
+                for (int loop = 0; loop < array.Length - 1; loop++)
                 {
                     if (array[loop] < array[loop + 1])
                     {
@@ -49,14 +40,21 @@ namespace PracticeProject
         public static bool Equal(int[] firstArray, int[] secondArray)
         {
             if (firstArray == null || secondArray == null)
+            {
                 return false;
+            }
 
             if (firstArray.Length != secondArray.Length)
+            {
                 return false;
+            }
 
             for (int i = 0; i < firstArray.Length; i++)
             {
-                if (firstArray[i] != secondArray[i]) return false;
+                if (firstArray[i] != secondArray[i])
+                {
+                    return false;
+                }
             }
             return true;
         }

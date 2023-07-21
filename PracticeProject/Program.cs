@@ -14,14 +14,14 @@ internal class Program
         Console.Clear();
         Console.WriteLine("First array before sort:");
         ArrayType.PrintArray(firstArray);
-        Console.WriteLine("\nSecond array before sort:");
+        Console.WriteLine("Second array before sort:");
         ArrayType.PrintArray(secondArray);
 
-        ArrayType.SortDesc(ref firstArray);
-        ArrayType.SortDesc(ref secondArray);
-        Console.WriteLine("\nFirst array after sort:");
+        ArrayType.SortDesc(firstArray);
+        ArrayType.SortDesc(secondArray);
+        Console.WriteLine("First array after sort:");
         ArrayType.PrintArray(firstArray);
-        Console.WriteLine("\nSecond array after sort:");
+        Console.WriteLine("Second array after sort:");
         ArrayType.PrintArray(secondArray);
 
         if (ArrayType.Equal(firstArray, secondArray))
