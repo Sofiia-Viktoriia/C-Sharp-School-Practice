@@ -38,7 +38,7 @@
 
         private void GetInfo()
         {
-            Console.WriteLine($"Name: {_name}\nPrice: {_price:#.##}$");
+            Console.WriteLine($"Name: {_name}\nPrice: {_price:C}");
         }
     }
 }
