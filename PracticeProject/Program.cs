@@ -14,6 +14,6 @@ internal class Program
         {
             salary = worker.CalculateSalaryWithBonus();
         }
-        Console.WriteLine($"The workers salary equals {salary:#.##}");
+        Console.WriteLine($"The workers salary equals {salary:C}");
     }
 }
