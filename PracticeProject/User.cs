@@ -2,8 +2,8 @@
 {
     internal class User
     {
-        public readonly string Name;
-        public readonly int Id;
+        public string Name { get; }
+        public int Id { get; }
         public int Age { get; private set; }
 
         public User(string name, int id, int age)
