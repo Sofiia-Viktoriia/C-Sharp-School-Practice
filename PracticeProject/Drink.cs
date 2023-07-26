@@ -26,8 +26,8 @@
 
         public Drink(string name, double price)
         {
-            this.Name = name;
-            this.Price = price;
+            Name = name;
+            Price = price;
         }
 
         public void PrintInfo()
