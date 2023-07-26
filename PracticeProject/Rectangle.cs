@@ -7,7 +7,7 @@
             Console.WriteLine("Rectangle is created");
         }
 
-        public void GetArea()
+        public new void GetArea()
         {
             Console.WriteLine($"The area of the rectangle equals {Width * Height}");
         }

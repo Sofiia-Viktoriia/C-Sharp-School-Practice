@@ -10,15 +10,15 @@ internal class Program
         Rectangle rectangle = new Rectangle(23, 44);
         rectangle.GetArea();
 
-        object obj1 = new Shape(32, 667);
-        object obj2 = new Rectangle(43, 11);
+        object objectShape = new Shape(32, 667);
+        object objectRectangle = new Rectangle(43, 11);
 
-        Shape shape1 = obj1 as Shape;
+        Shape? shape1 = objectShape as Shape;
         shape1?.GetArea();
 
-        if (obj2 is Rectangle r)
+        if (objectRectangle is Rectangle rectangleFromObject)
         {
-            r.GetArea();
+            rectangleFromObject.GetArea();
         }
         else
         {
