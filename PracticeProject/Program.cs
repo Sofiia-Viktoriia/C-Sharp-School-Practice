@@ -6,13 +6,13 @@ internal class Program
     {
         var worker = new Worker(40, 220);
         double salary;
-        if (worker.Rate > 50 && worker.TotalHour < 200)
+        if (worker.Rate < 50 && worker.TotalHour > 200)
         {
-            salary = worker.CalculateSalary();
+            salary = worker.CalculateSalaryWithBonus();
         }
         else
         {
-            salary = worker.CalculateSalaryWithBonus();
+            salary = worker.CalculateSalary();
         }
         Console.WriteLine($"The workers salary equals {salary:C}");
     }
