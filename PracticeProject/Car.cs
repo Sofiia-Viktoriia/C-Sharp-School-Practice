@@ -2,7 +2,18 @@
 {
     internal class Car
     {
-        public int Quantity { get; set; }
+        private int _quantity;
+        public int Quantity
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value > 0 ? value : 0;
+            }
+        }
         public int Warranty { get; protected set; }
 
         public virtual void GetQuantity()
