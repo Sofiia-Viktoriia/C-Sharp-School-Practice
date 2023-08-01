@@ -19,11 +19,10 @@
 
         public double TotalToPay()
         {
-            double sum = 0;
-            foreach (Employee employee in _employees)
-            {
-                sum += employee.ToPay();
-            }
+            double sum = (
+                from employee in _employees
+                select employee.ToPay()
+            ).Sum();
             return sum;
         }
 

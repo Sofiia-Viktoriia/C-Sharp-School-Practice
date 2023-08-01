@@ -11,15 +11,15 @@
 
         public override void SetBonus(double bonus)
         {
-            base.SetBonus(bonus);
             if (_percent > 200)
             {
-                _bonus *= 3;
+                bonus *= 3;
             }
             else if (_percent > 100)
             {
-                _bonus *= 2;
+                bonus *= 2;
             }
+            base.SetBonus(bonus);
         }
     }
 }

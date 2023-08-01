@@ -11,15 +11,15 @@
 
         public override void SetBonus(double bonus)
         {
-            base.SetBonus(bonus);
             if (_quantity > 150)
             {
-                _bonus += 1000;
+                bonus += 1000;
             }
             else if (_quantity > 100)
             {
-                _bonus += 500;
+                bonus += 500;
             }
+            base.SetBonus(bonus);
         }
     }
 }

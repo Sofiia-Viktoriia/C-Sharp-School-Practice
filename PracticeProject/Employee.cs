@@ -4,7 +4,7 @@
     {
         private string _name;
         private double _salary;
-        protected double _bonus;
+        private double _bonus;
 
         public string Name
         {
