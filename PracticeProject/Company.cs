@@ -19,11 +19,7 @@
 
         public double TotalToPay()
         {
-            double sum = (
-                from employee in _employees
-                select employee.ToPay()
-            ).Sum();
-            return sum;
+            return _employees.Sum(x => x.ToPay());
         }
 
         public void GetNameSalary()
