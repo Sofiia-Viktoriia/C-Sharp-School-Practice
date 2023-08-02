@@ -1,4 +1,5 @@
 ﻿using PracticeProject;
+using System.Text;
 using System.Text.RegularExpressions;
 
 internal class Program
@@ -49,7 +50,7 @@ internal class Program
 
     public static string[] FindErrorRecords(string[] records)
     {
-        Regex regex = new Regex(@"(error|Error|ERROR)");
+        Regex regex = new Regex(@"error", RegexOptions.IgnoreCase);
         return records.Where(record => regex.IsMatch(record)).ToArray();
     }
 
@@ -59,24 +60,24 @@ internal class Program
         Regex enrtyRegex = new Regex(@"\d{2}:\d{2}:\d{2} .:");
         using (StreamReader streamReader = File.OpenText(path))
         {
-            string currentRecord = "";
-            string line;
+            StringBuilder currentRecord = new StringBuilder();
+            string? line;
             while ((line = streamReader.ReadLine()) != null)
             {
                 if (enrtyRegex.IsMatch(line))
                 {
-                    if (!string.IsNullOrEmpty(currentRecord))
+                    if (currentRecord.Length > 0)
                     {
-                        records.Add(currentRecord);
-                        currentRecord = "";
+                        records.Add(currentRecord.ToString());
+                        currentRecord.Clear();
                     }
                 }
-                currentRecord += line;
+                currentRecord.Append(line);
             }
 
-            if (!string.IsNullOrEmpty(currentRecord))
+            if (currentRecord.Length > 0)
             {
-                records.Add(currentRecord);
+                records.Add(currentRecord.ToString());
             }
         }
         return records.ToArray();
