@@ -61,11 +61,10 @@ internal class Program
         using (StreamReader streamReader = File.OpenText(path))
         {
             StringBuilder currentRecord = new StringBuilder();
-            string line;
+            string? line;
 
-            while(!streamReader.EndOfStream)
+            while((line = streamReader.ReadLine()) != null)
             {
-                line = streamReader.ReadLine();
                 if (enrtyRegex.IsMatch(line) && currentRecord.Length > 0)
                 {
                     records.Add(currentRecord.ToString());
