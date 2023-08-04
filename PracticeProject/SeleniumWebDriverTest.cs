@@ -1,4 +1,4 @@
-﻿namespace SeleniumProject
+﻿namespace PracticeProject
 {
     [TestFixture]
     internal class SeleniumWebDriverTest
