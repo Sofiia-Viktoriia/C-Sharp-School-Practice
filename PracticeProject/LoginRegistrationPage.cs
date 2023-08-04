@@ -1,23 +1,23 @@
-﻿namespace PageObjectProject
+﻿namespace PracticeProject
 {
     public class LoginRegistrationPage
     {
         IWebDriver _webDriver;
         private IWebElement _formTitle(string title) => _webDriver.FindElement(By.XPath($"//h2[text()='{title}']"));
-        private IWebElement _loginFormUsernameOrEmailInput => _webDriver.FindElement(By.XPath("//input[@id = 'username']"));
-        private IWebElement _loginFormUsernameOrEmailLabel => _webDriver.FindElement(By.XPath("//label[@for='username']"));
-        private IWebElement _loginFormPasswordInput => _webDriver.FindElement(By.XPath("//input[@id = 'password']"));
-        private IWebElement _loginFormPasswordLabel => _webDriver.FindElement(By.XPath("//label[@for='password']"));
-        private IWebElement _loginButton => _webDriver.FindElement(By.XPath("//input[@name = 'login']"));
-        private IWebElement _rememberMeCheckbox => _webDriver.FindElement(By.XPath("//input[@id = 'rememberme']"));
-        private IWebElement _rememberMeLabel => _webDriver.FindElement(By.XPath("//label[@for='rememberme']"));
-        private IWebElement _lostPasswordLink => _webDriver.FindElement(By.XPath("//p[contains(concat(' ', @class, ' '), ' lost_password ')]/a"));
-        private IWebElement _registerFormEmailInput => _webDriver.FindElement(By.XPath("//input[@id = 'reg_email']"));
-        private IWebElement _registerFormEmailLabel => _webDriver.FindElement(By.XPath("//label[@for='reg_email']"));
-        private IWebElement _registerFormPasswordInput => _webDriver.FindElement(By.XPath("//input[@id = 'reg_password']"));
-        private IWebElement _registerFormPasswordLabel => _webDriver.FindElement(By.XPath("//label[@for='reg_password']"));
-        private IWebElement _registerButton => _webDriver.FindElement(By.XPath("//input[@name = 'register']"));
-        private IWebElement _errorMessage => _webDriver.FindElement(By.XPath("//li[./strong[text()='Error:']]"));
+        private IWebElement _loginFormUsernameOrEmailInput => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//input[@id = 'username']"));
+        private IWebElement _loginFormUsernameOrEmailLabel => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//label[@for='username']"));
+        private IWebElement _loginFormPasswordInput => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//input[@id = 'password']"));
+        private IWebElement _loginFormPasswordLabel => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//label[@for='password']"));
+        private IWebElement _loginButton => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//input[@name = 'login']"));
+        private IWebElement _rememberMeCheckbox => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//input[@id = 'rememberme']"));
+        private IWebElement _rememberMeLabel => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//label[@for='rememberme']"));
+        private IWebElement _lostPasswordLink => _webDriver.FindElement(By.XPath("//div[@class='u-column1 col-1']//p[contains(concat(' ', @class, ' '), ' lost_password ')]/a"));
+        private IWebElement _registerFormEmailInput => _webDriver.FindElement(By.XPath("//div[@class='u-column2 col-2']//input[@id = 'reg_email']"));
+        private IWebElement _registerFormEmailLabel => _webDriver.FindElement(By.XPath("//div[@class='u-column2 col-2']//label[@for='reg_email']"));
+        private IWebElement _registerFormPasswordInput => _webDriver.FindElement(By.XPath("//div[@class='u-column2 col-2']//input[@id = 'reg_password']"));
+        private IWebElement _registerFormPasswordLabel => _webDriver.FindElement(By.XPath("//div[@class='u-column2 col-2']//label[@for='reg_password']"));
+        private IWebElement _registerButton => _webDriver.FindElement(By.XPath("//div[@class='u-column2 col-2']//input[@name = 'register']"));
+        private IWebElement _errorMessage => _webDriver.FindElement(By.XPath("//ul[@class='woocommerce-error']/li[./strong[text()='Error:']]"));
 
         public LoginRegistrationPage(IWebDriver webDriver)
         {

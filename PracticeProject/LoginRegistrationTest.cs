@@ -1,4 +1,4 @@
-﻿namespace PageObjectProject
+﻿namespace PracticeProject
 {
     [TestFixture]
     internal class LoginRegistrationTest
