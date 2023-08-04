@@ -2,39 +2,40 @@
 {
     internal class Locators
     {
-        public string SearchIconXPath = "//input[@id='s']";
-        public string SearchIconCSS = "input#s";
+        public string SearchIconXPath = "//header//input[@id='s']";
+        public string SearchIconCSS = "header input#s";
 
-        public string FilterButtonXPath = "//button[@class='button']";
-        public string FilterButtonCSS = "button.button";
+        public string FilterButtonXPath = "//div[contains(concat(' ', @class, ' '), ' widget_price_filter ')]//button[@class='button']";
+        public string FilterButtonCSS = "div.widget_price_filter button.button";
 
-        public string MenuOptionTestCasesXPath = "//li[@id='menu-item-224']/a";
-        public string MenuOptionXPath(string optionName) => $"//li/a[text()='{optionName}']";
-        public string MenuOptionTestCaseCSS = "li#menu-item-224>a";
+        public string MenuOptionTestCasesXPath = "//nav[@id='main-nav-wrap']//li[@id='menu-item-224']/a";
+        public string MenuOptionXPath(string optionName) => $"//nav[@id='main-nav-wrap']//li/a[text()='{optionName}']";
+        public string MenuOptionTestCaseCSS = "nav#main-nav-wrap li#menu-item-224>a";
 
-        public string ExpanderXPath = "//a[@class='pull-down']";
-        public string ExpanderCSS = "a.pull-down";
+        public string ExpanderXPath = "//header//a[@class='pull-down']";
+        public string ExpanderCSS = "header a.pull-down";
 
-        public string CategoryJavaScriptXPath = "//li[contains(@class, 'cat-item-21')]/a";
-        public string CategoryXPath(string categoryName) => $"//li/a[text()='{categoryName}']";
-        public string CategoryJavaScriptCSS = "li.cat-item-21>a";
+        public string CategoryJavaScriptXPath = "//div[@id='woocommerce_product_categories-2']//li[contains(concat(' ', @class, ' '), ' cat-item-21 ')]/a";
+        public string CategoryXPath(string categoryName) => $"//div[@id='woocommerce_product_categories-2']//li/a[text()='{categoryName}']";
+        public string CategoryJavaScriptCSS = "div#woocommerce_product_categories-2 li.cat-item-21>a";
 
-        public string PostXPath = "//li[contains(@class,'post-169')]";
-        public string PostCSS = "li.post-169";
+        public string AndroidQuickStartGuidePostXPath = "//ul[contains(concat(' ', @class, ' '), ' products ')]//li[contains(concat(' ', @class,' '), ' post-169 ')]";
+        public string PostXPath(string postTitle) => $"//ul[contains(concat(' ', @class, ' '), ' products ')]//li[.//h3[text()='{postTitle}']]";
+        public string AndroidQuickStartGuidePostCSS = "ul.products li.post-169";
 
-        public string SortingOptionByNewnessXPath = "//option[@value='date']";
-        public string SortingOptionXPath(string value) => $"//select/option[@value='{value}']";
-        public string SortingOptionTextValueXPath(string textValue) => $"//select/option[text()='{textValue}']";
-        public string SortingOptionByNewnessCSS = "option[value='date']";
+        public string SortingOptionByNewnessXPath = "//select[@class='orderby']/option[@value='date']";
+        public string SortingOptionXPath(string value) => $"//select[@class='orderby']/option[@value='{value}']";
+        public string SortingOptionTextValueXPath(string textValue) => $"//select[@class='orderby']/option[text()='{textValue}']";
+        public string SortingOptionByNewnessCSS = "select.orderby>option[value='date']";
 
-        public string HTML5FormsPriceXPath = "//li[contains(@class,'post-181')]//span[@class='price']";
-        public string PriceXPath(string postId) => $"//li[contains(@class,{postId}')]//span[@class='price']";
-        public string HTML5FormsCSS = "li.post-181 span.price";
+        public string HTML5FormsPriceXPath = "//ul[contains(concat(' ', @class, ' '), ' products ')]//li[contains(concat(' ', @class, ' '), ' post-181 ')]//span[@class='price']";
+        public string PriceXPath(string postTitle) => $"//ul[contains(concat(' ', @class, ' '), ' products ')]//li[.//h3[text()='{postTitle}']]//span[@class='price']";
+        public string HTML5FormsCSS = "ul.products li.post-181 span.price";
 
-        public string EmailInputXPath = "//input[@name='EMAIL']";
-        public string EmailInputCSS = "input[name='EMAIL']";
+        public string EmailInputXPath = "//div[@id='mc4wp_form_widget-2']//input[@name='EMAIL']";
+        public string EmailInputCSS = "div#mc4wp_form_widget-2 input[name='EMAIL']";
 
-        public string CopyrightYearXPath = "//div[@class='one']/text()[2]";
-        public string CopyrightCSS = "div.one";
+        public string CopyrightYearXPath = "//div[contains(concat(' ', @class, ' '), ' footer-text ')]//div[@class='one']/text()[2]";
+        public string CopyrightCSS = "div.footer-text div.one";
     }
 }
