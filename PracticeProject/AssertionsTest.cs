@@ -25,7 +25,7 @@
             CollectionAssert.AreEqual(firstList, secondList, "Lists are not equal");
         }
 
-        [Test, Description("Check if sting is in the list")]
+        [Test(Description = "Check if sting is in the list")]
         public void IsStringInList()
         {
             List<string> list = new() { "I", "want", "to", "eat" };
