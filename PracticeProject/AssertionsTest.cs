@@ -1,4 +1,4 @@
-﻿namespace NUnitProject
+﻿namespace PracticeProject
 {
     [TestFixture]
     internal class AssertionsTest
