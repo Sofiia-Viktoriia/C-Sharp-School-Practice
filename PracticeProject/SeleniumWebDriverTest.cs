@@ -3,55 +3,53 @@
     [TestFixture]
     internal class SeleniumWebDriverTest
     {
-        public const string ThinkingInHTML = "Thinking in HTML";
-        public const string HTML5WebAppDevelpment = "HTML5 WebApp Develpment";
-        public const string HTML = "html";
-        public const string Href = "href";
-        public const string HTTPS = "https://";
         public const string URL = "https://practice.automationtesting.in/shop/";
-        IWebDriver webDriver;
-        IJavaScriptExecutor javaScriptExecutor;
+        IWebDriver _webDriver;
+        IJavaScriptExecutor _javaScriptExecutor;
 
         [SetUp]
         public void SetUp()
         {
             var chromeOptions = new ChromeOptions();
-            webDriver = new ChromeDriver(chromeOptions);
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            webDriver.Manage().Window.Maximize();
-            webDriver.Navigate().GoToUrl(URL);
+            _webDriver = new ChromeDriver(chromeOptions);
+            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _webDriver.Manage().Window.Maximize();
+            _webDriver.Navigate().GoToUrl(URL);
         }
 
         [Test]
         public void SearchAndAddToBasketTest()
         {
-            javaScriptExecutor = (IJavaScriptExecutor)webDriver;
+            string thinkingInHTML = "Thinking in HTML";
+            string html5WebAppDevelpment = "HTML5 WebApp Develpment";
+            string html = "html";
+            _javaScriptExecutor = (IJavaScriptExecutor)_webDriver;
 
-            webDriver.FindElement(By.Id(Locators.SearchInputId)).SendKeys(HTML + Keys.Enter);
+            _webDriver.FindElement(By.Id(Locators.SearchInputId)).SendKeys(html + Keys.Enter);
 
-            Assert.That(webDriver.Title, Does.Contain(HTML), "Search results page is not displayed");
-            string pageTitle = webDriver.FindElement(By.XPath(Locators.PageTitle)).Text;
-            Assert.That(pageTitle, Does.Contain(HTML).IgnoreCase, "Search results page title is not displayed");
+            Assert.That(_webDriver.Title, Does.Contain(html), "Search results page is not displayed");
+            string pageTitle = _webDriver.FindElement(By.XPath(Locators.PageTitle)).Text;
+            Assert.That(pageTitle, Does.Contain(html).IgnoreCase, "Search results page title is not displayed");
 
-            var productLinks = webDriver.FindElements(By.XPath(Locators.ProductLinks));
+            var productLinks = _webDriver.FindElements(By.XPath(Locators.ProductLinks));
             foreach (var link in productLinks)
             {
-                string href = link.GetAttribute(Href);
+                string href = link.GetAttribute("href");
                 Assert.Multiple(() =>
                 {
-                    Assert.That(href, Does.StartWith(HTTPS), "Product has invalid link");
-                    Assert.That(link.Text, Does.Contain(HTML).IgnoreCase, "Product title does not contain 'html'");
+                    Assert.That(href, Does.StartWith("https://"), "Product has invalid link");
+                    Assert.That(link.Text, Does.Contain(html).IgnoreCase, "Product title does not contain 'html'");
                 });
             }
 
-            IWebElement thinkingInHtmlLink = webDriver.FindElement(By.XPath(Locators.PostLinkByName(ThinkingInHTML)));
-            thinkingInHtmlLink.ScrollToElement(javaScriptExecutor);
+            IWebElement thinkingInHtmlLink = _webDriver.FindElement(By.XPath(Locators.PostLinkByName(thinkingInHTML)));
+            thinkingInHtmlLink.ScrollToElement(_javaScriptExecutor);
             thinkingInHtmlLink.Click();
             CloseAds();
 
-            IWebElement saleMark = webDriver.FindElement(By.CssSelector(Locators.OnSaleMark));
-            IWebElement oldPrice = webDriver.FindElement(By.XPath(Locators.OldPrice));
-            IWebElement newPrice = webDriver.FindElement(By.XPath(Locators.NewPrice));
+            IWebElement saleMark = _webDriver.FindElement(By.CssSelector(Locators.OnSaleMark));
+            IWebElement oldPrice = _webDriver.FindElement(By.XPath(Locators.OldPrice));
+            IWebElement newPrice = _webDriver.FindElement(By.XPath(Locators.NewPrice));
             Assert.Multiple(() =>
             {
                 Assert.That(saleMark.Displayed, Is.True, "SALE mark is not displayed");
@@ -59,22 +57,22 @@
                 Assert.That(newPrice.Displayed, Is.True, "New price is not displayed");
             });
 
-            IWebElement html5WebAppLink = webDriver.FindElement(By.XPath(Locators.RelatedProductLinkByName(HTML5WebAppDevelpment)));
-            html5WebAppLink.ScrollToElement(javaScriptExecutor);
+            IWebElement html5WebAppLink = _webDriver.FindElement(By.XPath(Locators.RelatedProductLinkByName(html5WebAppDevelpment)));
+            html5WebAppLink.ScrollToElement(_javaScriptExecutor);
             html5WebAppLink.Click();
             CloseAds();
-            string productTitle = webDriver.FindElement(By.CssSelector(Locators.ProductTitle)).Text;
-            double productPrice = double.Parse(webDriver.FindElement(By.CssSelector(Locators.RegularPrice)).Text.Substring(1));
-            webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
+            string productTitle = _webDriver.FindElement(By.CssSelector(Locators.ProductTitle)).Text;
+            double productPrice = double.Parse(_webDriver.FindElement(By.CssSelector(Locators.RegularPrice)).Text[1..]);
+            _webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
 
-            IWebElement quantityInput = webDriver.FindElement(By.XPath(Locators.ProductQuantityInput));
+            IWebElement quantityInput = _webDriver.FindElement(By.XPath(Locators.ProductQuantityInput));
             quantityInput.Clear();
             quantityInput.SendKeys("2");
-            webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
-            webDriver.FindElement(By.XPath(Locators.ViewBasketButton)).Click();
+            _webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
+            _webDriver.FindElement(By.XPath(Locators.ViewBasketButton)).Click();
 
-            IWebElement basketProductTitle = webDriver.FindElement(By.XPath(Locators.ProductName(ThinkingInHTML)));
-            IWebElement basketProductPrice = webDriver.FindElement(By.XPath(Locators.TotalCost));
+            IWebElement basketProductTitle = _webDriver.FindElement(By.XPath(Locators.ProductName(thinkingInHTML)));
+            IWebElement basketProductPrice = _webDriver.FindElement(By.XPath(Locators.TotalCost));
             Assert.Multiple(() =>
             {
                 Assert.That(basketProductTitle.Text, Is.EqualTo(productTitle), "Product name in the cart does not match");
@@ -84,18 +82,18 @@
 
         public void CloseAds()
         {
-            webDriver.SwitchTo().Frame(Locators.FrameId);
-            if (webDriver.FindElements(By.XPath(Locators.DismissButton)).Count > 0)
+            _webDriver.SwitchTo().Frame(Locators.FrameId);
+            if (_webDriver.FindElements(By.XPath(Locators.DismissButton)).Count > 0)
             {
-                webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
+                _webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
             }
-            webDriver.SwitchTo().DefaultContent();
+            _webDriver.SwitchTo().DefaultContent();
         }
 
         [TearDown]
         public void TearDown()
         {
-            webDriver.Close();
+            _webDriver.Quit();
         }
     }
 }
