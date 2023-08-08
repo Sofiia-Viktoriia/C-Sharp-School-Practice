@@ -12,7 +12,7 @@
         {
             var chromeOptions = new ChromeOptions();
             _webDriver = new ChromeDriver(chromeOptions);
-            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             _webDriver.Manage().Window.Maximize();
             _webDriver.Navigate().GoToUrl(URL);
         }
@@ -80,14 +80,36 @@
             });
         }
 
-        public void CloseAds()
+        private void CloseAds()
         {
             _webDriver.SwitchTo().Frame(Locators.FrameId);
-            if (_webDriver.FindElements(By.XPath(Locators.DismissButton)).Count > 0)
+            IWebElement? element = null;
+            if (IfElementVisible(By.XPath(Locators.DismissButton), ref element))
             {
-                _webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
+                element?.Click();
+                _webDriver.SwitchTo().DefaultContent();
+                return;
+            }
+            if (_webDriver.FindElements(By.Id(Locators.InnerFrameId)).Count > 0)
+            {
+                _webDriver.SwitchTo().Frame(Locators.InnerFrameId);
+                if (IfElementVisible(By.XPath(Locators.DismissButton), ref element))
+                {
+                    element?.Click();
+                }
             }
             _webDriver.SwitchTo().DefaultContent();
+        }
+
+        private bool IfElementVisible(By locator, ref IWebElement? element)
+        {
+            var elements = _webDriver.FindElements(locator);
+            if (elements.Count > 0 && elements[0].Displayed)
+            {
+                element = elements[0];
+                return true;
+            }
+            return false;
         }
 
         [TearDown]

@@ -25,6 +25,7 @@
         //Ads
         public const string DismissButton = "//*[@id='dismiss-button']";
         public const string FrameId = "aswift_5";
+        public const string InnerFrameId = "ad_iframe";
 
         //Header
         public const string SearchInputId = "s";
