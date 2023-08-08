@@ -9,7 +9,6 @@
         public const string Href = "href";
         public const string HTTPS = "https://";
         public const string URL = "https://practice.automationtesting.in/shop/";
-        public const string ScrollToElementScript = "arguments[0].scrollIntoView({ block: \"center\" });";
         IWebDriver webDriver;
         IJavaScriptExecutor javaScriptExecutor;
 
@@ -46,7 +45,7 @@
             }
 
             IWebElement thinkingInHtmlLink = webDriver.FindElement(By.XPath(Locators.PostLinkByName(ThinkingInHTML)));
-            javaScriptExecutor.ExecuteScript(ScrollToElementScript, thinkingInHtmlLink);
+            thinkingInHtmlLink.ScrollToElement(javaScriptExecutor);
             thinkingInHtmlLink.Click();
             CloseAds();
 
@@ -61,7 +60,7 @@
             });
 
             IWebElement html5WebAppLink = webDriver.FindElement(By.XPath(Locators.RelatedProductLinkByName(HTML5WebAppDevelpment)));
-            javaScriptExecutor.ExecuteScript(ScrollToElementScript, html5WebAppLink);
+            html5WebAppLink.ScrollToElement(javaScriptExecutor);
             html5WebAppLink.Click();
             CloseAds();
             string productTitle = webDriver.FindElement(By.CssSelector(Locators.ProductTitle)).Text;
