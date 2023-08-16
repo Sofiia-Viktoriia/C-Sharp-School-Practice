@@ -24,8 +24,8 @@
 
         //Ads
         public const string DismissButton = "//*[@id='dismiss-button']";
-        public const string FrameId = "aswift_5";
-        public const string InnerFrameId = "ad_iframe";
+        public const string AdsFrame = "//ins[@data-ad-status='filled' and count(*)=1 and @tabindex='0']//iframe";
+        public const string InnerFrame = "//iframe[@id='ad_iframe']";
 
         //Header
         public const string SearchInputId = "s";

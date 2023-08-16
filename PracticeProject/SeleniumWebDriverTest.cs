@@ -67,7 +67,7 @@
             _webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
 
             IWebElement quantityInput = _webDriver.FindElement(By.XPath(Locators.ProductQuantityInput));
-            quantityInput.Clear();
+            quantityInput.ScrollToElement().Clear();
             quantityInput.SendKeys("2");
             _webDriver.FindElement(By.XPath(Locators.AddToBasketButton)).Click();
             _webDriver.FindElement(By.XPath(Locators.ViewBasketButton)).Click();
@@ -83,34 +83,37 @@
 
         private void CloseAds()
         {
-            _webDriver.SwitchTo().Frame(Locators.FrameId);
-            IWebElement? element = null;
-            if (IfElementVisible(By.XPath(Locators.DismissButton), ref element))
+            if (IsElementVisible(By.XPath(Locators.AdsFrame), out IWebElement? frame))
             {
-                element?.Click();
-                _webDriver.SwitchTo().DefaultContent();
-                return;
-            }
-            if (_webDriver.FindElements(By.Id(Locators.InnerFrameId)).Count > 0)
-            {
-                _webDriver.SwitchTo().Frame(Locators.InnerFrameId);
-                if (IfElementVisible(By.XPath(Locators.DismissButton), ref element))
+                _webDriver.SwitchTo().Frame(frame);
+                IWebElement? element;
+                if (!IsElementVisible(By.XPath(Locators.DismissButton), out element))
                 {
-                    element?.Click();
+                    if (IsElementVisible(By.XPath(Locators.InnerFrame), out IWebElement? innerFrame))
+                    {
+                        _webDriver.SwitchTo().Frame(innerFrame);
+                        _webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
+                        _webDriver.SwitchTo().DefaultContent();
+                        return;
+                    }
                 }
+                element.Click();
+                _webDriver.SwitchTo().DefaultContent();
             }
-            _webDriver.SwitchTo().DefaultContent();
         }
 
-        private bool IfElementVisible(By locator, ref IWebElement? element)
+        private bool IsElementVisible(By locator, out IWebElement? element)
         {
-            var elements = _webDriver.FindElements(locator);
-            if (elements.Count > 0 && elements[0].Displayed)
+            try
             {
-                element = elements[0];
-                return true;
+                element = _webDriver.FindElement(locator);
+                return element.Displayed;
             }
-            return false;
+            catch (NoSuchElementException)
+            {
+                element = null;
+                return false;
+            }
         }
 
         [TearDown]
