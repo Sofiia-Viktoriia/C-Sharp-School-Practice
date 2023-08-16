@@ -4,7 +4,7 @@ namespace PracticeProject
 {
     public class LoginRegistrationPageFactory
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
 
         public LoginRegistrationPageFactory(IWebDriver webDriver)
         {
@@ -12,7 +12,11 @@ namespace PracticeProject
             PageFactory.InitElements(_webDriver, this);
         }
 
-        public IWebElement FormTitle(string title) => _webDriver.FindElement(By.XPath($"//h2[text()='{title}']"));
+        [FindsBy(How = How.XPath, Using = "//h2[text()='Login']")]
+        public IWebElement LoginFormTitle { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//h2[text()='Register']")]
+        public IWebElement RegisterFormTitle { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//div[@class='u-column1 col-1']//input[@id = 'username']")]
         public IWebElement LoginFormUsernameOrEmailInput { get; set; }

@@ -6,7 +6,7 @@
         private IWebDriver _webDriver;
         private LoginRegistrationPage _loginRegistrationPage;
         private LoginRegistrationPageFactory _loginRegistrationPageFactory;
-        private string _address = "https://practice.automationtesting.in/my-account/";
+        private const string Address = "https://practice.automationtesting.in/my-account/";
 
         [SetUp]
         public void SetUp()
@@ -16,7 +16,7 @@
             _loginRegistrationPage = new LoginRegistrationPage(_webDriver);
             _loginRegistrationPageFactory = new LoginRegistrationPageFactory(_webDriver);
             _webDriver.Manage().Window.Maximize();
-            _webDriver.Navigate().GoToUrl(_address);
+            _webDriver.Navigate().GoToUrl(Address);
         }
 
         [Test]
@@ -73,7 +73,7 @@
         {
             string email = "aksbd@jks.sd";
             string password = "12345";
-            _loginRegistrationPage.EnterEmailAndPasswordAndClickLoginButton(email, password);
+            _loginRegistrationPage.Login(email, password);
             Assert.That(_loginRegistrationPage.IsErrorMessageDisplayed(), Is.True, "Error message is not displayed");
         }
 
