@@ -4,7 +4,7 @@
     {
         //Search page
         public const string ProductLinks = "//div[@id='content']//h2/a";
-        public const string PageTitle = "//div[@id='content']//h1[@class='page-title']";
+        public const string PageName = "//div[@id='content']//h1[@class='page-title']";
         public static string PostLinkByName(string postName) => $"//article//h2/a[text()='{postName}']";
 
         //Product page

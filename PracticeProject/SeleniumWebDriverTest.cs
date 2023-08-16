@@ -25,9 +25,12 @@
 
             _webDriver.FindElement(By.Id(Locators.SearchInputId)).SendKeys(html + Keys.Enter);
 
-            Assert.That(_webDriver.Title, Does.Contain(html), "Search results page is not displayed");
-            string pageTitle = _webDriver.FindElement(By.XPath(Locators.PageTitle)).Text;
-            Assert.That(pageTitle, Does.Contain(html).IgnoreCase, "Search results page title is not displayed");
+            Assert.Multiple(() =>
+            {
+                Assert.That(_webDriver.Title, Does.Contain(html), $"Page title does not contain {html}");
+                string pageName = _webDriver.FindElement(By.XPath(Locators.PageName)).Text;
+                Assert.That(pageName, Does.Contain(html).IgnoreCase, $"Page name does not contain {html}");
+            });
 
             var productLinks = _webDriver.FindElements(By.XPath(Locators.ProductLinks));
             foreach (var link in productLinks)
