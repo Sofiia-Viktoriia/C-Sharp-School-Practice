@@ -5,7 +5,6 @@
     {
         public const string URL = "https://practice.automationtesting.in/shop/";
         IWebDriver _webDriver;
-        IJavaScriptExecutor _javaScriptExecutor;
 
         [SetUp]
         public void SetUp()
@@ -23,7 +22,6 @@
             string thinkingInHTML = "Thinking in HTML";
             string html5WebAppDevelpment = "HTML5 WebApp Develpment";
             string html = "html";
-            _javaScriptExecutor = (IJavaScriptExecutor)_webDriver;
 
             _webDriver.FindElement(By.Id(Locators.SearchInputId)).SendKeys(html + Keys.Enter);
 
@@ -43,7 +41,7 @@
             }
 
             IWebElement thinkingInHtmlLink = _webDriver.FindElement(By.XPath(Locators.PostLinkByName(thinkingInHTML)));
-            thinkingInHtmlLink.ScrollToElement(_javaScriptExecutor);
+            thinkingInHtmlLink.ScrollToElement();
             thinkingInHtmlLink.Click();
             CloseAds();
 
@@ -58,7 +56,7 @@
             });
 
             IWebElement html5WebAppLink = _webDriver.FindElement(By.XPath(Locators.RelatedProductLinkByName(html5WebAppDevelpment)));
-            html5WebAppLink.ScrollToElement(_javaScriptExecutor);
+            html5WebAppLink.ScrollToElement();
             html5WebAppLink.Click();
             CloseAds();
             string productTitle = _webDriver.FindElement(By.CssSelector(Locators.ProductTitle)).Text;
