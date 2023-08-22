@@ -44,8 +44,7 @@
             }
 
             IWebElement thinkingInHtmlLink = _webDriver.FindElement(By.XPath(Locators.PostLinkByName(thinkingInHTML)));
-            thinkingInHtmlLink.ScrollToElement();
-            thinkingInHtmlLink.Click();
+            thinkingInHtmlLink.ScrollToElement().Click();
             CloseAds();
 
             IWebElement saleMark = _webDriver.FindElement(By.CssSelector(Locators.OnSaleMark));
@@ -59,8 +58,7 @@
             });
 
             IWebElement html5WebAppLink = _webDriver.FindElement(By.XPath(Locators.RelatedProductLinkByName(html5WebAppDevelpment)));
-            html5WebAppLink.ScrollToElement();
-            html5WebAppLink.Click();
+            html5WebAppLink.ScrollToElement().Click();
             CloseAds();
             string productTitle = _webDriver.FindElement(By.CssSelector(Locators.ProductTitle)).Text;
             double productPrice = double.Parse(_webDriver.FindElement(By.CssSelector(Locators.RegularPrice)).Text[1..]);
@@ -86,16 +84,13 @@
             if (IsElementVisible(By.XPath(Locators.AdsFrame), out IWebElement? frame))
             {
                 _webDriver.SwitchTo().Frame(frame);
-                IWebElement? element;
-                if (!IsElementVisible(By.XPath(Locators.DismissButton), out element))
+                if (!IsElementVisible(By.XPath(Locators.DismissButton), out IWebElement? element) &&
+                    IsElementVisible(By.XPath(Locators.InnerFrame), out IWebElement? innerFrame))
                 {
-                    if (IsElementVisible(By.XPath(Locators.InnerFrame), out IWebElement? innerFrame))
-                    {
-                        _webDriver.SwitchTo().Frame(innerFrame);
-                        _webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
-                        _webDriver.SwitchTo().DefaultContent();
-                        return;
-                    }
+                    _webDriver.SwitchTo().Frame(innerFrame);
+                    _webDriver.FindElement(By.XPath(Locators.DismissButton)).Click();
+                    _webDriver.SwitchTo().DefaultContent();
+                    return;
                 }
                 element.Click();
                 _webDriver.SwitchTo().DefaultContent();
