@@ -1,35 +1,35 @@
-﻿using Microsoft.Extensions.Configuration;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using ToolsQAProject.Configurations;
 
 namespace ToolsQAProject.Drivers
 {
     public class WebDriverManager
     {
         private IWebDriver _driver;
+        private AppSettingsOptions? _appSettings;
 
         public void StartWebDriver()
         {
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string? browserName = configuration.GetSection("AppSettings")["BrowserName"];
-            switch (browserName)
+            _appSettings = AppSettingsConfig.GetApplicationConfiguration();
+            switch (_appSettings?.BrowserName)
             {
-                case "chrome":
+                case Browser.Chrome:
                     _driver = new ChromeDriver();
                     break;
-                case "firefox":
+                case Browser.Firefox:
                     _driver = new FirefoxDriver();
                     break;
-                case "edge":
+                case Browser.Edge:
                     _driver = new EdgeDriver();
                     break;
                 default:
                     throw new NotSupportedException("Not supported browser");
             }
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-            _driver.Url = configuration.GetSection("AppSettings")["URL"];
+            _driver.Url = _appSettings.URL;
             _driver.Manage().Window.Maximize();
         }
 
