@@ -97,7 +97,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.feature.cs
+/ToolsQAProject/Features/*.feature.cs
 
 # Chutzpah Test files
 _Chutzpah*
