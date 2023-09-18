@@ -1,21 +1,20 @@
 using FluentAssertions;
-using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using ToolsQAProject.Drivers;
 using ToolsQAProject.Pages;
 using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
     [Binding]
-    public class FormsPageStepDefinitions : BaseStepDefinitions
+    public class FormsPageStepDefinitions
     {
         private FormsPage _formsPage;
         private StudentRegistrationForm _studentRegistrationForm;
 
-        public FormsPageStepDefinitions(WebDriverManager webDriverManager, StudentRegistrationForm form) : base(webDriverManager)
+        public FormsPageStepDefinitions(IWebDriver webDriver, StudentRegistrationForm form)
         {
-            _formsPage = new FormsPage(GetWebDriver());
+            _formsPage = new FormsPage(webDriver);
             _studentRegistrationForm = form;
         }
 

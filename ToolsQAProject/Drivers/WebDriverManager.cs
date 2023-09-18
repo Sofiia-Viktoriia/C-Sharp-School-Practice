@@ -11,7 +11,7 @@ namespace ToolsQAProject.Drivers
         private IWebDriver _driver;
         private AppSettingsOptions? _appSettings;
 
-        public void StartWebDriver()
+        public IWebDriver GetWebDriver()
         {
             _appSettings = AppSettingsConfig.GetApplicationConfiguration();
             switch (_appSettings?.BrowserName)
@@ -31,10 +31,6 @@ namespace ToolsQAProject.Drivers
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             _driver.Url = _appSettings.URL;
             _driver.Manage().Window.Maximize();
-        }
-
-        public IWebDriver GetWebDriver()
-        {
             return _driver;
         }
 

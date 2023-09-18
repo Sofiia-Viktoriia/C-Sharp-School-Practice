@@ -1,19 +1,19 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using ToolsQAProject.Drivers;
 using ToolsQAProject.Pages;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
     [Binding]
-    public class AlertsFramesAndWindowsPageStepDefinitions : BaseStepDefinitions
+    public class AlertsFramesAndWindowsPageStepDefinitions
     {
         private AlertFrameWindowsPage _alertFrameWindowsPage;
         private const string SampleText = "This is a sample page";
 
-        public AlertsFramesAndWindowsPageStepDefinitions(WebDriverManager webDriverManager) : base(webDriverManager)
+        public AlertsFramesAndWindowsPageStepDefinitions(IWebDriver webDriver)
         {
-            _alertFrameWindowsPage = new AlertFrameWindowsPage(GetWebDriver());
+            _alertFrameWindowsPage = new AlertFrameWindowsPage(webDriver);
         }
 
         [When(@"user opens '([^']*)'")]

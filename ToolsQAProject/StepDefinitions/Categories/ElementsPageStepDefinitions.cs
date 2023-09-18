@@ -1,23 +1,23 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using ToolsQAProject.Drivers;
 using ToolsQAProject.Pages;
 using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
     [Binding]
-    public class ElementsPageStepDefinitions : BaseStepDefinitions
+    public class ElementsPageStepDefinitions
     {
         private ElementsPage _elementsPage;
         private const string DoubleClickMeButtonName = "Double Click Me";
         private const string RightClickMeButtonName = "Right Click Me";
         private const string ClickMeButtonName = "Click Me";
 
-        public ElementsPageStepDefinitions(WebDriverManager webDriverManager) : base(webDriverManager)
+        public ElementsPageStepDefinitions(IWebDriver webDriver)
         {
-            _elementsPage = new ElementsPage(GetWebDriver());
+            _elementsPage = new ElementsPage(webDriver);
         }
 
         [When(@"user enters valid values in the text boxes")]

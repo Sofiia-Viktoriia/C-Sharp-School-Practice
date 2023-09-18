@@ -1,18 +1,18 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using ToolsQAProject.Drivers;
 using ToolsQAProject.Pages;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
     [Binding]
-    public class InteractionsPageStepDefinitions : BaseStepDefinitions
+    public class InteractionsPageStepDefinitions
     {
         private InteractionsPage _interactionsPage;
 
-        public InteractionsPageStepDefinitions(WebDriverManager webDriverManager) : base(webDriverManager)
+        public InteractionsPageStepDefinitions(IWebDriver webDriver)
         {
-            _interactionsPage = new InteractionsPage(GetWebDriver());
+            _interactionsPage = new InteractionsPage(webDriver);
         }
 
         [When(@"user switches to '([^']*)' tab")]

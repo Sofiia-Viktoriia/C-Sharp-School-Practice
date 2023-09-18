@@ -1,17 +1,17 @@
-﻿using TechTalk.SpecFlow;
-using ToolsQAProject.Drivers;
+﻿using OpenQA.Selenium;
+using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
 
 namespace ToolsQAProject.StepDefinitions
 {
     [Binding]
-    public class MainPageStepDefinitions : BaseStepDefinitions
+    public class MainPageStepDefinitions
     {
         private MainPage _mainPage;
 
-        public MainPageStepDefinitions(WebDriverManager webDriverManager) : base(webDriverManager) 
+        public MainPageStepDefinitions(IWebDriver webDriver)
         {
-            _mainPage = new MainPage(GetWebDriver());
+            _mainPage = new MainPage(webDriver);
         }
 
         [Given(@"user opens the '([^']*)' category")]
