@@ -5,7 +5,6 @@
 
 Background:
 	Given user opens the 'Forms' category
-	And user is on the 'Forms' category page
 
 Scenario: Filling and submitting the form
 	Given user opens the 'Practice Form' section

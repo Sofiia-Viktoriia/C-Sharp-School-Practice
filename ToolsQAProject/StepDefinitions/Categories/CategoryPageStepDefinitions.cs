@@ -14,12 +14,6 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _categoryPage = new CategoryPage(GetWebDriver());
         }
 
-        [Given(@"user is on the '([^']*)' category page")]
-        public void GivenUserIsOnTheCategoryPage(string pageTitle)
-        {
-            _categoryPage.VerifyPageTitle(pageTitle);
-        }
-
         [Given(@"user opens the '([^']*)' section")]
         public void GivenUserOpensTheSection(string sectionName)
         {

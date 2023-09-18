@@ -81,9 +81,6 @@ namespace ToolsQAProject.Features
 #line 7
  testRunner.Given("user opens the \'Forms\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("user is on the \'Forms\' category page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -93,7 +90,7 @@ namespace ToolsQAProject.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filling and submitting the form", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -106,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 11
+#line 10
  testRunner.Given("user opens the \'Practice Form\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -133,13 +130,13 @@ this.FeatureBackground();
                             "Ukraine, Kyiv",
                             "Uttar Pradesh",
                             "Merrut"});
-#line 12
+#line 11
  testRunner.When("user fills the form with values", ((string)(null)), table3, "When ");
 #line hidden
-#line 15
+#line 14
  testRunner.And("user submits the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 15
  testRunner.Then("modal page with entered values is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

@@ -81,9 +81,6 @@ namespace ToolsQAProject.Features
 #line 7
  testRunner.Given("user opens the \'Interactions\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("user is on the \'Interactions\' category page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -93,7 +90,7 @@ namespace ToolsQAProject.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Selecting squares in the grid", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -106,10 +103,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 11
+#line 10
  testRunner.Given("user opens the \'Selectable\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 12
+#line 11
  testRunner.When("user switches to \'Grid\' tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -124,7 +121,7 @@ this.FeatureBackground();
                             "7"});
                 table4.AddRow(new string[] {
                             "9"});
-#line 13
+#line 12
  testRunner.And("user selects squares", ((string)(null)), table4, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -139,7 +136,7 @@ this.FeatureBackground();
                             "Seven"});
                 table5.AddRow(new string[] {
                             "Nine"});
-#line 20
+#line 19
  testRunner.Then("selected squares contain values", ((string)(null)), table5, "Then ");
 #line hidden
             }

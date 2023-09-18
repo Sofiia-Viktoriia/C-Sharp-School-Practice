@@ -81,9 +81,6 @@ namespace ToolsQAProject.Features
 #line 7
  testRunner.Given("user opens the \'Elements\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("user is on the \'Elements\' category page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -93,7 +90,7 @@ namespace ToolsQAProject.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Submitting correct fields` values in Text Box section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -106,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 11
+#line 10
  testRunner.Given("user opens the \'Text Box\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -119,10 +116,10 @@ this.FeatureBackground();
                             "email@address.com",
                             "USA, New York",
                             "Ukraine, Kyiv"});
-#line 12
+#line 11
  testRunner.When("user enters valid values in the text boxes", ((string)(null)), table1, "When ");
 #line hidden
-#line 15
+#line 14
  testRunner.And("user clicks on Submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -135,7 +132,7 @@ this.FeatureBackground();
                             "email@address.com",
                             "USA, New York",
                             "Ukraine, Kyiv"});
-#line 16
+#line 15
  testRunner.Then("the table should contain entered values", ((string)(null)), table2, "Then ");
 #line hidden
             }
@@ -149,7 +146,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Selecting elements in Check Box section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 20
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -162,40 +159,40 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 21
+#line 20
  testRunner.Given("user opens the \'Check Box\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 22
+#line 21
  testRunner.When("user opens the \'Home\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 23
+#line 22
  testRunner.And("user selects the \'Desktop\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 24
+#line 23
  testRunner.And("user opens the \'Documents\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 25
+#line 24
  testRunner.And("user opens the \'WorkSpace\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 26
+#line 25
  testRunner.And("user selects the \'Angular\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 27
+#line 26
  testRunner.And("user selects the \'Veu\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 28
+#line 27
  testRunner.And("user opens the \'Office\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 29
+#line 28
  testRunner.And("user selects all elements in the \'Office\' folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 30
+#line 29
  testRunner.And("user opens the \'Downloads\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 31
+#line 30
  testRunner.And("user selects the \'Downloads\' element", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 32
+#line 31
  testRunner.Then("the selection result should be equal \'You have selected : desktop notes commands " +
                         "angular veu office public private classified general downloads wordFile excelFil" +
                         "e\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -211,7 +208,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting column values in the table in Web Tables section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 34
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -224,13 +221,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 35
+#line 34
  testRunner.Given("user opens the \'Web Tables\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 36
+#line 35
  testRunner.When("user clicks on the \'Salary\' column name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 37
+#line 36
  testRunner.Then("the values in the \'Salary\' numeric column should be sorted ascending", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -244,7 +241,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deleting the row in the table in Web Tables section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 39
+#line 38
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -257,19 +254,19 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 40
+#line 39
  testRunner.Given("user opens the \'Web Tables\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 41
+#line 40
  testRunner.And("the amount of rows equals 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 42
+#line 41
  testRunner.When("user deletes the row with the \'Name\' value equals \'Alden\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 43
+#line 42
  testRunner.Then("the amount of rows should be equal 2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 44
+#line 43
  testRunner.And("the row with the \'Department\' value equals \'Compliance\' should not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -288,7 +285,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("buttonName", buttonName);
             argumentsOfScenario.Add("actionMessage", actionMessage);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Clicking on the button in Buttons section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 46
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -301,13 +298,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 47
+#line 46
  testRunner.Given("user opens the \'Buttons\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 48
+#line 47
  testRunner.When(string.Format("user interacts with the \'{0}\' button", buttonName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 49
+#line 48
  testRunner.Then(string.Format("the result \'{0}\' should be displayed", actionMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

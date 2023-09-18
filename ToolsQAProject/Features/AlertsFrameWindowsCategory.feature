@@ -5,14 +5,13 @@
 
 Background:
 	Given user opens the 'Alerts, Frame & Windows' category
-	And user is on the 'Alerts, Frame & Windows' category page
 
 Scenario Outline: Opening new tab/window
 	Given user opens the 'Browser Windows' section
-	When user clicks on '<ButtonName>' button
+	When user opens '<Value>'
 	Then a new tab/window opens with 'This is a sample page' text in it
 
 Examples: 
-	| ButtonName |
+	| Value      |
 	| New Tab    |
-	| New Window | 
+	| New Window |

@@ -5,7 +5,6 @@
 
 Background:
 	Given user opens the 'Widgets' category
-	And user is on the 'Widgets' category page
 
 Scenario: Entering a value into the auto completing field with multiple values in Auto Complete section
 	Given user opens the 'Auto Complete' section

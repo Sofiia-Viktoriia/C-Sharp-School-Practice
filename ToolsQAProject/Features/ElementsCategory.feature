@@ -5,7 +5,6 @@
 
 Background:
 	Given user opens the 'Elements' category
-	And user is on the 'Elements' category page
 
 Scenario: Submitting correct fields` values in Text Box section
 	Given user opens the 'Text Box' section

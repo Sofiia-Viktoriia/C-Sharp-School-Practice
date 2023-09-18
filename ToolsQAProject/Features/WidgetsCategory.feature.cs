@@ -81,9 +81,6 @@ namespace ToolsQAProject.Features
 #line 7
  testRunner.Given("user opens the \'Widgets\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("user is on the \'Widgets\' category page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -95,7 +92,7 @@ namespace ToolsQAProject.Features
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Entering a value into the auto completing field with multiple values in Auto Comp" +
                     "lete section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -108,16 +105,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 11
+#line 10
  testRunner.Given("user opens the \'Auto Complete\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 12
+#line 11
  testRunner.When("user enters \'g\' value into the auto completing field with multiple values", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 13
+#line 12
  testRunner.Then("list with 3 suggestions appears", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 14
+#line 13
  testRunner.And("all suggestions contain \'g\' value", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -133,7 +130,7 @@ this.FeatureBackground();
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deleting values from auto completing field with multiple values in Auto Complete " +
                     "section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 16
+#line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -146,7 +143,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 17
+#line 16
  testRunner.Given("user opens the \'Auto Complete\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -161,7 +158,7 @@ this.FeatureBackground();
                             "Blue"});
                 table6.AddRow(new string[] {
                             "Purple"});
-#line 18
+#line 17
  testRunner.When("user adds values to the auto completing field with multiple values", ((string)(null)), table6, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -170,7 +167,7 @@ this.FeatureBackground();
                             "Yellow"});
                 table7.AddRow(new string[] {
                             "Purple"});
-#line 25
+#line 24
  testRunner.And("user deletes values from the auto completing field with multiple values", ((string)(null)), table7, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -181,7 +178,7 @@ this.FeatureBackground();
                             "Green"});
                 table8.AddRow(new string[] {
                             "Blue"});
-#line 29
+#line 28
  testRunner.Then("the values are displayed in the auto completing field with multiple values", ((string)(null)), table8, "Then ");
 #line hidden
             }
@@ -195,7 +192,7 @@ this.FeatureBackground();
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Resetting the progress bar in Progress Bar section", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 35
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -208,25 +205,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 36
+#line 35
  testRunner.Given("user opens the \'Progress Bar\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 37
+#line 36
  testRunner.When("user clicks \'Start\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 38
+#line 37
  testRunner.Then("progress bar value reaches \'100%\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 39
+#line 38
  testRunner.And("\'Reset\' button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 40
+#line 39
  testRunner.When("user clicks \'Reset\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 40
  testRunner.Then("\'Start\' button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 42
+#line 41
  testRunner.And("progress bar value equals to \'0%\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

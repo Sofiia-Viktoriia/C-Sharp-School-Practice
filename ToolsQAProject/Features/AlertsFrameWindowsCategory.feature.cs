@@ -82,22 +82,19 @@ namespace ToolsQAProject.Features
 #line 7
  testRunner.Given("user opens the \'Alerts, Frame & Windows\' category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
- testRunner.And("user is on the \'Alerts, Frame & Windows\' category page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Opening new tab/window")]
         [NUnit.Framework.TestCaseAttribute("New Tab", null)]
         [NUnit.Framework.TestCaseAttribute("New Window", null)]
-        public void OpeningNewTabWindow(string buttonName, string[] exampleTags)
+        public void OpeningNewTabWindow(string value, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("ButtonName", buttonName);
+            argumentsOfScenario.Add("Value", value);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening new tab/window", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -110,13 +107,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 11
+#line 10
  testRunner.Given("user opens the \'Browser Windows\' section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 12
- testRunner.When(string.Format("user clicks on \'{0}\' button", buttonName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 11
+ testRunner.When(string.Format("user opens \'{0}\'", value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 13
+#line 12
  testRunner.Then("a new tab/window opens with \'This is a sample page\' text in it", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

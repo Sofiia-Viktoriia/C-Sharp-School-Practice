@@ -16,10 +16,10 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _alertFrameWindowsPage = new AlertFrameWindowsPage(GetWebDriver());
         }
 
-        [When(@"user clicks on '([^']*)' button")]
-        public void WhenUserClicksOnButton(string buttonName)
+        [When(@"user opens '([^']*)'")]
+        public void WhenUserOpens(string value)
         {
-            _alertFrameWindowsPage.ClickOnButton(buttonName);
+            _alertFrameWindowsPage.ClickOnButton(value);
         }
 
         [Then(@"a new tab/window opens with '([^']*)' text in it")]

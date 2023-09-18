@@ -5,7 +5,6 @@
 
 Background:
 	Given user opens the 'Interactions' category
-	And user is on the 'Interactions' category page
 
 Scenario: Selecting squares in the grid
 	Given user opens the 'Selectable' section
