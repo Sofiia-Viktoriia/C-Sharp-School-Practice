@@ -78,9 +78,9 @@ namespace ToolsQAProject.Pages
             ElementLabelByName(elementName).Click();
         }
 
-        public void OpenElement(string elementName)
+        public void ExpandFolder(string folderName)
         {
-            ElementButtonByName(elementName).Click();
+            ElementButtonByName(folderName).Click();
         }
 
         public void SelectElementsInFolder(string folderName)

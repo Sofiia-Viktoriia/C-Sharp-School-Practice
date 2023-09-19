@@ -17,15 +17,15 @@ Scenario: Submitting correct fields` values in Text Box section
 
 Scenario: Selecting elements in Check Box section
 	Given user opens the 'Check Box' section
-	When user opens the 'Home' element
+	When user expands the 'Home' folder
 	And user selects the 'Desktop' element
-	And user opens the 'Documents' element
-	And user opens the 'WorkSpace' element
+	And user expands the 'Documents' folder
+	And user expands the 'WorkSpace' folder
 	And user selects the 'Angular' element
 	And user selects the 'Veu' element
-	And user opens the 'Office' element
+	And user expands the 'Office' folder
 	And user selects all elements in the 'Office' folder
-	And user opens the 'Downloads' element
+	And user expands the 'Downloads' folder
 	And user selects the 'Downloads' element
 	Then the selection result should be equal 'You have selected : desktop notes commands angular veu office public private classified general downloads wordFile excelFile'
 

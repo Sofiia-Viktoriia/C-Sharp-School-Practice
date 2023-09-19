@@ -42,16 +42,16 @@ namespace ToolsQAProject.StepDefinitions.Categories
             table.CompareToInstance(userForm);
         }
 
-        [When(@"user opens the '([^']*)' element")]
-        public void WhenUserOpensTheElement(string elementName)
+        [When(@"user expands the '([^']*)' folder")]
+        public void WhenUserExpandsTheFolder(string elementName)
         {
-            _elementsPage.OpenElement(elementName);
+            _elementsPage.ExpandFolder(elementName);
         }
 
         [When(@"user selects the '([^']*)' element")]
-        public void WhenUserSelectsTheElement(string elementName)
+        public void WhenUserSelectsTheElement(string folderName)
         {
-            _elementsPage.SelectElement(elementName);
+            _elementsPage.SelectElement(folderName);
         }
 
         [When(@"user selects all elements in the '([^']*)' folder")]
