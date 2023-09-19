@@ -3,13 +3,15 @@ using OpenQA.Selenium;
 
 namespace ToolsQAProject.Pages
 {
-    public class AlertFrameWindowsPage : BasePage
+    public class AlertFrameWindowsPage
     {
-        private IWebElement ButtonByName(string buttonName) => WebDriver.FindElement(By.XPath($"//div[@id='browserWindows']//button[text()='{buttonName}']"));
-        private IWebElement SampleText => WebDriver.FindElement(By.XPath("//h1[@id='sampleHeading']"));
+        public IWebDriver _webDriver;
+        private IWebElement ButtonByName(string buttonName) => _webDriver.FindElement(By.XPath($"//div[@id='browserWindows']//button[text()='{buttonName}']"));
+        private IWebElement SampleText => _webDriver.FindElement(By.XPath("//h1[@id='sampleHeading']"));
 
-        public AlertFrameWindowsPage(IWebDriver webDriver) : base(webDriver)
+        public AlertFrameWindowsPage(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
         }
 
         public void ClickOnButton(string buttonName)
@@ -19,7 +21,7 @@ namespace ToolsQAProject.Pages
 
         public void SwitchToAnotherTabWindow()
         {
-            WebDriver.SwitchTo().Window(WebDriver.WindowHandles[1]);
+            _webDriver.SwitchTo().Window(_webDriver.WindowHandles[1]);
         }
 
         public string GetSampleTextValue()

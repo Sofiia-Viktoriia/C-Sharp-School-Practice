@@ -3,13 +3,16 @@ using ToolsQAProject.Helpers;
 
 namespace ToolsQAProject.Pages
 {
-    public class MainPage : BasePage
+    public class MainPage
     {
-        public MainPage(IWebDriver webDriver) : base(webDriver)
+        private IWebDriver _webDriver;
+
+        public MainPage(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
         }
 
-        private IWebElement CategoryByName(string categoryName) => WebDriver.FindElement(By.XPath("//div[@class='category-cards']" + 
+        private IWebElement CategoryByName(string categoryName) => _webDriver.FindElement(By.XPath("//div[@class='category-cards']" + 
             $"/div[contains(concat(' ', @class, ' '), ' card ') and .//h5[text()='{categoryName}']]"));
 
         public void OpenCategory(string categoryName)

@@ -4,15 +4,17 @@ using ToolsQAProject.Helpers;
 
 namespace ToolsQAProject.Pages
 {
-    public class InteractionsPage : BasePage
+    public class InteractionsPage
     {
-        private IWebElement TabByName(string tabName) => WebDriver.FindElement(By.XPath($"//nav[@role='tablist']//a[text()='{tabName}']"));
-        private ReadOnlyCollection<IWebElement> GridSquares => WebDriver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(concat(' ', @class, ' '), ' list-group-item ')]"));
-        private ReadOnlyCollection<IWebElement> SelectedGridSquares => WebDriver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(concat(' ', @class, ' '), ' list-group-item ') " +
+        private IWebDriver _webDriver;
+        private IWebElement TabByName(string tabName) => _webDriver.FindElement(By.XPath($"//nav[@role='tablist']//a[text()='{tabName}']"));
+        private ReadOnlyCollection<IWebElement> GridSquares => _webDriver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(concat(' ', @class, ' '), ' list-group-item ')]"));
+        private ReadOnlyCollection<IWebElement> SelectedGridSquares => _webDriver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(concat(' ', @class, ' '), ' list-group-item ') " +
             "and contains(concat(' ', @class, ' '), ' active ')]"));
 
-        public InteractionsPage(IWebDriver webDriver) : base(webDriver)
+        public InteractionsPage(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
         }
 
         public void SwitchToTab(string tabName)

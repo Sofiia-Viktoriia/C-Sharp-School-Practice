@@ -11,10 +11,12 @@ namespace ToolsQAProject.StepDefinitions.Categories
     [Binding]
     public class WidgetsPageStepDefinitions
     {
+        private IWebDriver _webDriver;
         private WidgetsPage _widgetsPage;
 
         public WidgetsPageStepDefinitions(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
             _widgetsPage = new WidgetsPage(webDriver);
         }
 
@@ -90,7 +92,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"progress bar value reaches '([^']*)'")]
         public void ThenProgressBarValueReaches(string value)
         {
-            var wait = new WebDriverWait(_widgetsPage.WebDriver, TimeSpan.FromSeconds(20));
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(20));
             wait.Until(driver => _widgetsPage.GetProgressBarValue().Equals(value));
         }
 

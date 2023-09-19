@@ -4,14 +4,16 @@ using ToolsQAProject.Helpers;
 
 namespace ToolsQAProject.Pages
 {
-    public class CategoryPage : BasePage
+    public class CategoryPage
     {
-        private IWebElement PageTitle(string pageTitle) => WebDriver.FindElement(By.XPath($"//div[text()='{pageTitle}']"));
-        private IWebElement SectionByName(string sectionName) => WebDriver.FindElement(By.XPath("//ul[@class='menu-list']" +
+        private IWebDriver _webDriver;
+        private IWebElement PageTitle(string pageTitle) => _webDriver.FindElement(By.XPath($"//div[text()='{pageTitle}']"));
+        private IWebElement SectionByName(string sectionName) => _webDriver.FindElement(By.XPath("//ul[@class='menu-list']" +
             $"/li[.//span[text()='{sectionName}']]"));
 
-        public CategoryPage(IWebDriver webDriver) : base(webDriver)
+        public CategoryPage(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
         }
 
         public void VerifyPageTitle(string pageTitle)

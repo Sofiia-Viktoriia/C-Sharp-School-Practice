@@ -6,8 +6,9 @@ using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.Pages
 {
-    public class FormsPage : BasePage
+    public class FormsPage
     {
+        private IWebDriver _webDriver;
         private const string FullNameModalLabel = "Student Name";
         private const string EmailModalLabel = "Student Email";
         private const string GenderModalLabel = "Gender";
@@ -17,42 +18,43 @@ namespace ToolsQAProject.Pages
         private const string HobbiesModalLabel = "Hobbies";
         private const string AddressModalLabel = "Address";
         private const string StateAndCityModalLabel = "State and City";
-        private IWebElement FirstNameInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='firstName']"));
-        private IWebElement LastNameInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='lastName']"));
-        private IWebElement EmailInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userEmail']"));
-        private IWebElement GenderRadiobuttonByValue(string value) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[./input[@name='gender' and @value='{value}']]"));
-        private IWebElement MobilePhoneInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userNumber']"));
-        private IWebElement DateOfBirthInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='dateOfBirthInput']"));
-        private IWebElement DateOfBirthPickerYearDropdown => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
+        private IWebElement FirstNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='firstName']"));
+        private IWebElement LastNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='lastName']"));
+        private IWebElement EmailInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userEmail']"));
+        private IWebElement GenderRadiobuttonByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[./input[@name='gender' and @value='{value}']]"));
+        private IWebElement MobilePhoneInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userNumber']"));
+        private IWebElement DateOfBirthInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='dateOfBirthInput']"));
+        private IWebElement DateOfBirthPickerYearDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
             "' react-datepicker__year-dropdown-container ')]"));
-        private IWebElement DateOfBirthPickerYearDropdownValueByText(string value) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
+        private IWebElement DateOfBirthPickerYearDropdownValueByText(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
             $"//div[contains(concat(' ', @class, ' '), ' react-datepicker__year-dropdown-container ')]//option[text()='{value}']"));
-        private IWebElement DateOfBirthPickerMonthDropdown => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
+        private IWebElement DateOfBirthPickerMonthDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
             "' react-datepicker__month-dropdown-container ')]"));
-        private IWebElement DateOfBirthPickerMonthDropdownValueByText(string value) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
+        private IWebElement DateOfBirthPickerMonthDropdownValueByText(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
             $"//div[contains(concat(' ', @class, ' '), ' react-datepicker__month-dropdown-container ')]//option[text()='{value}']"));
-        private IWebElement DateOfBirthPickerDayByTextAndMonth(int day, string month) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), ' react-datepicker__day ') and text()='{day}' and contains(@aria-label, '{month}')]"));
-        private IWebElement SubjectsInput => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='subjectsInput']"));
-        private IWebElement SubjectsSuggestionByValue(string value) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='subjectsContainer']//div[contains(concat(' ', @class, ' '), " +
+        private IWebElement DateOfBirthPickerDayByTextAndMonth(int day, string month) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), ' react-datepicker__day ') and text()='{day}' and contains(@aria-label, '{month}')]"));
+        private IWebElement SubjectsInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='subjectsInput']"));
+        private IWebElement SubjectsSuggestionByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='subjectsContainer']//div[contains(concat(' ', @class, ' '), " +
             $"' subjects-auto-complete__option ') and text()='{value}']"));
-        private IWebElement HobbiesCheckBoxByLabel(string label) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='hobbiesWrapper']//div[./label[text()='{label}']]"));
-        private IWebElement CurrentAddressTextarea => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//textarea[@id='currentAddress']"));
-        private IWebElement StateDropdown => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='state']"));
-        private IWebElement StateSuggestionByValue(string value) => WebDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='state']//div[contains(@class, 'option') and text()='{value}']"));
-        private IWebElement CityDropdown => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='city']//input"));
-        private IWebElement SubmitButton => WebDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//button[@id='submit']"));
-        private ReadOnlyCollection<IWebElement> AdsIframe => WebDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
-        private IWebElement ModalTableValueByLabel (string label) => WebDriver.FindElement(By.XPath($"//div[@class='modal-content']/div[@class='modal-body']//td[text()='{label}']/following-sibling::td"));
+        private IWebElement HobbiesCheckBoxByLabel(string label) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='hobbiesWrapper']//div[./label[text()='{label}']]"));
+        private IWebElement CurrentAddressTextarea => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//textarea[@id='currentAddress']"));
+        private IWebElement StateDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='state']"));
+        private IWebElement StateSuggestionByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='state']//div[contains(@class, 'option') and text()='{value}']"));
+        private IWebElement CityDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='city']//input"));
+        private IWebElement SubmitButton => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//button[@id='submit']"));
+        private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
+        private IWebElement ModalTableValueByLabel (string label) => _webDriver.FindElement(By.XPath($"//div[@class='modal-content']/div[@class='modal-body']//td[text()='{label}']/following-sibling::td"));
 
-        public FormsPage(IWebDriver webDriver) : base(webDriver)
+        public FormsPage(IWebDriver webDriver)
         {
+            _webDriver = webDriver;
         }
 
         public void FillStudentRegistrationForm(StudentRegistrationForm form)
         {
             while (AdsIframe.Count > 0)
             {
-                WebDriver.Navigate().Refresh();
+                _webDriver.Navigate().Refresh();
             }
 
             FillFirstName(form.FirstName);
