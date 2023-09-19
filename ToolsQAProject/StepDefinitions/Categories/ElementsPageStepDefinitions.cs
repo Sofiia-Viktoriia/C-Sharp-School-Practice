@@ -20,16 +20,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _elementsPage = new ElementsPage(webDriver);
         }
 
-        [When(@"user enters valid values in the text boxes")]
-        public void WhenUserEntersValidValuesInTheTextBoxes(Table table)
+        [When(@"user submits the form with the next data")]
+        public void WhenUserSubmitsTheFormWithTheNextData(Table table)
         {
             UserForm userForm = table.CreateInstance<UserForm>();
             _elementsPage.FillUserForm(userForm);
-        }
-
-        [When(@"user clicks on Submit button")]
-        public void WhenUserClicksOnSubmitButton()
-        {
             _elementsPage.SubmitUserForm();
         }
 

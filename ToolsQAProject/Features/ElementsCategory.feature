@@ -8,10 +8,9 @@ Background:
 
 Scenario: Submitting correct fields` values in Text Box section
 	Given user opens the 'Text Box' section
-	When user enters valid values in the text boxes
+	When user submits the form with the next data
 	| FullName  | Email             | CurrentAddress | PermanentAddress |
 	| Alex Ones | email@address.com | USA, New York  | Ukraine, Kyiv    |
-	And user clicks on Submit button
 	Then the table should contain entered values
 	| FullName  | Email             | CurrentAddress | PermanentAddress |
 	| Alex Ones | email@address.com | USA, New York  | Ukraine, Kyiv    |
