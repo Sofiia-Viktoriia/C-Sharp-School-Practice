@@ -10,13 +10,15 @@ namespace ToolsQAProject.StepDefinitions.Categories
     [Binding]
     public class ElementsPageStepDefinitions
     {
+        private readonly ScenarioContext _scenarioContext;
         private ElementsPage _elementsPage;
         private const string DoubleClickMeButtonName = "Double Click Me";
         private const string RightClickMeButtonName = "Right Click Me";
         private const string ClickMeButtonName = "Click Me";
 
-        public ElementsPageStepDefinitions(IWebDriver webDriver)
+        public ElementsPageStepDefinitions(IWebDriver webDriver, ScenarioContext scenarioContext)
         {
+            _scenarioContext = scenarioContext;
             _elementsPage = new ElementsPage(webDriver);
         }
 
@@ -67,12 +69,6 @@ namespace ToolsQAProject.StepDefinitions.Categories
             Assert.That(_elementsPage.GetSelectionResult().Replace("\r\n", " "), Is.EqualTo(selectionResult), $"The selection result does not equal to {selectionResult}");
         }
 
-        [Given(@"the amount of rows equals (\d+)")]
-        public void GivenTheAmountOfRowsEquals(int rowAmount)
-        {
-            Assert.That(_elementsPage.GetAmountOfRowsInTable, Is.EqualTo(rowAmount), $"The amount of table rows does not equal to {rowAmount}");
-        }
-
         [When(@"user sorts values in the table by '([^']*)' column")]
         public void WhenUserSortsValuesInTheTableByColumn(string columnName)
         {
@@ -86,16 +82,23 @@ namespace ToolsQAProject.StepDefinitions.Categories
             Assert.That(values.OrderBy(el => int.Parse(el)).SequenceEqual(values), Is.True, $"The {columnName} column values are not sorted ascending");
         }
 
+        [Given(@"the amount of rows is remembered")]
+        public void GivenTheAmountOfRowsIsRemembered()
+        {
+            _scenarioContext["RowAmount"] = _elementsPage.GetAmountOfRowsInTable();
+        }
+
         [When(@"user deletes the row with the '([^']*)' value equals '([^']*)'")]
         public void WhenUserDeletesTheRowWithTheValueEquals(string columnName, string columnValue)
         {
             _elementsPage.ClickOnRowDeleteButton(columnName, columnValue);
         }
 
-        [Then(@"the amount of rows should be equal (\d+)")]
-        public void ThenTheAmountOfRowsShouldBeEqual(int rowAmount)
+        [Then(@"the amount of rows in the table reduced by (\d+)")]
+        public void ThenTheAmountOfRowsInTheTableReducedBy(int reduceNumber)
         {
-            Assert.That(_elementsPage.GetAmountOfRowsInTable, Is.EqualTo(rowAmount), $"The amount of table rows does not equal to {rowAmount}");
+            var expectedRowAmount = (int)_scenarioContext["RowAmount"] - reduceNumber;
+            Assert.That(_elementsPage.GetAmountOfRowsInTable(), Is.EqualTo(expectedRowAmount), $"The amount of table rows does not equal to {expectedRowAmount}");
         }
 
         [Then(@"the row with the '([^']*)' value equals '([^']*)' should not exist")]

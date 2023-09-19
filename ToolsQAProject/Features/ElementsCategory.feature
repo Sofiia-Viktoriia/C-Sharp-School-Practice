@@ -36,9 +36,9 @@ Scenario: Sorting column values in the table in Web Tables section
 
 Scenario: Deleting the row in the table in Web Tables section
 	Given user opens the 'Web Tables' section
-	And the amount of rows equals 3
+	And the amount of rows is remembered
 	When user deletes the row with the 'Name' value equals 'Alden'
-	Then the amount of rows should be equal 2
+	Then the amount of rows in the table reduced by 1
 	And the row with the 'Department' value equals 'Compliance' should not exist
 
 Scenario Outline: Clicking on the button in Buttons section
