@@ -73,14 +73,14 @@ namespace ToolsQAProject.StepDefinitions.Categories
             Assert.That(_elementsPage.GetAmountOfRowsInTable, Is.EqualTo(rowAmount), $"The amount of table rows does not equal to {rowAmount}");
         }
 
-        [When(@"user clicks on the '([^']*)' column name")]
-        public void WhenUserClicksOnTheColumnName(string columnName)
+        [When(@"user sorts values in the table by '([^']*)' column")]
+        public void WhenUserSortsValuesInTheTableByColumn(string columnName)
         {
             _elementsPage.ClickOnColumnName(columnName);
         }
 
-        [Then(@"the values in the '([^']*)' numeric column should be sorted ascending")]
-        public void ThenTheValuesInTheNumericColumnShouldBeSortedAscending(string columnName)
+        [Then(@"the values in the '([^']*)' column should be sorted ascending")]
+        public void ThenTheValuesInTheColumnShouldBeSortedAscending(string columnName)
         {
             List<string> values = _elementsPage.GetColumnValues(columnName);
             Assert.That(values.OrderBy(el => int.Parse(el)).SequenceEqual(values), Is.True, $"The {columnName} column values are not sorted ascending");

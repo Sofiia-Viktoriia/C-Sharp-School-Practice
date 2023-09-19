@@ -31,8 +31,8 @@ Scenario: Selecting elements in Check Box section
 
 Scenario: Sorting column values in the table in Web Tables section
 	Given user opens the 'Web Tables' section
-	When user clicks on the 'Salary' column name
-	Then the values in the 'Salary' numeric column should be sorted ascending
+	When user sorts values in the table by 'Salary' column
+	Then the values in the 'Salary' column should be sorted ascending
 
 Scenario: Deleting the row in the table in Web Tables section
 	Given user opens the 'Web Tables' section
