@@ -10,16 +10,16 @@ Scenario: Selecting squares in the grid
 	Given user opens the 'Selectable' section
 	When user switches to 'Grid' tab
 	And user selects squares
-	| Number |
-	| 1      |
-	| 3      |
-	| 5      |
-	| 7      |
-	| 9      |
+		| Number |
+		| 1      |
+		| 3      |
+		| 5      |
+		| 7      |
+		| 9      |
 	Then selected squares contain values
-	| Value |
-	| One   |
-	| Three |
-	| Five  |
-	| Seven |
-	| Nine  |
+		| Value |
+		| One   |
+		| Three |
+		| Five  |
+		| Seven |
+		| Nine  |

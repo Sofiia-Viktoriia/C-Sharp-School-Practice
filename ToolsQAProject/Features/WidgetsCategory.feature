@@ -15,21 +15,21 @@ Scenario: Entering a value into the auto completing field with multiple values i
 Scenario: Deleting values from auto completing field with multiple values in Auto Complete section
 	Given user opens the 'Auto Complete' section
 	When user adds values to the auto completing field with multiple values
-	| Values |
-	| Red    |
-	| Yellow |
-	| Green  |
-	| Blue   |
-	| Purple |
+		| Values |
+		| Red    |
+		| Yellow |
+		| Green  |
+		| Blue   |
+		| Purple |
 	And user deletes values from the auto completing field with multiple values
-	| Values |
-	| Yellow |
-	| Purple |
+		| Values |
+		| Yellow |
+		| Purple |
 	Then the values are displayed in the auto completing field with multiple values
-	| Values |
-	| Red    |
-	| Green  |
-	| Blue   |
+		| Values |
+		| Red    |
+		| Green  |
+		| Blue   |
 
 Scenario: Resetting the progress bar in Progress Bar section
 	Given user opens the 'Progress Bar' section
