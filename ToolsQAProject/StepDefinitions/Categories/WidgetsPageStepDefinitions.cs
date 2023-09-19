@@ -105,7 +105,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"progress bar value equals to '([^']*)'")]
         public void ThenProgressBarValueEqualsTo(string value)
         {
-            Assert.That(_widgetsPage.GetProgressBarValue, Is.EqualTo(value), $"Progress bar value does not equal to {value}");
+            Assert.That(_widgetsPage.GetProgressBarValue(), Is.EqualTo(value), $"Progress bar value does not equal to {value}");
         }
     }
 }

@@ -35,8 +35,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
                 State = table.Rows[0]["State"],
                 City = table.Rows[0]["City"]
             };
-            _formsPage.FillStudentRegistrationForm(_studentRegistrationForm);
-            _formsPage.ClickSubmitButton();
+            _formsPage.FillStudentRegistrationForm(_studentRegistrationForm)
+                .ClickSubmitButton();
         }
 
         [Then(@"the sent form overview is populated with entered values")]

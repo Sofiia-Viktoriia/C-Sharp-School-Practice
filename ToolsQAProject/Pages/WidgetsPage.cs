@@ -24,9 +24,10 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public void FillAutoCompletingField(string value)
+        public WidgetsPage FillAutoCompletingField(string value)
         {
             AutoCompleteMultipleValuesInput.ScrollToElement().SendKeys(value);
+            return this;
         }
 
         public int GetAmountOfSuggestions()
@@ -39,15 +40,17 @@ namespace ToolsQAProject.Pages
             return AutoCompleteSuggestions;
         }
 
-        public void AddValueToAutoCompleteField(string value)
+        public WidgetsPage AddValueToAutoCompleteField(string value)
         {
             FillAutoCompletingField(value);
             AutoCompleteSuggestionByText(value).Click();
+            return this;
         }
 
-        public void DeleteValueFromAutoCompleteField(string value)
+        public WidgetsPage DeleteValueFromAutoCompleteField(string value)
         {
             AutoCompleteFiledValueRemoveButtonByText(value).Click();
+            return this;
         }
 
         public bool IsAutoCompleteFieldValueDisplayed(string value)
@@ -55,9 +58,10 @@ namespace ToolsQAProject.Pages
             return AutoCompleteFiledValueByText(value).Displayed;
         }
 
-        public void ClickOnButton(string buttonName)
+        public WidgetsPage ClickOnButton(string buttonName)
         {
             ButtonByName(buttonName).ScrollToElement().Click();
+            return this;
         }
 
         public bool IsButtonDisplayed(string buttonName)

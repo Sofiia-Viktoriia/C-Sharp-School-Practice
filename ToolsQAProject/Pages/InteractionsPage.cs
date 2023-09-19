@@ -17,14 +17,16 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public void SwitchToTab(string tabName)
+        public InteractionsPage SwitchToTab(string tabName)
         {
             TabByName(tabName).Click();
+            return this;
         }
 
-        public void SelectGridSquare(int number)
+        public InteractionsPage SelectGridSquare(int number)
         {
             GridSquares[number - 1].ScrollToElement().Click();
+            return this;
         }
 
         public string[] GetSelectedGridSquaresValues()

@@ -26,8 +26,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         public void WhenUserSubmitsTheFormWithTheNextData(Table table)
         {
             UserForm userForm = table.CreateInstance<UserForm>();
-            _elementsPage.FillUserForm(userForm);
-            _elementsPage.SubmitUserForm();
+            _elementsPage.FillUserForm(userForm)
+                .SubmitUserForm();
         }
 
         [Then(@"the table should contain entered values")]

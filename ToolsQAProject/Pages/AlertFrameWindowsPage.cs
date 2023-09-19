@@ -14,14 +14,16 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public void ClickOnButton(string buttonName)
+        public AlertFrameWindowsPage ClickOnButton(string buttonName)
         {
             ButtonByName(buttonName).Click();
+            return this;
         }
 
-        public void SwitchToAnotherTabWindow()
+        public AlertFrameWindowsPage SwitchToAnotherTabWindow()
         {
             _webDriver.SwitchTo().Window(_webDriver.WindowHandles[^1]);
+            return this;
         }
 
         public string GetSampleTextValue()

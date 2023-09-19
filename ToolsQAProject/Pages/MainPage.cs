@@ -15,9 +15,10 @@ namespace ToolsQAProject.Pages
         private IWebElement CategoryByName(string categoryName) => _webDriver.FindElement(By.XPath("//div[@class='category-cards']" + 
             $"/div[contains(concat(' ', @class, ' '), ' card ') and .//h5[text()='{categoryName}']]"));
 
-        public void OpenCategory(string categoryName)
+        public MainPage OpenCategory(string categoryName)
         {
             CategoryByName(categoryName).ScrollToElement().Click();
+            return this;
         }
     }
 }

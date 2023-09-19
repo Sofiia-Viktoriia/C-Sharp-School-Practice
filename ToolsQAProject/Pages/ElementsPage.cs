@@ -6,7 +6,7 @@ using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.Pages
 {
-    internal class ElementsPage
+    public class ElementsPage
     {
         private IWebDriver _webDriver;
         private const string _userFormOutputNameMeta = "Name:";
@@ -42,17 +42,19 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public void FillUserForm(UserForm userForm)
+        public ElementsPage FillUserForm(UserForm userForm)
         {
             UserFormFullNameInput.SendKeys(userForm.FullName);
             UserFormEmailInput.SendKeys(userForm.Email);
             UserFormCurrentAddressInput.SendKeys(userForm.CurrentAddress);
             UserFormPermanentAddressInput.SendKeys(userForm.PermanentAddress);
+            return this;
         }
 
-        public void SubmitUserForm()
+        public ElementsPage SubmitUserForm()
         {
             UserFormSubmitButton.ScrollToElement().Click();
+            return this;
         }
 
         public string GetUserFormOutputName()
@@ -75,22 +77,25 @@ namespace ToolsQAProject.Pages
             return UserFormOutputPermanentAddress.Text.TextAfter(_userFormOutputPermanentAddressMeta);
         }
 
-        public void SelectElement(string elementName)
+        public ElementsPage SelectElement(string elementName)
         {
             ElementLabelByName(elementName).Click();
+            return this;
         }
 
-        public void ExpandFolder(string folderName)
+        public ElementsPage ExpandFolder(string folderName)
         {
             ElementButtonByName(folderName).Click();
+            return this;
         }
 
-        public void SelectElementsInFolder(string folderName)
+        public ElementsPage SelectElementsInFolder(string folderName)
         {
             foreach (IWebElement element in ElementsInFolderByName(folderName))
             {
                 element.ScrollToElement().Click();
             }
+            return this;
         }
 
         public string GetSelectionResult()
@@ -103,9 +108,10 @@ namespace ToolsQAProject.Pages
             return TableRows.Count;
         }
 
-        public void ClickOnColumnName(string columnName)
+        public ElementsPage ClickOnColumnName(string columnName)
         {
             TableColumnByName(columnName).Click();
+            return this;
         }
 
         public List<string> GetColumnValues(string columnName)
@@ -113,9 +119,10 @@ namespace ToolsQAProject.Pages
             return ColumnValuesByName(columnName).Select(element => element.Text).ToList();
         }
 
-        public void ClickOnRowDeleteButton(string columnName, string columnValue)
+        public ElementsPage ClickOnRowDeleteButton(string columnName, string columnValue)
         {
             TableRowDeleteButtonByColumnNameAndValue(columnName, columnValue).Click();
+            return this;
         }
 
         public bool IfColumnContainsValue(string columnName, string columnValue)
@@ -123,20 +130,23 @@ namespace ToolsQAProject.Pages
             return ColumnValuesByName(columnName).Select(element => element.Text).Contains(columnValue);
         }
 
-        public void ClickOnButton(string buttonName)
+        public ElementsPage ClickOnButton(string buttonName)
         {
             ButtonByName(buttonName).ScrollToElement().Click();
+            return this;
         }
 
-        public void DoubleClickOnButton(string buttonName)
+        public ElementsPage DoubleClickOnButton(string buttonName)
         {
             new Actions(_webDriver).MoveToElement(ButtonByName(buttonName))
                 .Click(ButtonByName(buttonName)).Click(ButtonByName(buttonName)).Build().Perform();
+            return this;
         }
 
-        public void RightClickOnButton(string buttonName)
+        public ElementsPage RightClickOnButton(string buttonName)
         {
             new Actions(_webDriver).MoveToElement(ButtonByName(buttonName)).ContextClick(ButtonByName(buttonName)).Build().Perform();
+            return this;
         }
 
         public bool IfClickingResultDisplayed(string resultText)

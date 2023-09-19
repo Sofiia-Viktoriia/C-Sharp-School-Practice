@@ -26,7 +26,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         public void ThenANewTabWindowOpensWithTextInIt(string text)
         {
             _alertFrameWindowsPage.SwitchToAnotherTabWindow();
-            Assert.That(_alertFrameWindowsPage.GetSampleTextValue, Is.EqualTo(SampleText), $"The sample text does not equal to {SampleText}");
+            Assert.That(_alertFrameWindowsPage.GetSampleTextValue(), Is.EqualTo(SampleText), $"The sample text does not equal to {SampleText}");
         }
     }
 }

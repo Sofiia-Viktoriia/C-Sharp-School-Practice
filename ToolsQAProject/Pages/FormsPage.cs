@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using ToolsQAProject.Helpers;
 using ToolsQAProject.StepDefinitions.Entities;
 
@@ -43,120 +42,135 @@ namespace ToolsQAProject.Pages
         private IWebElement CityDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='city']//input"));
         private IWebElement SubmitButton => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//button[@id='submit']"));
         private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
-        private IWebElement ModalTableValueByLabel (string label) => _webDriver.FindElement(By.XPath($"//div[@class='modal-content']/div[@class='modal-body']//td[text()='{label}']/following-sibling::td"));
+        private IWebElement ModalTableValueByLabel(string label) => _webDriver.FindElement(By.XPath($"//div[@class='modal-content']/div[@class='modal-body']//td[text()='{label}']/following-sibling::td"));
 
         public FormsPage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
         }
 
-        public void FillStudentRegistrationForm(StudentRegistrationForm form)
+        public FormsPage FillStudentRegistrationForm(StudentRegistrationForm form)
         {
             while (AdsIframe.Count > 0)
             {
                 _webDriver.Navigate().Refresh();
             }
 
-            FillFirstName(form.FirstName);
-            FillLastName(form.LastName);
-            FillEmail(form.Email);
-            SelectGender(form.Gender);
-            FillPhone(form.MobilePhone);
-            FillDateOfBirth(form.DateOfBirth);
-            AddSubjects(form.Subjects);
-            SelectHobbies(form.Hobbies);
-            FillCurrentAddress(form.CurrentAddress);
-            SelectState(form.State);
-            SelectCity(form.City);
+            return FillFirstName(form.FirstName)
+                .FillLastName(form.LastName)
+                .FillEmail(form.Email)
+                .SelectGender(form.Gender)
+                .FillPhone(form.MobilePhone)
+                .FillDateOfBirth(form.DateOfBirth)
+                .AddSubjects(form.Subjects)
+                .SelectHobbies(form.Hobbies)
+                .FillCurrentAddress(form.CurrentAddress)
+                .SelectState(form.State)
+                .SelectCity(form.City);
         }
 
-        public void FillFirstName(string firstName)
+        public FormsPage FillFirstName(string firstName)
         {
             FirstNameInput.ScrollToElement().SendKeys(firstName);
+            return this;
         }
 
-        public void FillLastName(string lastName)
+        public FormsPage FillLastName(string lastName)
         {
             LastNameInput.ScrollToElement().SendKeys(lastName);
+            return this;
         }
 
-        public void FillEmail(string email)
+        public FormsPage FillEmail(string email)
         {
             EmailInput.ScrollToElement().SendKeys(email);
+            return this;
         }
 
-        public void SelectGender(string value)
+        public FormsPage SelectGender(string value)
         {
             GenderRadiobuttonByValue(value).ScrollToElement().Click();
+            return this;
         }
 
-        public void FillPhone(string phone)
+        public FormsPage FillPhone(string phone)
         {
             MobilePhoneInput.ScrollToElement().SendKeys(phone);
+            return this;
         }
 
-        public void FillDateOfBirth(string dateOfBirth)
+        public FormsPage FillDateOfBirth(string dateOfBirth)
         {
             var date = dateOfBirth.Split(" ");
             DateOfBirthInput.Click();
             SelectYearInDatePicker(date[2]);
             SelectMonthInDatePicker(date[1]);
             SelectDayInDatePicker(int.Parse(date[0]), date[1]);
+            return this;
         }
 
-        public void SelectYearInDatePicker(string year)
+        public FormsPage SelectYearInDatePicker(string year)
         {
             DateOfBirthPickerYearDropdown.Click();
             DateOfBirthPickerYearDropdownValueByText(year).Click();
+            return this;
         }
 
-        public void SelectMonthInDatePicker(string month)
+        public FormsPage SelectMonthInDatePicker(string month)
         {
             DateOfBirthPickerMonthDropdown.Click();
             DateOfBirthPickerMonthDropdownValueByText(month).Click();
+            return this;
         }
 
-        public void SelectDayInDatePicker(int day, string month)
+        public FormsPage SelectDayInDatePicker(int day, string month)
         {
             DateOfBirthPickerDayByTextAndMonth(day, month).Click();
+            return this;
         }
 
-        public void AddSubjects(List<string> subjects)
+        public FormsPage AddSubjects(List<string> subjects)
         {
             foreach (string subject in subjects)
             {
                 SubjectsInput.ScrollToElement().SendKeys(subject);
                 SubjectsSuggestionByValue(subject).Click();
             }
+            return this;
         }
 
-        public void SelectHobbies(List<string> hobbies)
+        public FormsPage SelectHobbies(List<string> hobbies)
         {
             foreach (string hobby in hobbies)
             {
                 HobbiesCheckBoxByLabel(hobby).ScrollToElement().Click();
             }
+            return this;
         }
 
-        public void FillCurrentAddress(string  currentAddress)
+        public FormsPage FillCurrentAddress(string currentAddress)
         {
             CurrentAddressTextarea.ScrollToElement().SendKeys(currentAddress);
+            return this;
         }
 
-        public void SelectState(string state)
+        public FormsPage SelectState(string state)
         {
             StateDropdown.ScrollToElement().Click();
             StateSuggestionByValue(state).Click();
+            return this;
         }
 
-        public void SelectCity(string city)
+        public FormsPage SelectCity(string city)
         {
             CityDropdown.ScrollToElement().SendKeys(city + Keys.Enter);
+            return this;
         }
 
-        public void ClickSubmitButton()
+        public FormsPage ClickSubmitButton()
         {
             SubmitButton.ScriptClick();
+            return this;
         }
 
         public StudentRegistrationForm GetModalTableValues()
