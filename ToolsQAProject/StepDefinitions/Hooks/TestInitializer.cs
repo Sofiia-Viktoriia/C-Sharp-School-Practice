@@ -27,7 +27,7 @@ namespace ToolsQAProject.StepDefinitions.Hooks
         [AfterScenario]
         public void StopWebDriver()
         {
-            _webDriverManager.StopWebDriver();
+            _webDriverManager.StopWebDriver(_objectContainer.Resolve<IWebDriver>());
         }
     }
 }

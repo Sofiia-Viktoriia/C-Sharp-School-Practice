@@ -8,35 +8,35 @@ namespace ToolsQAProject.Drivers
 {
     public class WebDriverManager
     {
-        private IWebDriver _driver;
         private AppSettingsOptions? _appSettings;
 
         public IWebDriver GetWebDriver()
         {
+            IWebDriver webDriver;
             _appSettings = AppSettingsConfig.GetApplicationConfiguration();
             switch (_appSettings?.BrowserName)
             {
                 case Browser.Chrome:
-                    _driver = new ChromeDriver();
+                    webDriver = new ChromeDriver();
                     break;
                 case Browser.Firefox:
-                    _driver = new FirefoxDriver();
+                    webDriver = new FirefoxDriver();
                     break;
                 case Browser.Edge:
-                    _driver = new EdgeDriver();
+                    webDriver = new EdgeDriver();
                     break;
                 default:
                     throw new NotSupportedException("Not supported browser");
             }
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-            _driver.Url = _appSettings.URL;
-            _driver.Manage().Window.Maximize();
-            return _driver;
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+            webDriver.Url = _appSettings.URL;
+            webDriver.Manage().Window.Maximize();
+            return webDriver;
         }
 
-        public void StopWebDriver()
+        public void StopWebDriver(IWebDriver webDriver)
         {
-            _driver?.Quit();
+            webDriver.Quit();
         }
     }
 }
