@@ -2,6 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
+using ToolsQAProject.Constants;
 using ToolsQAProject.Pages;
 
 namespace ToolsQAProject.StepDefinitions.Categories
@@ -73,10 +74,16 @@ namespace ToolsQAProject.StepDefinitions.Categories
             });
         }
 
-        [When(@"user clicks '([^']*)' button")]
-        public void WhenUserClicksButton(string buttonName)
+        [When(@"user starts filling the progress bar") ]
+        public void WhenUserStartsFillingTheProgressBar()
         {
-            _widgetsPage.ClickOnButton(buttonName);
+            _widgetsPage.ClickOnButton(Buttons.Start);
+        }
+
+        [When(@"user resets the progress bar")]
+        public void WhenUserResetsTheProgressBar()
+        {
+            _widgetsPage.ClickOnButton(Buttons.Reset);
         }
 
         [Then(@"progress bar value reaches '([^']*)'")]

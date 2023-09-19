@@ -33,9 +33,9 @@ Scenario: Deleting values from auto completing field with multiple values in Aut
 
 Scenario: Resetting the progress bar in Progress Bar section
 	Given user opens the 'Progress Bar' section
-	When user clicks 'Start' button
+	When user starts filling the progress bar
 	Then progress bar value reaches '100%'
 	And 'Reset' button is displayed
-	When user clicks 'Reset' button
+	When user resets the progress bar
 	Then 'Start' button is displayed
 	And progress bar value equals to '0%'
