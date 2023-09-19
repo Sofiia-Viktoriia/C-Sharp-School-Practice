@@ -12,20 +12,20 @@ Scenario: Entering a value into the auto completing field with multiple values i
 	Then list with 3 suggestions appears
 	And all suggestions contain 'g' value
 
-Scenario: Deleting values from auto completing field with multiple values in Auto Complete section
+Scenario: Deleting values from multiple color selection field in Auto Complete section
 	Given user opens the 'Auto Complete' section
-	When user adds values to the auto completing field with multiple values
+	When user adds values to the multiple color selection field
 		| Values |
 		| Red    |
 		| Yellow |
 		| Green  |
 		| Blue   |
 		| Purple |
-	And user deletes values from the auto completing field with multiple values
+	And user deletes values from the multiple color selection field
 		| Values |
 		| Yellow |
 		| Purple |
-	Then the values are displayed in the auto completing field with multiple values
+	Then the values are displayed in the multiple color selection field
 		| Values |
 		| Red    |
 		| Green  |

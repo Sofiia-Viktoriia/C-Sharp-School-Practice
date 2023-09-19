@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Drawing;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Pages;
@@ -41,8 +42,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             });
         }
 
-        [When(@"user adds values to the auto completing field with multiple values")]
-        public void WhenUserAddsValuesToTheAutoCompletingFieldWithMultipleValues(Table table)
+        [When(@"user adds values to the multiple color selection field")]
+        public void WhenUserAddsValuesToTheMultipleColorSelectionField(Table table)
         {
             string[] values = table.Rows.Select(r => r[0]).ToArray();
             foreach (string value in values)
@@ -51,8 +52,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             }
         }
 
-        [When(@"user deletes values from the auto completing field with multiple values")]
-        public void WhenUserDeletesValuesFromTheAutoCompletingFieldWithMultipleValues(Table table)
+        [When(@"user deletes values from the multiple color selection field")]
+        public void WhenUserDeletesValuesFromTheMultipleColorSelectionField(Table table)
         {
             string[] values = table.Rows.Select(r => r[0]).ToArray();
             foreach (string value in values)
@@ -61,8 +62,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             }
         }
 
-        [Then(@"the values are displayed in the auto completing field with multiple values")]
-        public void ThenTheValuesAreDisplayedInTheAutoCompletingFieldWithMultipleValues(Table table)
+        [Then(@"the values are displayed in the multiple color selection field")]
+        public void ThenTheValuesAreDisplayedInTheMultipleColorSelectionField(Table table)
         {
             string[] values = table.Rows.Select(r => r[0]).ToArray();
             Assert.Multiple(() =>
