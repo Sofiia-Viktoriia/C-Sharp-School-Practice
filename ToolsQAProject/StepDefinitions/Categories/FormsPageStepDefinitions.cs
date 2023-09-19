@@ -18,8 +18,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _studentRegistrationForm = form;
         }
 
-        [When(@"user fills the form with values")]
-        public void WhenUserFillsTheFormWithValues(Table table)
+        [When(@"user submits the form with values")]
+        public void WhenUserSubmitsTheFormWithValues(Table table)
         {
             _studentRegistrationForm = new StudentRegistrationForm
             {
@@ -36,16 +36,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
                 City = table.Rows[0]["City"]
             };
             _formsPage.FillStudentRegistrationForm(_studentRegistrationForm);
-        }
-
-        [When(@"user submits the form")]
-        public void WhenUserSubmitsTheForm()
-        {
             _formsPage.ClickSubmitButton();
         }
 
-        [Then(@"modal page with entered values is displayed")]
-        public void ThenModalPageWithEnteredValuesIsDisplayed()
+        [Then(@"the sent form overview is populated with entered values")]
+        public void ThenTheSentFormOverviewIsPopulatedWithEnteredValues()
         {
             var actualForm = _formsPage.GetModalTableValues();
             actualForm.Should().BeEquivalentTo(_studentRegistrationForm);
