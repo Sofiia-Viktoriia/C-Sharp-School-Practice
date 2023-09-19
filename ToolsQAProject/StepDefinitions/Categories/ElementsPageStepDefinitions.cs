@@ -49,6 +49,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [When(@"user selects the '([^']*)' element")]
+        [When(@"user selects the '([^']*)' folder")]
         public void WhenUserSelectsTheElement(string folderName)
         {
             _elementsPage.SelectElement(folderName);

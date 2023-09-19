@@ -18,7 +18,7 @@ Scenario: Submitting correct fields` values in Text Box section
 Scenario: Selecting elements in Check Box section
 	Given user opens the 'Check Box' section
 	When user expands the 'Home' folder
-	And user selects the 'Desktop' element
+	And user selects the 'Desktop' folder
 	And user expands the 'Documents' folder
 	And user expands the 'WorkSpace' folder
 	And user selects the 'Angular' element
@@ -26,7 +26,7 @@ Scenario: Selecting elements in Check Box section
 	And user expands the 'Office' folder
 	And user selects all elements in the 'Office' folder
 	And user expands the 'Downloads' folder
-	And user selects the 'Downloads' element
+	And user selects the 'Downloads' folder
 	Then the selection result should be equal 'You have selected : desktop notes commands angular veu office public private classified general downloads wordFile excelFile'
 
 Scenario: Sorting column values in the table in Web Tables section
