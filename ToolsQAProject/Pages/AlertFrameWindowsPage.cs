@@ -21,7 +21,7 @@ namespace ToolsQAProject.Pages
 
         public void SwitchToAnotherTabWindow()
         {
-            _webDriver.SwitchTo().Window(_webDriver.WindowHandles[1]);
+            _webDriver.SwitchTo().Window(_webDriver.WindowHandles[^1]);
         }
 
         public string GetSampleTextValue()
