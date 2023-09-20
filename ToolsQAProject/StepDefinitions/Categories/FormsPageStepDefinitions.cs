@@ -1,4 +1,3 @@
-using FluentAssertions;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
@@ -42,8 +41,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the sent form overview is populated with entered values")]
         public void ThenTheSentFormOverviewIsPopulatedWithEnteredValues()
         {
-            var actualForm = _formsPage.GetModalTableValues();
-            actualForm.Should().BeEquivalentTo(_studentRegistrationForm);
+            _formsPage.VerifyModalTableValues(_studentRegistrationForm);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers;
 
@@ -12,7 +13,7 @@ namespace ToolsQAProject.Pages
             "//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div"));
         private IWebElement AutoCompleteSuggestionByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             $"//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div[text()='{text}']"));
-        private IWebElement AutoCompleteFiledValueByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']"+ 
+        private IWebElement AutoCompleteFiledValueByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             $"//div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value ') and ./div[text()='{text}']]"));
         private IWebElement AutoCompleteFiledValueRemoveButtonByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             $"//div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value ') and ./div[text()='{text}']]/div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value__remove ')]"));
@@ -30,14 +31,22 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public int GetAmountOfSuggestions()
+        public WidgetsPage VerifyAmountOfSuggestions(int expectedAmount)
         {
-            return AutoCompleteSuggestions.Count;
+            Assert.That(AutoCompleteSuggestions.Count, Is.EqualTo(expectedAmount), $"The amount of suggestions does not equal to {expectedAmount}");
+            return this;
         }
 
-        public ReadOnlyCollection<IWebElement> GetAllSuggestions()
+        public WidgetsPage VerifyAllSuggestionsContainValue(string value)
         {
-            return AutoCompleteSuggestions;
+            Assert.Multiple(() =>
+            {
+                foreach (IWebElement suggestion in AutoCompleteSuggestions)
+                {
+                    Assert.That(suggestion.Text, Does.Contain(value).IgnoreCase, $"'{suggestion.Text}' does not contain '{value}'");
+                }
+            });
+            return this;
         }
 
         public WidgetsPage AddValueToAutoCompleteField(string value)
@@ -53,9 +62,16 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public bool IsAutoCompleteFieldValueDisplayed(string value)
+        public WidgetsPage VerifyAutoCompleteFieldValuesAreDisplayed(string[] values)
         {
-            return AutoCompleteFiledValueByText(value).Displayed;
+            Assert.Multiple(() =>
+            {
+                foreach (string value in values)
+                {
+                    Assert.That(AutoCompleteFiledValueByText(value).Displayed, Is.True, $"'{value}' value is not in the auto complete field");
+                }
+            });
+            return this;
         }
 
         public WidgetsPage ClickOnButton(string buttonName)
@@ -64,14 +80,21 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public bool IsButtonDisplayed(string buttonName)
+        public WidgetsPage VerifyButtonIsDisplayed(string buttonName)
         {
-            return ButtonByName(buttonName).Displayed;
+            Assert.That(ButtonByName(buttonName).Displayed, Is.True, $"{buttonName} button is not displayed");
+            return this;
         }
 
         public string GetProgressBarValue()
         {
             return ProgressBar.Text;
+        }
+
+        public WidgetsPage VerifyProgressBarValue(string value)
+        {
+            Assert.That(GetProgressBarValue(), Is.EqualTo(value), $"Progress bar value does not equal to {value}");
+            return this;
         }
     }
 }

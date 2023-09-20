@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -33,15 +32,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the table should contain entered values")]
         public void ThenTheTableShouldContainEnteredValues(Table table)
         {
-            UserForm userForm = new UserForm
-            {
-                FullName = _elementsPage.GetUserFormOutputName(),
-                Email = _elementsPage.GetUserFormOutputEmail(),
-                CurrentAddress = _elementsPage.GetUserFormOutputCurrentAddress(),
-                PermanentAddress = _elementsPage.GetUserFormOutputPermanentAddress()
-            };
-
-            table.CompareToInstance(userForm);
+            _elementsPage.VerifyOutputTableValues(table);
         }
 
         [When(@"user expands the '([^']*)' folder")]
@@ -66,7 +57,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the selection result should be equal '([^']*)'")]
         public void ThenTheSelectionResultShouldBeEqual(string selectionResult)
         {
-            Assert.That(_elementsPage.GetSelectionResult().Replace("\r\n", " "), Is.EqualTo(selectionResult), $"The selection result does not equal to {selectionResult}");
+            _elementsPage.VerifySelectionResult(selectionResult);
         }
 
         [When(@"user sorts values in the table by '([^']*)' column")]
@@ -78,8 +69,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the values in the '([^']*)' column should be sorted ascending")]
         public void ThenTheValuesInTheColumnShouldBeSortedAscending(string columnName)
         {
-            List<string> values = _elementsPage.GetColumnValues(columnName);
-            Assert.That(values.OrderBy(el => int.Parse(el)).SequenceEqual(values), Is.True, $"The {columnName} column values are not sorted ascending");
+            _elementsPage.VerifyColumnValuesSortedAscending(columnName);
         }
 
         [Given(@"the amount of rows is remembered")]
@@ -98,13 +88,13 @@ namespace ToolsQAProject.StepDefinitions.Categories
         public void ThenTheAmountOfRowsInTheTableReducedBy(int reduceNumber)
         {
             var expectedRowAmount = (int)_scenarioContext["RowAmount"] - reduceNumber;
-            Assert.That(_elementsPage.GetAmountOfRowsInTable(), Is.EqualTo(expectedRowAmount), $"The amount of table rows does not equal to {expectedRowAmount}");
+            _elementsPage.VerifyAmountOfRowsInTable(expectedRowAmount);
         }
 
         [Then(@"the row with the '([^']*)' value equals '([^']*)' should not exist")]
         public void ThenTheRowWithTheValueEqualsShouldNotExist(string columnName, string columnValue)
         {
-            Assert.That(_elementsPage.IfColumnContainsValue(columnName, columnValue), Is.False, $"The row with the {columnName} value {columnValue} exists");
+            _elementsPage.VerifyColumnDoesNotContainValue(columnName, columnValue);
         }
 
         [When(@"user interacts with the '([^']*)' button")]
@@ -127,7 +117,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the result '([^']*)' should be displayed")]
         public void ThenTheResultShouldBeDisplayed(string result)
         {
-            Assert.That(_elementsPage.IfClickingResultDisplayed(result), Is.True, "The clicking result is not displayed");
+            _elementsPage.VerifyClickingResultIsDisplayed(result);
         }
     }
 }

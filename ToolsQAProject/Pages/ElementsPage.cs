@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System.Collections.ObjectModel;
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Helpers;
 using ToolsQAProject.StepDefinitions.Entities;
 
@@ -57,24 +60,18 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public string GetUserFormOutputName()
+        public ElementsPage VerifyOutputTableValues(Table table)
         {
-            return UserFormOutputName.Text.TextAfter(_userFormOutputNameMeta);
-        }
+            UserForm userForm = new UserForm
+            {
+                FullName = UserFormOutputName.Text.TextAfter(_userFormOutputNameMeta),
+                Email = UserFormOutputEmail.Text.TextAfter(_userFormOutputEmailMeta),
+                CurrentAddress = UserFormOutputCurrentAddress.Text.TextAfter(_userFormOutputCurrentAddressMeta),
+                PermanentAddress = UserFormOutputPermanentAddress.Text.TextAfter(_userFormOutputPermanentAddressMeta)
+            };
 
-        public string GetUserFormOutputEmail()
-        {
-            return UserFormOutputEmail.Text.TextAfter(_userFormOutputEmailMeta);
-        }
-
-        public string GetUserFormOutputCurrentAddress()
-        {
-            return UserFormOutputCurrentAddress.Text.TextAfter(_userFormOutputCurrentAddressMeta);
-        }
-
-        public string GetUserFormOutputPermanentAddress()
-        {
-            return UserFormOutputPermanentAddress.Text.TextAfter(_userFormOutputPermanentAddressMeta);
+            table.CompareToInstance(userForm);
+            return this;
         }
 
         public ElementsPage SelectElement(string elementName)
@@ -98,14 +95,21 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public string GetSelectionResult()
+        public ElementsPage VerifySelectionResult(string expectedResult)
         {
-            return SelectionResult.Text;
+            Assert.That(SelectionResult.Text.Replace("\r\n", " "), Is.EqualTo(expectedResult), $"The selection result does not equal to {expectedResult}");
+            return this;
         }
 
         public int GetAmountOfRowsInTable()
         {
             return TableRows.Count;
+        }
+
+        public ElementsPage VerifyAmountOfRowsInTable(int expectedAmount)
+        {
+            Assert.That(GetAmountOfRowsInTable(), Is.EqualTo(expectedAmount), $"The amount of table rows does not equal to {expectedAmount}");
+            return this;
         }
 
         public ElementsPage ClickOnColumnName(string columnName)
@@ -114,9 +118,11 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public List<string> GetColumnValues(string columnName)
+        public ElementsPage VerifyColumnValuesSortedAscending(string columnName)
         {
-            return ColumnValuesByName(columnName).Select(element => element.Text).ToList();
+            List<string> values = ColumnValuesByName(columnName).Select(element => element.Text).ToList();
+            Assert.That(values.OrderBy(el => int.Parse(el)).SequenceEqual(values), Is.True, $"The {columnName} column values are not sorted ascending");
+            return this;
         }
 
         public ElementsPage ClickOnRowDeleteButton(string columnName, string columnValue)
@@ -125,9 +131,10 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public bool IfColumnContainsValue(string columnName, string columnValue)
+        public ElementsPage VerifyColumnDoesNotContainValue(string columnName, string columnValue)
         {
-            return ColumnValuesByName(columnName).Select(element => element.Text).Contains(columnValue);
+            Assert.That(ColumnValuesByName(columnName).Select(element => element.Text).Contains(columnValue), Is.False, $"The row with the {columnName} value {columnValue} exists");
+            return this;
         }
 
         public ElementsPage ClickOnButton(string buttonName)
@@ -149,9 +156,10 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public bool IfClickingResultDisplayed(string resultText)
+        public ElementsPage VerifyClickingResultIsDisplayed(string resultText)
         {
-            return ClickingResultByText(resultText).Displayed;
+            Assert.That(ClickingResultByText(resultText).Displayed, Is.True, "The clicking result is not displayed");
+            return this;
         }
     }
 }

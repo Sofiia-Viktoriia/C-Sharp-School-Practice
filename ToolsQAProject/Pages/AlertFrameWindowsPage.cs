@@ -26,9 +26,10 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public string GetSampleTextValue()
+        public AlertFrameWindowsPage VerifySampleTextValue(string expectedSampleText)
         {
-            return SampleText.Text;
+            Assert.That(SampleText.Text, Is.EqualTo(expectedSampleText), $"The sample text does not equal to {expectedSampleText}");
+            return this;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using FluentAssertions;
+using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers;
 using ToolsQAProject.StepDefinitions.Entities;
@@ -173,7 +174,7 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public StudentRegistrationForm GetModalTableValues()
+        public FormsPage VerifyModalTableValues(StudentRegistrationForm expectedValues)
         {
             StudentRegistrationForm form = new StudentRegistrationForm();
             var fullName = ModalTableValueByLabel(FullNameModalLabel).Text.Split(" ");
@@ -191,7 +192,8 @@ namespace ToolsQAProject.Pages
             form.State = stateAndCity[..lastSpaceIndex];
             form.City = stateAndCity[(lastSpaceIndex + 1)..];
 
-            return form;
+            form.Should().BeEquivalentTo(expectedValues);
+            return this;
         }
     }
 }

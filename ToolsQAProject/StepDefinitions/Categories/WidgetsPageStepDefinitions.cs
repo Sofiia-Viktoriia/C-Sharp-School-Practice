@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System.Drawing;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Pages;
@@ -29,19 +27,13 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"list with (.*) suggestions appears")]
         public void ThenListWithSuggestionsAppears(int suggestionAmount)
         {
-            Assert.That(_widgetsPage.GetAmountOfSuggestions(), Is.EqualTo(suggestionAmount), $"The amount of suggestions does not equal to {suggestionAmount}");
+            _widgetsPage.VerifyAmountOfSuggestions(suggestionAmount);
         }
 
         [Then(@"all suggestions contain '([^']*)' value")]
         public void ThenAllSuggestionsContainValue(string value)
         {
-            Assert.Multiple(() =>
-            {
-                foreach (IWebElement suggestion in _widgetsPage.GetAllSuggestions())
-                {
-                    Assert.That(suggestion.Text, Does.Contain(value).IgnoreCase, $"'{suggestion.Text}' does not contain '{value}'");
-                }
-            });
+            _widgetsPage.VerifyAllSuggestionsContainValue(value);
         }
 
         [When(@"user adds values to the multiple color selection field")]
@@ -68,16 +60,10 @@ namespace ToolsQAProject.StepDefinitions.Categories
         public void ThenTheValuesAreDisplayedInTheMultipleColorSelectionField(Table table)
         {
             string[] values = table.Rows.Select(r => r[0]).ToArray();
-            Assert.Multiple(() =>
-            {
-                foreach (string value in values)
-                {
-                    Assert.That(_widgetsPage.IsAutoCompleteFieldValueDisplayed(value), Is.True, $"'{value}' value is not in the auto complete field");
-                }
-            });
+            _widgetsPage.VerifyAutoCompleteFieldValuesAreDisplayed(values);
         }
 
-        [When(@"user starts filling the progress bar") ]
+        [When(@"user starts filling the progress bar")]
         public void WhenUserStartsFillingTheProgressBar()
         {
             _widgetsPage.ClickOnButton(Buttons.Start);
@@ -99,13 +85,13 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"'([^']*)' button is displayed")]
         public void ThenButtonIsDisplayed(string buttonName)
         {
-            Assert.That(_widgetsPage.IsButtonDisplayed(buttonName), Is.True, $"{buttonName} button is not displayed");
+            _widgetsPage.VerifyButtonIsDisplayed(buttonName);
         }
 
         [Then(@"progress bar value equals to '([^']*)'")]
         public void ThenProgressBarValueEqualsTo(string value)
         {
-            Assert.That(_widgetsPage.GetProgressBarValue(), Is.EqualTo(value), $"Progress bar value does not equal to {value}");
+            _widgetsPage.VerifyProgressBarValue(value);
         }
     }
 }

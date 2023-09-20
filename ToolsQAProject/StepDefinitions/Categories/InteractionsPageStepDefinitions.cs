@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
@@ -31,13 +30,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
             }
         }
 
-        [Then(@"selected squares contain values")]
+        [Then(@"selected squares contain values")
         public void ThenSelectedSquaresContainValues(Table table)
         {
             string[] expectedValues = table.Rows.Select(r => r[0]).ToArray();
-            string[] actualValues = _interactionsPage.GetSelectedGridSquaresValues();
-            Assert.That(actualValues.OrderBy(value => value).SequenceEqual(expectedValues.OrderBy(value => value)), Is.True,
-                "Selected grid squares do not contain expected values");
+            _interactionsPage.VerifySelectedGridSquaresValues(expectedValues);
         }
     }
 }

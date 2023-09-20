@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers;
 
@@ -29,9 +30,12 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public string[] GetSelectedGridSquaresValues()
+        public InteractionsPage VerifySelectedGridSquaresValues(string[] expectedValues)
         {
-            return SelectedGridSquares.Select(square => square.Text).ToArray();
+            string[] actualValues = SelectedGridSquares.Select(square => square.Text).ToArray();
+            Assert.That(actualValues.OrderBy(value => value).SequenceEqual(expectedValues.OrderBy(value => value)), Is.True,
+                "Selected grid squares do not contain expected values");
+            return this;
         }
     }
 }
