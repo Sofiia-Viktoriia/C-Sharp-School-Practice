@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Constants;
-using ToolsQAProject.Pages;
+using ToolsQAProject.Pages.ElementsPage;
 using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.StepDefinitions.Categories
@@ -11,19 +11,25 @@ namespace ToolsQAProject.StepDefinitions.Categories
     public class ElementsPageStepDefinitions
     {
         private readonly ScenarioContext _scenarioContext;
-        private ElementsPage _elementsPage;
+        private TextBoxSection _textBoxSection;
+        private CheckBoxSection _checkBoxSection;
+        private WebTablesSection _webTablesSection;
+        private ButtonsSection _buttonsSection;
 
         public ElementsPageStepDefinitions(IWebDriver webDriver, ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _elementsPage = new ElementsPage(webDriver);
+            _textBoxSection = new TextBoxSection(webDriver);
+            _checkBoxSection = new CheckBoxSection(webDriver);
+            _webTablesSection = new WebTablesSection(webDriver);
+            _buttonsSection = new ButtonsSection(webDriver);
         }
 
         [When(@"user submits the form with the next data")]
         public void WhenUserSubmitsTheFormWithTheNextData(Table table)
         {
             UserForm userForm = table.CreateInstance<UserForm>();
-            _elementsPage
+            _textBoxSection
                 .FillFullName(userForm.FullName)
                 .FillEmail(userForm.Email)
                 .FillCurrentAddress(userForm.CurrentAddress)
@@ -34,69 +40,69 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the table should contain entered values")]
         public void ThenTheTableShouldContainEnteredValues(Table table)
         {
-            _elementsPage.VerifyOutputTableValues(table);
+            _textBoxSection.VerifyOutputTableValues(table);
         }
 
         [When(@"user expands the '([^']*)' folder")]
         public void WhenUserExpandsTheFolder(string elementName)
         {
-            _elementsPage.ExpandFolder(elementName);
+            _checkBoxSection.ExpandFolder(elementName);
         }
 
         [When(@"user selects the '([^']*)' element")]
         [When(@"user selects the '([^']*)' folder")]
         public void WhenUserSelectsTheElement(string folderName)
         {
-            _elementsPage.SelectElement(folderName);
+            _checkBoxSection.SelectElement(folderName);
         }
 
         [When(@"user selects all elements in the '([^']*)' folder")]
         public void WhenUserSelectsAllElementsInTheFolder(string folderName)
         {
-            _elementsPage.SelectElementsInFolder(folderName);
+            _checkBoxSection.SelectElementsInFolder(folderName);
         }
 
         [Then(@"the selection result should be equal '([^']*)'")]
         public void ThenTheSelectionResultShouldBeEqual(string selectionResult)
         {
-            _elementsPage.VerifySelectionResult(selectionResult);
+            _checkBoxSection.VerifySelectionResult(selectionResult);
         }
 
         [When(@"user sorts values in the table by '([^']*)' column")]
         public void WhenUserSortsValuesInTheTableByColumn(string columnName)
         {
-            _elementsPage.ClickOnColumnName(columnName);
+            _webTablesSection.ClickOnColumnName(columnName);
         }
 
         [Then(@"the values in the '([^']*)' column should be sorted ascending")]
         public void ThenTheValuesInTheColumnShouldBeSortedAscending(string columnName)
         {
-            _elementsPage.VerifyColumnValuesSortedAscending(columnName);
+            _webTablesSection.VerifyColumnValuesSortedAscending(columnName);
         }
 
         [Given(@"the amount of rows is remembered")]
         public void GivenTheAmountOfRowsIsRemembered()
         {
-            _scenarioContext["RowAmount"] = _elementsPage.GetAmountOfRowsInTable();
+            _scenarioContext["RowAmount"] = _webTablesSection.GetAmountOfRowsInTable();
         }
 
         [When(@"user deletes the row with the '([^']*)' value equals '([^']*)'")]
         public void WhenUserDeletesTheRowWithTheValueEquals(string columnName, string columnValue)
         {
-            _elementsPage.ClickOnRowDeleteButton(columnName, columnValue);
+            _webTablesSection.ClickOnRowDeleteButton(columnName, columnValue);
         }
 
         [Then(@"the amount of rows in the table reduced by (\d+)")]
         public void ThenTheAmountOfRowsInTheTableReducedBy(int reduceNumber)
         {
             var expectedRowAmount = (int)_scenarioContext["RowAmount"] - reduceNumber;
-            _elementsPage.VerifyAmountOfRowsInTable(expectedRowAmount);
+            _webTablesSection.VerifyAmountOfRowsInTable(expectedRowAmount);
         }
 
         [Then(@"the row with the '([^']*)' value equals '([^']*)' should not exist")]
         public void ThenTheRowWithTheValueEqualsShouldNotExist(string columnName, string columnValue)
         {
-            _elementsPage.VerifyColumnDoesNotContainValue(columnName, columnValue);
+            _webTablesSection.VerifyColumnDoesNotContainValue(columnName, columnValue);
         }
 
         [When(@"user interacts with the '([^']*)' button")]
@@ -105,13 +111,13 @@ namespace ToolsQAProject.StepDefinitions.Categories
             switch (buttonName)
             {
                 case Buttons.DoubleClickMe:
-                    _elementsPage.DoubleClickOnButton(buttonName);
+                    _buttonsSection.DoubleClickOnButton(buttonName);
                     break;
                 case Buttons.RightClickMe:
-                    _elementsPage.RightClickOnButton(buttonName);
+                    _buttonsSection.RightClickOnButton(buttonName);
                     break;
                 case Buttons.ClickMe:
-                    _elementsPage.ClickOnButton(buttonName);
+                    _buttonsSection.ClickOnButton(buttonName);
                     break;
             }
         }
@@ -119,7 +125,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the result '([^']*)' should be displayed")]
         public void ThenTheResultShouldBeDisplayed(string result)
         {
-            _elementsPage.VerifyClickingResultIsDisplayed(result);
+            _buttonsSection.VerifyClickingResultIsDisplayed(result);
         }
     }
 }
