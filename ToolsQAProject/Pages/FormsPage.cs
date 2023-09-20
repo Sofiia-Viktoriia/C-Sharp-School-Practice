@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using ToolsQAProject.Constants;
 using ToolsQAProject.Helpers;
 using ToolsQAProject.StepDefinitions.Entities;
 
@@ -9,15 +10,6 @@ namespace ToolsQAProject.Pages
     public class FormsPage
     {
         private IWebDriver _webDriver;
-        private const string FullNameModalLabel = "Student Name";
-        private const string EmailModalLabel = "Student Email";
-        private const string GenderModalLabel = "Gender";
-        private const string MobilePhoneModalLabel = "Mobile";
-        private const string DateOfBirthModalLabel = "Date of Birth";
-        private const string SubjectsModalLabel = "Subjects";
-        private const string HobbiesModalLabel = "Hobbies";
-        private const string AddressModalLabel = "Address";
-        private const string StateAndCityModalLabel = "State and City";
         private IWebElement FirstNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='firstName']"));
         private IWebElement LastNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='lastName']"));
         private IWebElement EmailInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userEmail']"));
@@ -177,17 +169,17 @@ namespace ToolsQAProject.Pages
         public FormsPage VerifyModalTableValues(StudentRegistrationForm expectedValues)
         {
             StudentRegistrationForm form = new StudentRegistrationForm();
-            var fullName = ModalTableValueByLabel(FullNameModalLabel).Text.Split(" ");
+            var fullName = ModalTableValueByLabel(Labels.FullNameModalLabel).Text.Split(" ");
             form.FirstName = fullName[0];
             form.LastName = fullName[1];
-            form.Email = ModalTableValueByLabel(EmailModalLabel).Text;
-            form.Gender = ModalTableValueByLabel(GenderModalLabel).Text;
-            form.MobilePhone = ModalTableValueByLabel(MobilePhoneModalLabel).Text;
-            form.DateOfBirth = ModalTableValueByLabel(DateOfBirthModalLabel).Text.Replace(',', ' ');
-            form.Subjects = ModalTableValueByLabel(SubjectsModalLabel).Text.Split(", ").ToList();
-            form.Hobbies = ModalTableValueByLabel(HobbiesModalLabel).Text.Split(", ").ToList();
-            form.CurrentAddress = ModalTableValueByLabel(AddressModalLabel).Text;
-            var stateAndCity = ModalTableValueByLabel(StateAndCityModalLabel).Text;
+            form.Email = ModalTableValueByLabel(Labels.EmailModalLabel).Text;
+            form.Gender = ModalTableValueByLabel(Labels.GenderModalLabel).Text;
+            form.MobilePhone = ModalTableValueByLabel(Labels.MobilePhoneModalLabel).Text;
+            form.DateOfBirth = ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text.Replace(',', ' ');
+            form.Subjects = ModalTableValueByLabel(Labels.SubjectsModalLabel).Text.Split(", ").ToList();
+            form.Hobbies = ModalTableValueByLabel(Labels.HobbiesModalLabel).Text.Split(", ").ToList();
+            form.CurrentAddress = ModalTableValueByLabel(Labels.AddressModalLabel).Text;
+            var stateAndCity = ModalTableValueByLabel(Labels.StateAndCityModalLabel).Text;
             var lastSpaceIndex = stateAndCity.LastIndexOf(' ');
             form.State = stateAndCity[..lastSpaceIndex];
             form.City = stateAndCity[(lastSpaceIndex + 1)..];

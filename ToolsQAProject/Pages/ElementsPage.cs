@@ -4,6 +4,7 @@ using OpenQA.Selenium.Interactions;
 using System.Collections.ObjectModel;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using ToolsQAProject.Constants;
 using ToolsQAProject.Helpers;
 using ToolsQAProject.StepDefinitions.Entities;
 
@@ -12,10 +13,6 @@ namespace ToolsQAProject.Pages
     public class ElementsPage
     {
         private IWebDriver _webDriver;
-        private const string _userFormOutputNameMeta = "Name:";
-        private const string _userFormOutputEmailMeta = "Email:";
-        private const string _userFormOutputCurrentAddressMeta = "Current Address :";
-        private const string _userFormOutputPermanentAddressMeta = "Permananet Address :";
         private IWebElement UserFormFullNameInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//input[@id='userName']"));
         private IWebElement UserFormEmailInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//input[@id='userEmail']"));
         private IWebElement UserFormCurrentAddressInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//textarea[@id='currentAddress']"));
@@ -64,10 +61,10 @@ namespace ToolsQAProject.Pages
         {
             UserForm userForm = new UserForm
             {
-                FullName = UserFormOutputName.Text.TextAfter(_userFormOutputNameMeta),
-                Email = UserFormOutputEmail.Text.TextAfter(_userFormOutputEmailMeta),
-                CurrentAddress = UserFormOutputCurrentAddress.Text.TextAfter(_userFormOutputCurrentAddressMeta),
-                PermanentAddress = UserFormOutputPermanentAddress.Text.TextAfter(_userFormOutputPermanentAddressMeta)
+                FullName = UserFormOutputName.Text.TextAfter(Labels.UserFormOutputNameMeta),
+                Email = UserFormOutputEmail.Text.TextAfter(Labels.UserFormOutputEmailMeta),
+                CurrentAddress = UserFormOutputCurrentAddress.Text.TextAfter(Labels.UserFormOutputCurrentAddressMeta),
+                PermanentAddress = UserFormOutputPermanentAddress.Text.TextAfter(Labels.UserFormOutputPermanentAddressMeta)
             };
 
             table.CompareToInstance(userForm);

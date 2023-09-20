@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using ToolsQAProject.Constants;
 using ToolsQAProject.Pages;
 using ToolsQAProject.StepDefinitions.Entities;
 
@@ -11,9 +12,6 @@ namespace ToolsQAProject.StepDefinitions.Categories
     {
         private readonly ScenarioContext _scenarioContext;
         private ElementsPage _elementsPage;
-        private const string DoubleClickMeButtonName = "Double Click Me";
-        private const string RightClickMeButtonName = "Right Click Me";
-        private const string ClickMeButtonName = "Click Me";
 
         public ElementsPageStepDefinitions(IWebDriver webDriver, ScenarioContext scenarioContext)
         {
@@ -102,13 +100,13 @@ namespace ToolsQAProject.StepDefinitions.Categories
         {
             switch (buttonName)
             {
-                case DoubleClickMeButtonName:
+                case Buttons.DoubleClickMe:
                     _elementsPage.DoubleClickOnButton(buttonName);
                     break;
-                case RightClickMeButtonName:
+                case Buttons.RightClickMe:
                     _elementsPage.RightClickOnButton(buttonName);
                     break;
-                case ClickMeButtonName:
+                case Buttons.ClickMe:
                     _elementsPage.ClickOnButton(buttonName);
                     break;
             }
