@@ -30,7 +30,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
             }
         }
 
-        [Then(@"selected squares contain values")
+        [Then(@"selected squares contain values")]
         public void ThenSelectedSquaresContainValues(Table table)
         {
             string[] expectedValues = table.Rows.Select(r => r[0]).ToArray();

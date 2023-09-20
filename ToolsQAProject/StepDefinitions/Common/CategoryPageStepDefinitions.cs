@@ -2,7 +2,7 @@
 using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
 
-namespace ToolsQAProject.StepDefinitions.Categories
+namespace ToolsQAProject.StepDefinitions.Common
 {
     [Binding]
     public class CategoryPageStepDefinitions
