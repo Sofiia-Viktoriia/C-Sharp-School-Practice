@@ -42,12 +42,27 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public ElementsPage FillUserForm(UserForm userForm)
+        public ElementsPage FillFullName(string fullName)
         {
-            UserFormFullNameInput.SendKeys(userForm.FullName);
-            UserFormEmailInput.SendKeys(userForm.Email);
-            UserFormCurrentAddressInput.SendKeys(userForm.CurrentAddress);
-            UserFormPermanentAddressInput.SendKeys(userForm.PermanentAddress);
+            UserFormFullNameInput.SendKeys(fullName);
+            return this;
+        }
+
+        public ElementsPage FillEmail(string email)
+        {
+            UserFormEmailInput.SendKeys(email);
+            return this;
+        }
+
+        public ElementsPage FillCurrentAddress(string currentAddress)
+        {
+            UserFormCurrentAddressInput.SendKeys(currentAddress);
+            return this;
+        }
+
+        public ElementsPage FillPermanentAddress(string permanentAddress)
+        {
+            UserFormPermanentAddressInput.SendKeys(permanentAddress);
             return this;
         }
 
