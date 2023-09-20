@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using ToolsQAProject.Helpers;
 
-namespace ToolsQAProject.Pages
+namespace ToolsQAProject.Pages.Common
 {
     public class CategoryPage
     {

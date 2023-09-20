@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using TechTalk.SpecFlow;
-using ToolsQAProject.Pages;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.StepDefinitions.Common
 {
