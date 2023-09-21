@@ -28,7 +28,6 @@ namespace ToolsQAProject.Drivers
                 default:
                     throw new NotSupportedException("Not supported browser");
             }
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             webDriver.Url = _appSettings.URL;
             webDriver.Manage().Window.Maximize();
             return webDriver;
