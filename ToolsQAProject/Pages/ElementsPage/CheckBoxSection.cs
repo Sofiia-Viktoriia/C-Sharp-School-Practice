@@ -7,7 +7,7 @@ namespace ToolsQAProject.Pages.ElementsPage
 {
     public class CheckBoxSection
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement ElementLabelByName(string elementName) => _webDriver.FindElement(By.XPath($"//div[@id='tree-node']//label/span[text()='{elementName}']"));
         private IWebElement ElementButtonByName(string elementName) => _webDriver.FindElement(By.XPath("//div[@id='tree-node']//span[@class='rct-text' " +
             $"and .//span[text()='{elementName}']]/button"));
@@ -32,7 +32,7 @@ namespace ToolsQAProject.Pages.ElementsPage
             return this;
         }
 
-        public CheckBoxSection SelectElementsInFolder(string folderName)
+        public CheckBoxSection SelectAllElementsInFolder(string folderName)
         {
             foreach (IWebElement element in ElementsInFolderByName(folderName))
             {

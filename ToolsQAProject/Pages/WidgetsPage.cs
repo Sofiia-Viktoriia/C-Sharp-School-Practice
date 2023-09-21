@@ -1,13 +1,14 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers;
 
 namespace ToolsQAProject.Pages
 {
-    internal class WidgetsPage
+    public class WidgetsPage
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement AutoCompleteMultipleValuesInput => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']//input"));
         private ReadOnlyCollection<IWebElement> AutoCompleteSuggestions => _webDriver.FindElements(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             "//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div"));
@@ -86,14 +87,16 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public string GetProgressBarValue()
+        public WidgetsPage WaitUntilProgressBarValue(string value)
         {
-            return ProgressBar.Text;
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(20));
+            wait.Until(driver => ProgressBar.Text.Equals(value));
+            return this;
         }
 
         public WidgetsPage VerifyProgressBarValue(string value)
         {
-            Assert.That(GetProgressBarValue(), Is.EqualTo(value), $"Progress bar value does not equal to {value}");
+            Assert.That(ProgressBar.Text, Is.EqualTo(value), $"Progress bar value does not equal to {value}");
             return this;
         }
     }

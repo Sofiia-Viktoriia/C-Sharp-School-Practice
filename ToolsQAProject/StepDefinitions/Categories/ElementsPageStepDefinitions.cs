@@ -1,9 +1,8 @@
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Constants;
+using ToolsQAProject.Entities;
 using ToolsQAProject.Pages.ElementsPage;
-using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
@@ -11,18 +10,19 @@ namespace ToolsQAProject.StepDefinitions.Categories
     public class ElementsPageStepDefinitions
     {
         private readonly ScenarioContext _scenarioContext;
-        private TextBoxSection _textBoxSection;
-        private CheckBoxSection _checkBoxSection;
-        private WebTablesSection _webTablesSection;
-        private ButtonsSection _buttonsSection;
+        private readonly TextBoxSection _textBoxSection;
+        private readonly CheckBoxSection _checkBoxSection;
+        private readonly WebTablesSection _webTablesSection;
+        private readonly ButtonsSection _buttonsSection;
 
-        public ElementsPageStepDefinitions(IWebDriver webDriver, ScenarioContext scenarioContext)
+        public ElementsPageStepDefinitions(ScenarioContext scenarioContext, TextBoxSection textBoxSection,
+            CheckBoxSection checkBoxSection, WebTablesSection webTablesSection, ButtonsSection buttonsSection)
         {
             _scenarioContext = scenarioContext;
-            _textBoxSection = new TextBoxSection(webDriver);
-            _checkBoxSection = new CheckBoxSection(webDriver);
-            _webTablesSection = new WebTablesSection(webDriver);
-            _buttonsSection = new ButtonsSection(webDriver);
+            _textBoxSection = textBoxSection;
+            _checkBoxSection = checkBoxSection;
+            _webTablesSection = webTablesSection;
+            _buttonsSection = buttonsSection;
         }
 
         [When(@"user submits the form with the next data")]
@@ -59,7 +59,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [When(@"user selects all elements in the '([^']*)' folder")]
         public void WhenUserSelectsAllElementsInTheFolder(string folderName)
         {
-            _checkBoxSection.SelectElementsInFolder(folderName);
+            _checkBoxSection.SelectAllElementsInFolder(folderName);
         }
 
         [Then(@"the selection result should be equal '([^']*)'")]

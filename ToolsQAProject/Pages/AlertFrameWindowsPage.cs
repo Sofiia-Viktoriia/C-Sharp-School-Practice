@@ -5,7 +5,7 @@ namespace ToolsQAProject.Pages
 {
     public class AlertFrameWindowsPage
     {
-        public IWebDriver _webDriver;
+        public readonly IWebDriver _webDriver;
         private IWebElement ButtonByName(string buttonName) => _webDriver.FindElement(By.XPath($"//div[@id='browserWindows']//button[text()='{buttonName}']"));
         private IWebElement SampleText => _webDriver.FindElement(By.XPath("//h1[@id='sampleHeading']"));
 

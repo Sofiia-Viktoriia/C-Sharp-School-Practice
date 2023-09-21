@@ -1,19 +1,18 @@
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
+using ToolsQAProject.Entities;
 using ToolsQAProject.Pages;
-using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.StepDefinitions.Categories
 {
     [Binding]
     public class FormsPageStepDefinitions
     {
-        private FormsPage _formsPage;
+        private readonly FormsPage _formsPage;
         private StudentRegistrationForm _studentRegistrationForm;
 
-        public FormsPageStepDefinitions(IWebDriver webDriver, StudentRegistrationForm form)
+        public FormsPageStepDefinitions(FormsPage formsPage, StudentRegistrationForm form)
         {
-            _formsPage = new FormsPage(webDriver);
+            _formsPage = formsPage;
             _studentRegistrationForm = form;
         }
 

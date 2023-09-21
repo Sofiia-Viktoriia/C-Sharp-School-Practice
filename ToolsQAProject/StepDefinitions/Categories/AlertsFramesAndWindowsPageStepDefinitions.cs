@@ -1,4 +1,3 @@
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
 
@@ -7,11 +6,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
     [Binding]
     public class AlertsFramesAndWindowsPageStepDefinitions
     {
-        private AlertFrameWindowsPage _alertFrameWindowsPage;
+        private readonly AlertFrameWindowsPage _alertFrameWindowsPage;
 
-        public AlertsFramesAndWindowsPageStepDefinitions(IWebDriver webDriver)
+        public AlertsFramesAndWindowsPageStepDefinitions(AlertFrameWindowsPage alertFrameWindowsPage)
         {
-            _alertFrameWindowsPage = new AlertFrameWindowsPage(webDriver);
+            _alertFrameWindowsPage = alertFrameWindowsPage;
         }
 
         [When(@"user opens '([^']*)'")]

@@ -6,7 +6,7 @@ namespace ToolsQAProject.Pages.ElementsPage
 {
     public class WebTablesSection
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement TableColumnByName(string colunmName) => _webDriver.FindElement(By.XPath($"//div[@class='rt-table']//div[@role='columnheader' and ./div[text()='{colunmName}']]"));
         private ReadOnlyCollection<IWebElement> TableRows => _webDriver.FindElements(By.XPath("//div[@class='rt-table']//div[@role='row' and .//div[@class='action-buttons']]"));
         private ReadOnlyCollection<IWebElement> ColumnValuesByName(string columnName) => _webDriver.FindElements(By.XPath("//div[@class='rt-table']//div[@role='row' and .//div[@class='action-buttons']]" +

@@ -1,5 +1,3 @@
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Pages;
@@ -9,13 +7,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
     [Binding]
     public class WidgetsPageStepDefinitions
     {
-        private IWebDriver _webDriver;
-        private WidgetsPage _widgetsPage;
+        private readonly WidgetsPage _widgetsPage;
 
-        public WidgetsPageStepDefinitions(IWebDriver webDriver)
+        public WidgetsPageStepDefinitions(WidgetsPage widgetsPage)
         {
-            _webDriver = webDriver;
-            _widgetsPage = new WidgetsPage(webDriver);
+            _widgetsPage = widgetsPage;
         }
 
         [When(@"user enters '([^']*)' value into the auto completing field with multiple values")]
@@ -78,8 +74,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"progress bar value reaches '([^']*)'")]
         public void ThenProgressBarValueReaches(string value)
         {
-            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(20));
-            wait.Until(driver => _widgetsPage.GetProgressBarValue().Equals(value));
+            _widgetsPage.WaitUntilProgressBarValue(value);
         }
 
         [Then(@"'([^']*)' button is displayed")]

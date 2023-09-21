@@ -1,4 +1,3 @@
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
 
@@ -7,11 +6,11 @@ namespace ToolsQAProject.StepDefinitions.Categories
     [Binding]
     public class InteractionsPageStepDefinitions
     {
-        private InteractionsPage _interactionsPage;
+        private readonly InteractionsPage _interactionsPage;
 
-        public InteractionsPageStepDefinitions(IWebDriver webDriver)
+        public InteractionsPageStepDefinitions(InteractionsPage interactionsPage)
         {
-            _interactionsPage = new InteractionsPage(webDriver);
+            _interactionsPage = interactionsPage;
         }
 
         [When(@"user switches to '([^']*)' tab")]

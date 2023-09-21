@@ -2,14 +2,14 @@
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Constants;
+using ToolsQAProject.Entities;
 using ToolsQAProject.Helpers;
-using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.Pages
 {
     public class FormsPage
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement FirstNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='firstName']"));
         private IWebElement LastNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='lastName']"));
         private IWebElement EmailInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userEmail']"));

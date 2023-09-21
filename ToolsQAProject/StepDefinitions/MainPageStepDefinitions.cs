@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 using ToolsQAProject.Pages;
 
 namespace ToolsQAProject.StepDefinitions
@@ -7,11 +6,11 @@ namespace ToolsQAProject.StepDefinitions
     [Binding]
     public class MainPageStepDefinitions
     {
-        private MainPage _mainPage;
+        private readonly MainPage _mainPage;
 
-        public MainPageStepDefinitions(IWebDriver webDriver)
+        public MainPageStepDefinitions(MainPage mainPage)
         {
-            _mainPage = new MainPage(webDriver);
+            _mainPage = mainPage;
         }
 
         [Given(@"user opens the '([^']*)' category")]

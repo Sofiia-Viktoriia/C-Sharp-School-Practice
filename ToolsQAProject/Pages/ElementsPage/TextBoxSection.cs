@@ -2,14 +2,14 @@
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Constants;
+using ToolsQAProject.Entities;
 using ToolsQAProject.Helpers;
-using ToolsQAProject.StepDefinitions.Entities;
 
 namespace ToolsQAProject.Pages.ElementsPage
 {
     public class TextBoxSection
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement UserFormFullNameInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//input[@id='userName']"));
         private IWebElement UserFormEmailInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//input[@id='userEmail']"));
         private IWebElement UserFormCurrentAddressInput => _webDriver.FindElement(By.XPath("//form[@id='userForm']//textarea[@id='currentAddress']"));

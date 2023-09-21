@@ -7,7 +7,7 @@ namespace ToolsQAProject.Pages.ElementsPage
 {
     public class ButtonsSection
     {
-        private IWebDriver _webDriver;
+        private readonly IWebDriver _webDriver;
         private IWebElement ButtonByName(string buttonName) => _webDriver.FindElement(By.XPath($"//div/button[text()='{buttonName}']"));
         private IWebElement ClickingResultByText(string resultText) => _webDriver.FindElement(By.XPath($"//p[text()='{resultText}']"));
 

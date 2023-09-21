@@ -1,4 +1,4 @@
-﻿namespace ToolsQAProject.StepDefinitions.Entities
+﻿namespace ToolsQAProject.Entities
 {
     public class StudentRegistrationForm
     {

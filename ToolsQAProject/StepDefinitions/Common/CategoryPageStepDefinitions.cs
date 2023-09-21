@@ -7,7 +7,7 @@ namespace ToolsQAProject.StepDefinitions.Common
     [Binding]
     public class CategoryPageStepDefinitions
     {
-        private CategoryPage _categoryPage;
+        private readonly CategoryPage _categoryPage;
 
         public CategoryPageStepDefinitions(IWebDriver webDriver)
         {
