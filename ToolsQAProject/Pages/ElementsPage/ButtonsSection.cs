@@ -25,7 +25,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         public ButtonsSection DoubleClickOnButton(string buttonName)
         {
             new Actions(_webDriver).MoveToElement(ButtonByName(buttonName))
-                .Click(ButtonByName(buttonName)).Click(ButtonByName(buttonName)).Build().Perform();
+                .DoubleClick(ButtonByName(buttonName)).Build().Perform();
             return this;
         }
 
