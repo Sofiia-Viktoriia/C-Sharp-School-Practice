@@ -63,9 +63,8 @@ namespace RestSharpProject.StepDefinitions
         }
 
         [Given(@"user has the following data")]
-        public void GivenUserHasTheFollowingData(Table table)
+        public void GivenUserHasTheFollowingData(CreateUpdateUserBody userCreationBody)
         {
-            CreateUpdateUserBody userCreationBody = table.CreateInstance<CreateUpdateUserBody>();
             _scenarioContext["CreateUpdateUserBody"] = userCreationBody;
         }
 
@@ -90,9 +89,8 @@ namespace RestSharpProject.StepDefinitions
         }
 
         [Given(@"data for updating user includes")]
-        public void GivenDataForUpdatingUserIncludes(Table table)
+        public void GivenDataForUpdatingUserIncludes(CreateUpdateUserBody userUpdateBody)
         {
-            CreateUpdateUserBody userUpdateBody = table.CreateInstance<CreateUpdateUserBody>();
             _scenarioContext["CreateUpdateUserBody"] = userUpdateBody;
         }
 
@@ -120,9 +118,8 @@ namespace RestSharpProject.StepDefinitions
         }
 
         [Given(@"user has the following registration data")]
-        public void GivenUserHasTheFollowingRegistrationData(Table table)
+        public void GivenUserHasTheFollowingRegistrationData(LoginRegistrationBody registrationBody)
         {
-            LoginRegistrationBody registrationBody = table.CreateInstance<LoginRegistrationBody>();
             _scenarioContext["LoginRegistrationBody"] = registrationBody;
         }
 
@@ -135,9 +132,8 @@ namespace RestSharpProject.StepDefinitions
         }
 
         [Given(@"user has the following login data")]
-        public void GivenUserHasTheFollowingLoginData(Table table)
+        public void GivenUserHasTheFollowingLoginData(LoginRegistrationBody loginBody)
         {
-            LoginRegistrationBody loginBody = table.CreateInstance<LoginRegistrationBody>();
             _scenarioContext["LoginRegistrationBody"] = loginBody;
         }
 
