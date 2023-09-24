@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
-using ToolsQAProject.Helpers;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages
 {

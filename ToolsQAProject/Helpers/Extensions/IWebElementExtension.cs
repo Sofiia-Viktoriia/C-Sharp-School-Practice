@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace ToolsQAProject.Helpers
+namespace ToolsQAProject.Helpers.Extensions
 {
     public static class IWebElementExtension
     {

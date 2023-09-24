@@ -1,9 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
-using ToolsQAProject.Helpers;
+using ToolsQAProject.Helpers.Comparers;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages.ElementsPage
 {
@@ -55,7 +57,7 @@ namespace ToolsQAProject.Pages.ElementsPage
             return this;
         }
 
-        public TextBoxSection VerifyOutputTableValues(Table table)
+        public TextBoxSection VerifyOutputTableValues(UserForm result)
         {
             UserForm userForm = new UserForm
             {
@@ -65,7 +67,7 @@ namespace ToolsQAProject.Pages.ElementsPage
                 PermanentAddress = UserFormOutputPermanentAddress.Text.TextAfter(Labels.UserFormOutputPermanentAddressMeta)
             };
 
-            table.CompareToInstance(userForm);
+            Assert.That(result, Is.EqualTo(userForm).Using<UserForm>(new UserFormComparer()));
             return this;
         }
     }

@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
-using ToolsQAProject.Helpers;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages
 {

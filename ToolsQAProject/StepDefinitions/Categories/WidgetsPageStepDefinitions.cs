@@ -33,9 +33,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [When(@"user adds values to the multiple color selection field")]
-        public void WhenUserAddsValuesToTheMultipleColorSelectionField(Table table)
+        public void WhenUserAddsValuesToTheMultipleColorSelectionField(string[] values)
         {
-            string[] values = table.Rows.Select(r => r[0]).ToArray();
             foreach (string value in values)
             {
                 _widgetsPage.AddValueToAutoCompleteField(value);
@@ -43,9 +42,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [When(@"user deletes values from the multiple color selection field")]
-        public void WhenUserDeletesValuesFromTheMultipleColorSelectionField(Table table)
+        public void WhenUserDeletesValuesFromTheMultipleColorSelectionField(string[] values)
         {
-            string[] values = table.Rows.Select(r => r[0]).ToArray();
             foreach (string value in values)
             {
                 _widgetsPage.DeleteValueFromAutoCompleteField(value);
@@ -53,9 +51,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [Then(@"the values are displayed in the multiple color selection field")]
-        public void ThenTheValuesAreDisplayedInTheMultipleColorSelectionField(Table table)
+        public void ThenTheValuesAreDisplayedInTheMultipleColorSelectionField(string[] values)
         {
-            string[] values = table.Rows.Select(r => r[0]).ToArray();
             _widgetsPage.VerifyAutoCompleteFieldValuesAreDisplayed(values);
         }
 

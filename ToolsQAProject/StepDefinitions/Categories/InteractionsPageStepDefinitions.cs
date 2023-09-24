@@ -20,9 +20,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [When(@"user selects squares")]
-        public void WhenUserSelectsSquares(Table table)
+        public void WhenUserSelectsSquares(int[] numbers)
         {
-            int[] numbers = table.Rows.Select(r => int.Parse(r[0])).ToArray();
             foreach (int number in numbers)
             {
                 _interactionsPage.SelectGridSquare(number);
@@ -30,9 +29,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [Then(@"selected squares contain values")]
-        public void ThenSelectedSquaresContainValues(Table table)
+        public void ThenSelectedSquaresContainValues(string[] expectedValues)
         {
-            string[] expectedValues = table.Rows.Select(r => r[0]).ToArray();
             _interactionsPage.VerifySelectedGridSquaresValues(expectedValues);
         }
     }

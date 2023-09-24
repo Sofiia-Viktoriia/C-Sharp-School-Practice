@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using ToolsQAProject.Helpers;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages
 {

@@ -17,9 +17,9 @@ Scenario: Selecting squares in the grid
 		| 7      |
 		| 9      |
 	Then selected squares contain values
-		| Value |
-		| One   |
-		| Three |
-		| Five  |
-		| Seven |
-		| Nine  |
+		| Values |
+		| One    |
+		| Three  |
+		| Five   |
+		| Seven  |
+		| Nine   |

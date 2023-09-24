@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
-using ToolsQAProject.Helpers;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages
 {
