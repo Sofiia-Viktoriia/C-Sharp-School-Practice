@@ -38,8 +38,8 @@ namespace ToolsQAProject.Pages.ElementsPage
 
         public WebTablesSection VerifyColumnValuesSortedAscending(string columnName)
         {
-            List<string> values = ColumnValuesByName(columnName).Select(element => element.Text).ToList();
-            Assert.That(values.OrderBy(el => int.Parse(el)).SequenceEqual(values), Is.True, $"The {columnName} column values are not sorted ascending");
+            int[] values = ColumnValuesByName(columnName).Select(element => int.Parse(element.Text)).ToArray();
+            Assert.That(values, Is.Ordered, $"The {columnName} column values are not sorted ascending");
             return this;
         }
 
