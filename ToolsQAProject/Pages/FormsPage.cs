@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
 using ToolsQAProject.Helpers.Extensions;
@@ -18,7 +19,7 @@ namespace ToolsQAProject.Pages
         private IWebElement DateOfBirthInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='dateOfBirthInput']"));
         private IWebElement DateOfBirthPickerYearDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
             "' react-datepicker__year-dropdown-container ')]"));
-        private IWebElement DateOfBirthPickerYearDropdownValueByText(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
+        private IWebElement DateOfBirthPickerYearDropdownValueByNumber(int value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
             $"//div[contains(concat(' ', @class, ' '), ' react-datepicker__year-dropdown-container ')]//option[text()='{value}']"));
         private IWebElement DateOfBirthPickerMonthDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
             "' react-datepicker__month-dropdown-container ')]"));
@@ -92,20 +93,19 @@ namespace ToolsQAProject.Pages
             return this;
         }
 
-        public FormsPage FillDateOfBirth(string dateOfBirth)
+        public FormsPage FillDateOfBirth(DateTime dateOfBirth)
         {
-            var date = dateOfBirth.Split(" ");
             DateOfBirthInput.Click();
-            SelectYearInDatePicker(date[2]);
-            SelectMonthInDatePicker(date[1]);
-            SelectDayInDatePicker(int.Parse(date[0]), date[1]);
+            SelectYearInDatePicker(dateOfBirth.Year);
+            SelectMonthInDatePicker(dateOfBirth.ToString("MMMM"));
+            SelectDayInDatePicker(dateOfBirth.Day, dateOfBirth.ToString("MMMM"));
             return this;
         }
 
-        public FormsPage SelectYearInDatePicker(string year)
+        public FormsPage SelectYearInDatePicker(int year)
         {
             DateOfBirthPickerYearDropdown.Click();
-            DateOfBirthPickerYearDropdownValueByText(year).Click();
+            DateOfBirthPickerYearDropdownValueByNumber(year).Click();
             return this;
         }
 
@@ -175,7 +175,8 @@ namespace ToolsQAProject.Pages
             form.Email = ModalTableValueByLabel(Labels.EmailModalLabel).Text;
             form.Gender = ModalTableValueByLabel(Labels.GenderModalLabel).Text;
             form.MobilePhone = ModalTableValueByLabel(Labels.MobilePhoneModalLabel).Text;
-            form.DateOfBirth = ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text.Replace(',', ' ');
+            form.DateOfBirth = DateTime.ParseExact(ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text, 
+                "dd MMMM,yyyy", CultureInfo.InvariantCulture);
             form.Subjects = ModalTableValueByLabel(Labels.SubjectsModalLabel).Text.Split(", ").ToList();
             form.Hobbies = ModalTableValueByLabel(Labels.HobbiesModalLabel).Text.Split(", ").ToList();
             form.CurrentAddress = ModalTableValueByLabel(Labels.AddressModalLabel).Text;

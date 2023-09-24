@@ -7,7 +7,7 @@
         public string Email { get; set; }
         public string Gender { get; set; }
         public string MobilePhone { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public List<string> Subjects { get; set; }
         public List<string> Hobbies { get; set; }
         public string CurrentAddress { get; set; }

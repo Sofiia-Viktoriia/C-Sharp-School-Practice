@@ -1,4 +1,5 @@
-﻿using TechTalk.SpecFlow;
+﻿using System.Globalization;
+using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Entities;
 
@@ -29,7 +30,8 @@ namespace ToolsQAProject.StepDefinitions
                 Email = table.Rows[0][nameof(StudentRegistrationForm.Email)],
                 Gender = table.Rows[0][nameof(StudentRegistrationForm.Gender)],
                 MobilePhone = table.Rows[0][nameof(StudentRegistrationForm.MobilePhone)],
-                DateOfBirth = table.Rows[0][nameof(StudentRegistrationForm.DateOfBirth)],
+                DateOfBirth = DateTime.ParseExact(table.Rows[0][nameof(StudentRegistrationForm.DateOfBirth)], 
+                    "dd MMMM yyyy", CultureInfo.InvariantCulture),
                 Subjects = table.Rows[0][nameof(StudentRegistrationForm.Subjects)].Split("; ").ToList(),
                 Hobbies = table.Rows[0][nameof(StudentRegistrationForm.Hobbies)].Split("; ").ToList(),
                 CurrentAddress = table.Rows[0][nameof(StudentRegistrationForm.CurrentAddress)],
