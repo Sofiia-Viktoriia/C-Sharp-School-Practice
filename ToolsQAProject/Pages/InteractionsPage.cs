@@ -33,8 +33,7 @@ namespace ToolsQAProject.Pages
         public InteractionsPage VerifySelectedGridSquaresValues(string[] expectedValues)
         {
             string[] actualValues = SelectedGridSquares.Select(square => square.Text).ToArray();
-            Assert.That(actualValues.OrderBy(value => value).SequenceEqual(expectedValues.OrderBy(value => value)), Is.True,
-                "Selected grid squares do not contain expected values");
+            Assert.That(expectedValues, Is.EqualTo(actualValues), "Selected grid squares do not contain expected values");
             return this;
         }
     }

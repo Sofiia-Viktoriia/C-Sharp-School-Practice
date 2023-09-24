@@ -40,13 +40,8 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyAllSuggestionsContainValue(string value)
         {
-            Assert.Multiple(() =>
-            {
-                foreach (IWebElement suggestion in AutoCompleteSuggestions)
-                {
-                    Assert.That(suggestion.Text, Does.Contain(value).IgnoreCase, $"'{suggestion.Text}' does not contain '{value}'");
-                }
-            });
+            string[] suggestions = AutoCompleteSuggestions.Select(element => element.Text).ToArray();
+            Assert.That(suggestions, Is.All.Contain(value).IgnoreCase, $"Not all suggestions contain '{value}'");
             return this;
         }
 
@@ -66,7 +61,7 @@ namespace ToolsQAProject.Pages
         public WidgetsPage VerifyAutoCompleteFieldValuesAreDisplayed(string[] values)
         {
             string[] actualResult = AutoCompleteFieldValues.Select(element => element.Text).ToArray();
-            Assert.That(values.SequenceEqual(actualResult), Is.True, "Expected entered values don't equal to the actual result");
+            Assert.That(values, Is.EquivalentTo(actualResult), "Expected entered values don't equal to the actual result");
             return this;
         }
 
