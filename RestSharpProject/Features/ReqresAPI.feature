@@ -17,22 +17,22 @@ Scenario: Getting user that don't exist
 
 @Reqres
 Scenario Outline: Getting existing user
-	Given user has id <idValue>
+	Given user has id <IdValue>
 	When I send request to get a single user
 	Then response code equals 200
-	And response body contains user with id <idValue>
+	And response body contains user with id <IdValue>
 
 Examples: 
-| idValue |
-| 2       |
-| 3       |
-| 10      |
+	| IdValue |
+	| 2       |
+	| 3       |
+	| 10      |
 
 @Reqres
 Scenario: Creating new user
 	Given user has the following data
-	| Name | Job     |
-	| Alex | Teacher |
+		| Name | Job     |
+		| Alex | Teacher |
 	When I send request to create a user
 	Then response code equals 201
 	And response body contains the entered user data
@@ -41,8 +41,8 @@ Scenario: Creating new user
 Scenario: PUT updating a user
 	Given user has id 2
 	And data for updating user includes
-	| Name | Job |
-	| Zeus | God |
+		| Name | Job |
+		| Zeus | God |
 	When I send PUT request to update a user
 	Then response code equals 200
 	And response body contains the entered user data
@@ -51,8 +51,8 @@ Scenario: PUT updating a user
 Scenario: PATCH updating a user
 	Given user has id 2
 	And data for updating user includes
-	| Name      | Job     |
-	| Aphrodite | Goddess |
+		| Name      | Job     |
+		| Aphrodite | Goddess |
 	When I send PATCH request to update a user
 	Then response code equals 200
 	And response body contains the entered user data
@@ -66,16 +66,16 @@ Scenario: Deleting a user
 @Reqres
 Scenario: Successful registration
 	Given user has the following registration data
-	| Email              | Password |
-	| eve.holt@reqres.in | pistol   |
+		| Email              | Password |
+		| eve.holt@reqres.in | pistol   |
 	When I send request to register
 	Then response code equals 200
 
 @Reqres
 Scenario: Successful login
 	Given user has the following login data
-	| Email              | Password   |
-	| eve.holt@reqres.in | cityslicka |
+		| Email              | Password   |
+		| eve.holt@reqres.in | cityslicka |
 	When I send request to login
 	Then response code equals 200
 
