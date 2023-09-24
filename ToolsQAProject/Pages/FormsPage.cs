@@ -86,30 +86,8 @@ namespace ToolsQAProject.Pages
 
         public FormsPage FillDateOfBirth(DateTime dateOfBirth)
         {
-            DateOfBirthInput.Click();
-            SelectYearInDatePicker(dateOfBirth.Year);
-            SelectMonthInDatePicker(dateOfBirth.ToString("MMMM"));
-            SelectDayInDatePicker(dateOfBirth.Day, dateOfBirth.ToString("MMMM"));
-            return this;
-        }
-
-        public FormsPage SelectYearInDatePicker(int year)
-        {
-            DateOfBirthPickerYearDropdown.Click();
-            DateOfBirthPickerYearDropdownValueByNumber(year).Click();
-            return this;
-        }
-
-        public FormsPage SelectMonthInDatePicker(string month)
-        {
-            DateOfBirthPickerMonthDropdown.Click();
-            DateOfBirthPickerMonthDropdownValueByText(month).Click();
-            return this;
-        }
-
-        public FormsPage SelectDayInDatePicker(int day, string month)
-        {
-            DateOfBirthPickerDayByTextAndMonth(day, month).Click();
+            DateOfBirthInput.SendKeys(Keys.Control + "a");
+            DateOfBirthInput.SendKeys(dateOfBirth.ToString("dd MMM yyyy"));
             return this;
         }
 
