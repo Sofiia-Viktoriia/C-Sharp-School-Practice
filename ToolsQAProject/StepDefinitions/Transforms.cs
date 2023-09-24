@@ -24,17 +24,17 @@ namespace ToolsQAProject.StepDefinitions
         {
             return new StudentRegistrationForm
             {
-                FirstName = table.Rows[0]["FirstName"],
-                LastName = table.Rows[0]["LastName"],
-                Email = table.Rows[0]["Email"],
-                Gender = table.Rows[0]["Gender"],
-                MobilePhone = table.Rows[0]["MobilePhone"],
-                DateOfBirth = table.Rows[0]["DateOfBirth"],
-                Subjects = table.Rows[0]["Subjects"].Split("; ").ToList(),
-                Hobbies = table.Rows[0]["Hobbies"].Split("; ").ToList(),
-                CurrentAddress = table.Rows[0]["CurrentAddress"],
-                State = table.Rows[0]["State"],
-                City = table.Rows[0]["City"]
+                FirstName = table.Rows[0][nameof(StudentRegistrationForm.FirstName)],
+                LastName = table.Rows[0][nameof(StudentRegistrationForm.LastName)],
+                Email = table.Rows[0][nameof(StudentRegistrationForm.Email)],
+                Gender = table.Rows[0][nameof(StudentRegistrationForm.Gender)],
+                MobilePhone = table.Rows[0][nameof(StudentRegistrationForm.MobilePhone)],
+                DateOfBirth = table.Rows[0][nameof(StudentRegistrationForm.DateOfBirth)],
+                Subjects = table.Rows[0][nameof(StudentRegistrationForm.Subjects)].Split("; ").ToList(),
+                Hobbies = table.Rows[0][nameof(StudentRegistrationForm.Hobbies)].Split("; ").ToList(),
+                CurrentAddress = table.Rows[0][nameof(StudentRegistrationForm.CurrentAddress)],
+                State = table.Rows[0][nameof(StudentRegistrationForm.State)],
+                City = table.Rows[0][nameof(StudentRegistrationForm.City)]
             };
         }
 
