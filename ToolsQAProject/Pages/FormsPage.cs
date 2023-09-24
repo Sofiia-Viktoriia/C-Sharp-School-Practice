@@ -1,9 +1,10 @@
-﻿using FluentAssertions;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
+using ToolsQAProject.Helpers.Comparers;
 using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages
@@ -165,7 +166,7 @@ namespace ToolsQAProject.Pages
             form.Email = ModalTableValueByLabel(Labels.EmailModalLabel).Text;
             form.Gender = ModalTableValueByLabel(Labels.GenderModalLabel).Text;
             form.MobilePhone = ModalTableValueByLabel(Labels.MobilePhoneModalLabel).Text;
-            form.DateOfBirth = DateTime.ParseExact(ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text, 
+            form.DateOfBirth = DateTime.ParseExact(ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text,
                 "dd MMMM,yyyy", CultureInfo.InvariantCulture);
             form.Subjects = ModalTableValueByLabel(Labels.SubjectsModalLabel).Text.Split(", ").ToList();
             form.Hobbies = ModalTableValueByLabel(Labels.HobbiesModalLabel).Text.Split(", ").ToList();
@@ -175,7 +176,7 @@ namespace ToolsQAProject.Pages
             form.State = stateAndCity[..lastSpaceIndex];
             form.City = stateAndCity[(lastSpaceIndex + 1)..];
 
-            form.Should().BeEquivalentTo(expectedValues);
+            Assert.That(form, Is.EqualTo(expectedValues).Using<StudentRegistrationForm>(new StudentRegistrationFormComparer()));
             return this;
         }
     }
