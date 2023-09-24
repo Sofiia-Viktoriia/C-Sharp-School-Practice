@@ -137,22 +137,25 @@ namespace ToolsQAProject.Pages
 
         public FormsPage VerifyModalTableValues(StudentRegistrationForm expectedValues)
         {
-            StudentRegistrationForm form = new StudentRegistrationForm();
             var fullName = ModalTableValueByLabel(Labels.FullNameModalLabel).Text.Split(" ");
-            form.FirstName = fullName[0];
-            form.LastName = fullName[1];
-            form.Email = ModalTableValueByLabel(Labels.EmailModalLabel).Text;
-            form.Gender = ModalTableValueByLabel(Labels.GenderModalLabel).Text;
-            form.MobilePhone = ModalTableValueByLabel(Labels.MobilePhoneModalLabel).Text;
-            form.DateOfBirth = DateTime.ParseExact(ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text,
-                "dd MMMM,yyyy", CultureInfo.InvariantCulture);
-            form.Subjects = ModalTableValueByLabel(Labels.SubjectsModalLabel).Text.Split(", ").ToList();
-            form.Hobbies = ModalTableValueByLabel(Labels.HobbiesModalLabel).Text.Split(", ").ToList();
-            form.CurrentAddress = ModalTableValueByLabel(Labels.AddressModalLabel).Text;
             var stateAndCity = ModalTableValueByLabel(Labels.StateAndCityModalLabel).Text;
             var lastSpaceIndex = stateAndCity.LastIndexOf(' ');
-            form.State = stateAndCity[..lastSpaceIndex];
-            form.City = stateAndCity[(lastSpaceIndex + 1)..];
+
+            StudentRegistrationForm form = new StudentRegistrationForm
+            {
+                FirstName = fullName[0],
+                LastName = fullName[1],
+                Email = ModalTableValueByLabel(Labels.EmailModalLabel).Text,
+                Gender = ModalTableValueByLabel(Labels.GenderModalLabel).Text,
+                MobilePhone = ModalTableValueByLabel(Labels.MobilePhoneModalLabel).Text,
+                DateOfBirth = DateTime.ParseExact(ModalTableValueByLabel(Labels.DateOfBirthModalLabel).Text,
+                "dd MMMM,yyyy", CultureInfo.InvariantCulture),
+                Subjects = ModalTableValueByLabel(Labels.SubjectsModalLabel).Text.Split(", ").ToList(),
+                Hobbies = ModalTableValueByLabel(Labels.HobbiesModalLabel).Text.Split(", ").ToList(),
+                CurrentAddress = ModalTableValueByLabel(Labels.AddressModalLabel).Text,
+                State = stateAndCity[..lastSpaceIndex],
+                City = stateAndCity[(lastSpaceIndex + 1)..]
+            };
 
             Assert.That(form, Is.EqualTo(expectedValues).Using<StudentRegistrationForm>(new StudentRegistrationFormComparer()));
             return this;
