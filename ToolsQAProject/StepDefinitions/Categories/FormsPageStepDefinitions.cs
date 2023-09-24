@@ -20,7 +20,18 @@ namespace ToolsQAProject.StepDefinitions.Categories
         public void WhenUserSubmitsTheFormWithValues(StudentRegistrationForm form)
         {
             _studentRegistrationForm = form;
-            _formsPage.FillStudentRegistrationForm(_studentRegistrationForm)
+            _formsPage.RefreshPageIfAdsAreDisplayed()
+                .FillFirstName(form.FirstName)
+                .FillLastName(form.LastName)
+                .FillEmail(form.Email)
+                .SelectGender(form.Gender)
+                .FillPhone(form.MobilePhone)
+                .FillDateOfBirth(form.DateOfBirth)
+                .AddSubjects(form.Subjects)
+                .SelectHobbies(form.Hobbies)
+                .FillCurrentAddress(form.CurrentAddress)
+                .SelectState(form.State)
+                .SelectCity(form.City)
                 .ClickSubmitButton();
         }
 

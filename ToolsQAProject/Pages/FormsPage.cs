@@ -43,24 +43,14 @@ namespace ToolsQAProject.Pages
             _webDriver = webDriver;
         }
 
-        public FormsPage FillStudentRegistrationForm(StudentRegistrationForm form)
+        public FormsPage RefreshPageIfAdsAreDisplayed()
         {
             while (AdsIframe.Count > 0)
             {
                 _webDriver.Navigate().Refresh();
             }
 
-            return FillFirstName(form.FirstName)
-                .FillLastName(form.LastName)
-                .FillEmail(form.Email)
-                .SelectGender(form.Gender)
-                .FillPhone(form.MobilePhone)
-                .FillDateOfBirth(form.DateOfBirth)
-                .AddSubjects(form.Subjects)
-                .SelectHobbies(form.Hobbies)
-                .FillCurrentAddress(form.CurrentAddress)
-                .SelectState(form.State)
-                .SelectCity(form.City);
+            return this;
         }
 
         public FormsPage FillFirstName(string firstName)
