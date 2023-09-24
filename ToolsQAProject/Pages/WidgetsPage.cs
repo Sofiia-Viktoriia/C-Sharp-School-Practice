@@ -14,8 +14,8 @@ namespace ToolsQAProject.Pages
             "//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div"));
         private IWebElement AutoCompleteSuggestionByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             $"//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div[text()='{text}']"));
-        private IWebElement AutoCompleteFiledValueByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
-            $"//div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value ') and ./div[text()='{text}']]"));
+        private ReadOnlyCollection<IWebElement> AutoCompleteFieldValues => _webDriver.FindElements(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
+            $"//div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value ')]/div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value__label ')]"));
         private IWebElement AutoCompleteFiledValueRemoveButtonByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             $"//div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value ') and ./div[text()='{text}']]/div[contains(concat(' ', @class, ' '), ' auto-complete__multi-value__remove ')]"));
         private IWebElement ButtonByName(string buttonName) => _webDriver.FindElement(By.XPath($"//div[@id='progressBarContainer']//button[text()='{buttonName}']"));
@@ -65,13 +65,8 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyAutoCompleteFieldValuesAreDisplayed(string[] values)
         {
-            Assert.Multiple(() =>
-            {
-                foreach (string value in values)
-                {
-                    Assert.That(AutoCompleteFiledValueByText(value).Displayed, Is.True, $"'{value}' value is not in the auto complete field");
-                }
-            });
+            string[] actualResult = AutoCompleteFieldValues.Select(element => element.Text).ToArray();
+            Assert.That(values.SequenceEqual(actualResult), Is.True, "Expected entered values don't equal to the actual result");
             return this;
         }
 
