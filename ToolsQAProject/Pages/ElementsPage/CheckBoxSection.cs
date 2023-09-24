@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using ToolsQAProject.Constants;
 using ToolsQAProject.Helpers;
 
 namespace ToolsQAProject.Pages.ElementsPage
@@ -8,11 +9,11 @@ namespace ToolsQAProject.Pages.ElementsPage
     public class CheckBoxSection
     {
         private readonly IWebDriver _webDriver;
-        private IWebElement ElementLabelByName(string elementName) => _webDriver.FindElement(By.XPath($"//div[@id='tree-node']//label/span[text()='{elementName}']"));
-        private IWebElement ElementButtonByName(string elementName) => _webDriver.FindElement(By.XPath("//div[@id='tree-node']//span[@class='rct-text' " +
-            $"and .//span[text()='{elementName}']]/button"));
-        private ReadOnlyCollection<IWebElement> ElementsInFolderByName(string folderName) => _webDriver.FindElements(By.XPath("//div[@id='tree-node']" +
-            $"//li[./span[@class='rct-text' and .//span[text()='{folderName}']]]//li//label"));
+        private IWebElement ElementByName(string elementName) => _webDriver.FindElement(By.XPath($"//div[@id='tree-node']//span[@class='rct-text' and .//span[text()='{elementName}']]"));
+        private IWebElement ElementCheckboxByName(string elementName) => ElementByName(elementName).FindElement(By.XPath($".//span[@class='rct-checkbox']/*[local-name() = 'svg']"));
+        private IWebElement ElementButtonByName(string elementName) => ElementByName(elementName).FindElement(By.XPath($"./button"));
+        private ReadOnlyCollection<IWebElement> ElementsCheckboxesInFolderByName(string folderName) => _webDriver.FindElements(By.XPath("//div[@id='tree-node']" +
+            $"//li[./span[@class='rct-text' and .//span[text()='{folderName}']]]//li//span[@class='rct-checkbox']/*[local-name() = 'svg']"));
         private IWebElement SelectionResult => _webDriver.FindElement(By.XPath("//div[@class='check-box-tree-wrapper']/div[@id='result']"));
 
         public CheckBoxSection(IWebDriver webDriver)
@@ -22,7 +23,11 @@ namespace ToolsQAProject.Pages.ElementsPage
 
         public CheckBoxSection SelectElement(string elementName)
         {
-            ElementLabelByName(elementName).Click();
+            var checkbox = ElementCheckboxByName(elementName);
+            if(checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
+            {
+                checkbox.Click();
+            }
             return this;
         }
 
@@ -34,9 +39,12 @@ namespace ToolsQAProject.Pages.ElementsPage
 
         public CheckBoxSection SelectAllElementsInFolder(string folderName)
         {
-            foreach (IWebElement element in ElementsInFolderByName(folderName))
+            foreach (IWebElement checkbox in ElementsCheckboxesInFolderByName(folderName))
             {
-                element.ScrollToElement().Click();
+                if (checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
+                {
+                    checkbox.ScrollToElement().Click();
+                }
             }
             return this;
         }
