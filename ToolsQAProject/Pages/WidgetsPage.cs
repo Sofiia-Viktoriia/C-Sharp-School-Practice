@@ -73,7 +73,16 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyButtonIsDisplayed(string buttonName)
         {
-            Assert.That(ButtonByName(buttonName).Displayed, Is.True, $"{buttonName} button is not displayed");
+            bool result;
+            try
+            {
+                result = ButtonByName(buttonName).Displayed;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            Assert.That(result, Is.True, $"{buttonName} button is not displayed");
             return this;
         }
 
