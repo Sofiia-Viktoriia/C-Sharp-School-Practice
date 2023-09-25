@@ -1,5 +1,4 @@
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
 using ToolsQAProject.Pages.ElementsPage;
