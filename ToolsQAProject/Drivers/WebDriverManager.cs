@@ -17,7 +17,9 @@ namespace ToolsQAProject.Drivers
             switch (_appSettings?.BrowserName)
             {
                 case Browser.Chrome:
-                    webDriver = new ChromeDriver();
+                    var options = new ChromeOptions();
+                    options.AddExcludedArguments("enable-automation");
+                    webDriver = new ChromeDriver(options);
                     break;
                 case Browser.Firefox:
                     webDriver = new FirefoxDriver();

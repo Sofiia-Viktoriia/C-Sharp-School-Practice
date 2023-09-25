@@ -12,13 +12,5 @@ namespace ToolsQAProject.Helpers.Extensions
             javaScriptExecutor.ExecuteScript(_scrollToElementScript, element);
             return element;
         }
-
-        public static IWebElement ScriptClick(this IWebElement element)
-        {
-            var javaScriptExecutor = (IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver;
-            javaScriptExecutor.ExecuteScript("arguments[0].click();", element);
-
-            return element;
-        }
     }
 }

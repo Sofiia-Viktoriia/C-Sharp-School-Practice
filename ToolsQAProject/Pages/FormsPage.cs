@@ -131,7 +131,7 @@ namespace ToolsQAProject.Pages
 
         public FormsPage ClickSubmitButton()
         {
-            SubmitButton.ScriptClick();
+            SubmitButton.Click();
             return this;
         }
 
