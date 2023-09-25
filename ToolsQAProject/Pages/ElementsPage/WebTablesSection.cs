@@ -1,10 +1,11 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages.ElementsPage
 {
-    public class WebTablesSection
+    public class WebTablesSection : BasePage<WebTablesSection>
     {
         private readonly IWebDriver _webDriver;
         private IWebElement TableColumnByName(string colunmName) => _webDriver.FindElement(By.XPath($"//div[@class='rt-table']//div[@role='columnheader' and ./div[text()='{colunmName}']]"));
@@ -14,7 +15,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         private IWebElement TableRowDeleteButtonByColumnNameAndValue(string columnName, string columnValue) => _webDriver.FindElement(By.XPath("//div[@class='rt-table']//div[@role='row' and " +
             $"./div[count(//div[@class='rt-table']//div[@role='columnheader' and ./div[text()='{columnName}']]/preceding-sibling::div) + 1][text()='{columnValue}']]//div[@class='action-buttons']/span[@title='Delete']"));
 
-        public WebTablesSection(IWebDriver webDriver)
+        public WebTablesSection(IWebDriver webDriver) : base (webDriver)
         {
             _webDriver = webDriver;
         }
@@ -52,6 +53,11 @@ namespace ToolsQAProject.Pages.ElementsPage
         public WebTablesSection VerifyColumnDoesNotContainValue(string columnName, string columnValue)
         {
             Assert.That(ColumnValuesByName(columnName).Select(element => element.Text).Contains(columnValue), Is.False, $"The row with the {columnName} value {columnValue} exists");
+            return this;
+        }
+
+        protected override WebTablesSection Self()
+        {
             return this;
         }
     }

@@ -2,10 +2,11 @@
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers.Extensions;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages
 {
-    public class InteractionsPage
+    public class InteractionsPage : BasePage<InteractionsPage>
     {
         private readonly IWebDriver _webDriver;
         private IWebElement TabByName(string tabName) => _webDriver.FindElement(By.XPath($"//nav[@role='tablist']//a[text()='{tabName}']"));
@@ -13,7 +14,7 @@ namespace ToolsQAProject.Pages
         private ReadOnlyCollection<IWebElement> SelectedGridSquares => _webDriver.FindElements(By.XPath("//div[@id='demo-tabpane-grid']//li[contains(concat(' ', @class, ' '), ' list-group-item ') " +
             "and contains(concat(' ', @class, ' '), ' active ')]"));
 
-        public InteractionsPage(IWebDriver webDriver)
+        public InteractionsPage(IWebDriver webDriver) : base(webDriver)
         {
             _webDriver = webDriver;
         }
@@ -34,6 +35,11 @@ namespace ToolsQAProject.Pages
         {
             string[] actualValues = SelectedGridSquares.Select(square => square.Text).ToArray();
             Assert.That(expectedValues, Is.EqualTo(actualValues), "Selected grid squares do not contain expected values");
+            return this;
+        }
+
+        protected override InteractionsPage Self()
+        {
             return this;
         }
     }

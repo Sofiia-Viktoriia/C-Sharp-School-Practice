@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
 using ToolsQAProject.Helpers.Comparers;
 using ToolsQAProject.Helpers.Extensions;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages
 {
-    public class FormsPage
+    public class FormsPage : BasePage<FormsPage>
     {
         private readonly IWebDriver _webDriver;
         private IWebElement FirstNameInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='firstName']"));
@@ -18,15 +18,6 @@ namespace ToolsQAProject.Pages
         private IWebElement GenderRadiobuttonByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[./input[@name='gender' and @value='{value}']]"));
         private IWebElement MobilePhoneInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='userNumber']"));
         private IWebElement DateOfBirthInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='dateOfBirthInput']"));
-        private IWebElement DateOfBirthPickerYearDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
-            "' react-datepicker__year-dropdown-container ')]"));
-        private IWebElement DateOfBirthPickerYearDropdownValueByNumber(int value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
-            $"//div[contains(concat(' ', @class, ' '), ' react-datepicker__year-dropdown-container ')]//option[text()='{value}']"));
-        private IWebElement DateOfBirthPickerMonthDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), " +
-            "' react-datepicker__month-dropdown-container ')]"));
-        private IWebElement DateOfBirthPickerMonthDropdownValueByText(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']" +
-            $"//div[contains(concat(' ', @class, ' '), ' react-datepicker__month-dropdown-container ')]//option[text()='{value}']"));
-        private IWebElement DateOfBirthPickerDayByTextAndMonth(int day, string month) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@class='react-datepicker']//div[contains(concat(' ', @class, ' '), ' react-datepicker__day ') and text()='{day}' and contains(@aria-label, '{month}')]"));
         private IWebElement SubjectsInput => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//input[@id='subjectsInput']"));
         private IWebElement SubjectsSuggestionByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='subjectsContainer']//div[contains(concat(' ', @class, ' '), " +
             $"' subjects-auto-complete__option ') and text()='{value}']"));
@@ -36,22 +27,11 @@ namespace ToolsQAProject.Pages
         private IWebElement StateSuggestionByValue(string value) => _webDriver.FindElement(By.XPath($"//div[@class='practice-form-wrapper']//div[@id='state']//div[contains(@class, 'option') and text()='{value}']"));
         private IWebElement CityDropdown => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//div[@id='city']//input"));
         private IWebElement SubmitButton => _webDriver.FindElement(By.XPath("//div[@class='practice-form-wrapper']//button[@id='submit']"));
-        private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
         private IWebElement ModalTableValueByLabel(string label) => _webDriver.FindElement(By.XPath($"//div[@class='modal-content']/div[@class='modal-body']//td[text()='{label}']/following-sibling::td"));
 
-        public FormsPage(IWebDriver webDriver)
+        public FormsPage(IWebDriver webDriver) : base(webDriver)
         {
             _webDriver = webDriver;
-        }
-
-        public FormsPage RefreshPageIfAdsAreDisplayed()
-        {
-            while (AdsIframe.Count > 0)
-            {
-                _webDriver.Navigate().Refresh();
-            }
-
-            return this;
         }
 
         public FormsPage FillFirstName(string firstName)
@@ -158,6 +138,11 @@ namespace ToolsQAProject.Pages
             };
 
             Assert.That(form, Is.EqualTo(expectedValues).Using<StudentRegistrationForm>(new StudentRegistrationFormComparer()));
+            return this;
+        }
+
+        protected override FormsPage Self()
+        {
             return this;
         }
     }

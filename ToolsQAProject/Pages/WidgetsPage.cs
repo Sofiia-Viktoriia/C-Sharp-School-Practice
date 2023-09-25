@@ -3,10 +3,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers.Extensions;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages
 {
-    public class WidgetsPage
+    public class WidgetsPage : BasePage<WidgetsPage>
     {
         private readonly IWebDriver _webDriver;
         private IWebElement AutoCompleteMultipleValuesInput => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']//input"));
@@ -21,7 +22,7 @@ namespace ToolsQAProject.Pages
         private IWebElement ButtonByName(string buttonName) => _webDriver.FindElement(By.XPath($"//div[@id='progressBarContainer']//button[text()='{buttonName}']"));
         private IWebElement ProgressBar => _webDriver.FindElement(By.XPath("//div[@id='progressBarContainer']//div[@id='progressBar']/div"));
 
-        public WidgetsPage(IWebDriver webDriver)
+        public WidgetsPage(IWebDriver webDriver) : base(webDriver)
         {
             _webDriver = webDriver;
         }
@@ -96,6 +97,11 @@ namespace ToolsQAProject.Pages
         public WidgetsPage VerifyProgressBarValue(string value)
         {
             Assert.That(ProgressBar.Text, Is.EqualTo(value), $"Progress bar value does not equal to {value}");
+            return this;
+        }
+
+        protected override WidgetsPage Self()
+        {
             return this;
         }
     }

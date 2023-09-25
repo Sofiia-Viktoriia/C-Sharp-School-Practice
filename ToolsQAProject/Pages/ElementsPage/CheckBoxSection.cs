@@ -3,10 +3,11 @@ using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Helpers.Extensions;
+using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages.ElementsPage
 {
-    public class CheckBoxSection
+    public class CheckBoxSection : BasePage<CheckBoxSection>
     {
         private readonly IWebDriver _webDriver;
         private IWebElement ElementByName(string elementName) => _webDriver.FindElement(By.XPath($"//div[@id='tree-node']//span[@class='rct-text' and .//span[text()='{elementName}']]"));
@@ -16,7 +17,7 @@ namespace ToolsQAProject.Pages.ElementsPage
             $"//li[./span[@class='rct-text' and .//span[text()='{folderName}']]]//li//span[@class='rct-checkbox']/*[local-name() = 'svg']"));
         private IWebElement SelectionResult => _webDriver.FindElement(By.XPath("//div[@class='check-box-tree-wrapper']/div[@id='result']"));
 
-        public CheckBoxSection(IWebDriver webDriver)
+        public CheckBoxSection(IWebDriver webDriver) : base(webDriver)
         {
             _webDriver = webDriver;
         }
@@ -52,6 +53,11 @@ namespace ToolsQAProject.Pages.ElementsPage
         public CheckBoxSection VerifySelectionResult(string expectedResult)
         {
             Assert.That(SelectionResult.Text.Replace("\r\n", " "), Is.EqualTo(expectedResult), $"The selection result does not equal to {expectedResult}");
+            return this;
+        }
+
+        protected override CheckBoxSection Self()
+        {
             return this;
         }
     }
