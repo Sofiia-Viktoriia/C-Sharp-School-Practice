@@ -16,15 +16,14 @@ namespace RestSharpProject.StepDefinitions
         public MathjsAPIStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _restClient = new RestClient(EndPoints.BaseURL);
+            _restClient = new RestClient(EndPoints.BaseUrl);
             _restClient.AddDefaultHeader("User-Agent", "Learning RestSharp");
         }
 
         [When(@"I send POST request to calculate '([^']*)'")]
         public void WhenISendPOSTRequestToCalculate(string expr)
         {
-            var request = new RestRequest();
-            request.Method = Method.Post;
+            var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Post);
             request.AddJsonBody(new RequestBody(expr));
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
@@ -53,14 +52,14 @@ namespace RestSharpProject.StepDefinitions
         [When(@"I send GET request to calculate '([^']*)'")]
         public void WhenISendGETRequestToCalculate(string expr)
         {
-            var request = new RestRequest();
+            var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Get);
             request.AddQueryParameter("expr", expr);
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
         private async Task<RestResponse> ExecuteRequest(RestRequest request)
         {
-            logger.Info(request.Method + " " + EndPoints.BaseURL + request.Resource);
+            logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
             return await _restClient.ExecuteAsync(request);
         }
     }

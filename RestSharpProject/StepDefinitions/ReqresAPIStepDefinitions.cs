@@ -17,7 +17,7 @@ namespace RestSharpProject.StepDefinitions
         public ReqresAPIStepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _restClient = new RestClient(EndPoints.BaseURL);
+            _restClient = new RestClient(EndPoints.BaseUrl);
         }
 
         [When(@"I send request to get list of users")]
@@ -161,7 +161,7 @@ namespace RestSharpProject.StepDefinitions
 
         private async Task<RestResponse> ExecuteRequest(RestRequest request)
         {
-            logger.Info(request.Method + " " + EndPoints.BaseURL + request.Resource);
+            logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
             return await _restClient.ExecuteAsync(request);
         }
     }

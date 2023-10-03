@@ -1,7 +1,8 @@
 ﻿namespace RestSharpProject.Constants.Mathjs
 {
-    public class EndPoints
+    public static class EndPoints
     {
-        public const string BaseURL = "http://api.mathjs.org/v4/";
+        public const string BaseUrl = "http://api.mathjs.org";
+        public const string ExpressionCalculation = "/v4/";
     }
 }
