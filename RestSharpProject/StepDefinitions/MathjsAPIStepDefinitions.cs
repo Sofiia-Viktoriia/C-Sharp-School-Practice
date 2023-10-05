@@ -21,15 +21,15 @@ namespace RestSharpProject.StepDefinitions
             _restClient.AddDefaultHeader("User-Agent", "Learning RestSharp");
         }
 
-        [When(@"I send POST request to calculate '([^']*)'")]
-        public void WhenISendPOSTRequestToCalculate(string expr)
+        [When(@"I send a request to calculate '([^']*)'"), Scope(Tag = "PostRequest")]
+        public void WhenISendPostRequestToCalculate(string expr)
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Post);
             request.AddJsonBody(new RequestBody(expr));
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
-        [Then(@"response contains the '([^']*)'")]
+        [Then(@"response contains the '([^']*)'"), Scope(Tag = "PostRequest")]
         public void ThenResponseContainsThe(string result)
         {
             VerifyResponseIsSuccess();
@@ -44,8 +44,8 @@ namespace RestSharpProject.StepDefinitions
             Assert.That(((RestResponse)_scenarioContext["Response"]).Content, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
-        [When(@"I send GET request to calculate '([^']*)'")]
-        public void WhenISendGETRequestToCalculate(string expr)
+        [When(@"I send a request to calculate '([^']*)'"), Scope(Tag = "GetRequest")]
+        public void WhenISendGetRequestToCalculate(string expr)
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Get);
             request.AddQueryParameter("expr", expr);

@@ -3,8 +3,9 @@
 	I want to be able to send requests
 	To understand the requests work
 
+@PostRequest
 Scenario Outline: Addition of two numbers
-	When I send POST request to calculate '<Expression>'
+	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
@@ -13,8 +14,9 @@ Examples:
 	| 5 + 3      | 8      |
 	| 234 + 294  | 528    |
 
+@PostRequest
 Scenario Outline: Subtraction of two numbers
-	When I send POST request to calculate '<Expression>'
+	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
@@ -23,8 +25,9 @@ Examples:
 	| 15 - 3     | 12     |
 	| 234 - 234  | 0      |
 
+@PostRequest
 Scenario Outline: Multiplication of two numbers
-	When I send POST request to calculate '<Expression>'
+	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
@@ -33,8 +36,9 @@ Examples:
 	| 15 * 3     | 45     |
 	| 4 * -3     | -12    |
 
+@PostRequest
 Scenario Outline: Division of two numbers
-	When I send POST request to calculate '<Expression>'
+	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
@@ -45,7 +49,7 @@ Examples:
 
 @GetRequest
 Scenario Outline: Getting square of the number
-	When I send GET request to calculate '<Expression>'
+	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
