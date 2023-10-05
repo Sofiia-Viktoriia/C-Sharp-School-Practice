@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using RestSharp;
+using RestSharpProject.Constants.Common;
 using RestSharpProject.Constants.Mathjs;
 using RestSharpProject.Models.Mathjs;
 using System.Text.Json;
@@ -28,17 +29,10 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
-        [Then(@"response code equals (.*)"), Scope(Tag = "Mathjs")]
-        public void ThenResponseCodeEquals(int code)
-        {
-            RestResponse response = (RestResponse)_scenarioContext["Response"];
-            logger.Info(response.StatusCode + "\n" + response.Content);
-            Assert.That((int)response.StatusCode, Is.EqualTo(code), $"Response code does not equal to {code}");
-        }
-
         [Then(@"response contains the '([^']*)'")]
         public void ThenResponseContainsThe(string result)
         {
+            VerifyResponseIsSuccess();
             ResponseBody response = JsonSerializer.Deserialize<ResponseBody>(((RestResponse)_scenarioContext["Response"]).Content);
             Assert.That(response.Result, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
@@ -46,6 +40,7 @@ namespace RestSharpProject.StepDefinitions
         [Then(@"response contains the '([^']*)'"), Scope(Tag = "GetRequest")]
         public void ResponseContainsThe(string result)
         {
+            VerifyResponseIsSuccess();
             Assert.That(((RestResponse)_scenarioContext["Response"]).Content, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
@@ -61,6 +56,13 @@ namespace RestSharpProject.StepDefinitions
         {
             logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
             return await _restClient.ExecuteAsync(request);
+        }
+
+        private void VerifyResponseIsSuccess()
+        {
+            RestResponse response = (RestResponse)_scenarioContext["Response"];
+            logger.Info(response.StatusCode + "\n" + response.Content);
+            Assert.That((int)response.StatusCode, Is.EqualTo(ResponseCodes.Success), $"Response code does not equal to {ResponseCodes.Success}");
         }
     }
 }

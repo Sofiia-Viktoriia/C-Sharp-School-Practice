@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using RestSharp;
+using RestSharpProject.Constants.Common;
 using RestSharpProject.Constants.Reqres;
 using RestSharpProject.Models.Reqres;
 using System.Text.Json;
@@ -27,17 +28,10 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
-        [Then(@"response code equals (.*)"), Scope(Tag = "Reqres")]
-        public void ThenResponseCodeEquals(int code)
-        {
-            RestResponse response = (RestResponse)_scenarioContext["Response"];
-            logger.Info(response.StatusCode + "\n" + response.Content);
-            Assert.That((int)response.StatusCode, Is.EqualTo(code), $"Response code does not equal to {code}");
-        }
-
         [Then(@"response body contains list of users")]
         public void ThenResponseBodyContainsListOfUsers()
         {
+            VerifyResponseCode(ResponseCodes.Success);
             UserList userList = JsonSerializer.Deserialize<UserList>(((RestResponse)_scenarioContext["Response"]).Content);
             Assert.That(userList.Data, Is.Not.Empty, "List does not contain users");
         }
@@ -49,6 +43,12 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
+        [Then(@"user is not found")]
+        public void ThenUserIsNotFound()
+        {
+            VerifyResponseCode(ResponseCodes.NotFound);
+        }
+
         [Given(@"user has id (.*)")]
         public void GivenUserHasId(int userId)
         {
@@ -58,6 +58,7 @@ namespace RestSharpProject.StepDefinitions
         [Then(@"response body contains user with id (.*)")]
         public void ThenResponseBodyContainsUserWithId(int userId)
         {
+            VerifyResponseCode(ResponseCodes.Success);
             UserBodyResponse user = JsonSerializer.Deserialize<UserBodyResponse>(((RestResponse)_scenarioContext["Response"]).Content);
             Assert.That(user.Data.Id, Is.EqualTo(userId), $"The Id of returned user does not equal {userId}");
         }
@@ -76,16 +77,18 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
-        [Then(@"response body contains the entered user data")]
-        public void ThenResponseBodyContainsTheEnteredUserData()
+        [Then(@"user is created")]
+        public void ThenUserIsCreated()
         {
-            CreateUpdateUserBody user = JsonSerializer.Deserialize<CreateUpdateUserBody>(((RestResponse)_scenarioContext["Response"]).Content);
-            CreateUpdateUserBody expectedUser = (CreateUpdateUserBody)_scenarioContext["CreateUpdateUserBody"];
-            Assert.Multiple(() =>
-            {
-                Assert.That(user.Name, Is.EqualTo(expectedUser.Name), $"The Name of returned user does not equal {expectedUser.Name}");
-                Assert.That(user.Job, Is.EqualTo(expectedUser.Job), $"The Job of returned user does not equal {expectedUser.Job}");
-            });
+            VerifyResponseCode(ResponseCodes.Created);
+            VerifyCreateUpdateResponseBody();
+        }
+
+        [Then(@"user is updated")]
+        public void ThenUserIsUpdated()
+        {
+            VerifyResponseCode(ResponseCodes.Success);
+            VerifyCreateUpdateResponseBody();
         }
 
         [Given(@"data for updating user includes")]
@@ -117,6 +120,12 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
+        [Then(@"user is deleted")]
+        public void ThenUserIsDeleted()
+        {
+            VerifyResponseCode(ResponseCodes.Deleted);
+        }
+
         [Given(@"user has the following registration data")]
         public void GivenUserHasTheFollowingRegistrationData(LoginRegistrationBody registrationBody)
         {
@@ -129,6 +138,13 @@ namespace RestSharpProject.StepDefinitions
             var request = new RestRequest(EndPoints.Registration, Method.Post);
             request.AddJsonBody(_scenarioContext["LoginRegistrationBody"]);
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
+        }
+
+        [Then(@"user is registered")]
+        [Then(@"user is logged in")]
+        public void ThenUserIsRegisteredLoggedIn()
+        {
+            VerifyResponseCode(ResponseCodes.Success);
         }
 
         [Given(@"user has the following login data")]
@@ -163,6 +179,24 @@ namespace RestSharpProject.StepDefinitions
         {
             logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
             return await _restClient.ExecuteAsync(request);
+        }
+
+        private void VerifyResponseCode(int code)
+        {
+            RestResponse response = (RestResponse)_scenarioContext["Response"];
+            logger.Info(response.StatusCode + "\n" + response.Content);
+            Assert.That((int)response.StatusCode, Is.EqualTo(code), $"Response code does not equal to {code}");
+        }
+
+        private void VerifyCreateUpdateResponseBody()
+        {
+            CreateUpdateUserBody user = JsonSerializer.Deserialize<CreateUpdateUserBody>(((RestResponse)_scenarioContext["Response"]).Content);
+            CreateUpdateUserBody expectedUser = (CreateUpdateUserBody)_scenarioContext["CreateUpdateUserBody"];
+            Assert.Multiple(() =>
+            {
+                Assert.That(user.Name, Is.EqualTo(expectedUser.Name), $"The Name of returned user does not equal {expectedUser.Name}");
+                Assert.That(user.Job, Is.EqualTo(expectedUser.Job), $"The Job of returned user does not equal {expectedUser.Job}");
+            });
         }
     }
 }
