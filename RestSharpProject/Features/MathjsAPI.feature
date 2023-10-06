@@ -3,29 +3,30 @@
 	I want to be able to send requests
 	To understand the requests work
 
-@PostRequest
 Scenario Outline: Addition of two numbers
 	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
-	| Expression | Result |
-	| 1 + 2      | 3      |
-	| 5 + 3      | 8      |
-	| 234 + 294  | 528    |
+	| Expression  | Result |
+	| 1 + 21      | 22     |
+	| 5.1 + 3.6   | 8.7    |
+	| -234 + -294 | -528   |
+	| -12 + 22    | 10     |
+	| -1 + 1      | 0      |
 
-@PostRequest
 Scenario Outline: Subtraction of two numbers
 	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
-	| Expression | Result |
-	| 1 - 2      | -1     |
-	| 15 - 3     | 12     |
-	| 234 - 234  | 0      |
+	| Expression   | Result |
+	| 1 - 2        | -1     |
+	| 15 - 3       | 12     |
+	| 234 - 234    | 0      |
+	| 12.3 - 11.24 | 1.06   |
+	| -14 - 5      | -19    |
 
-@PostRequest
 Scenario Outline: Multiplication of two numbers
 	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
@@ -35,25 +36,29 @@ Examples:
 	| 0 * 2      | 0      |
 	| 15 * 3     | 45     |
 	| 4 * -3     | -12    |
+	| -5 * -10   | 50     |
+	| 3.5 * 3.1  | 10.85  |
 
-@PostRequest
 Scenario Outline: Division of two numbers
 	When I send a request to calculate '<Expression>'
 	Then response contains the '<Result>'
 
 Examples: 
-	| Expression | Result |
-	| 0 / 2      | 0      |
-	| 15 / 3     | 5      |
-	| 40 / -4    | -10    |
+	| Expression | Result      |
+	| 0 / 2      | 0           |
+	| 2 / 0      | Infinity    |
+	| 15 / 3     | 5           |
+	| 40 / -4    | -10         |
+	| -30 / -10  | 3           |
+	| 12.5 / 3.3 | 3.787878788 |
 
-@GetRequest
 Scenario Outline: Getting square of the number
-	When I send a request to calculate '<Expression>'
-	Then response contains the '<Result>'
+	When I send a request to get a square root of a <Value>
+	Then response contains the correct square root of a <Value> value
 
 Examples: 
-	| Expression | Result |
-	| sqrt(4)    | 2      |
-	| sqrt(121)  | 11     |
-	| sqrt(-49)  | 7i     |
+	| Value |
+	| 121   |
+	| -49   |
+	| 10.3  |
+	| 0     |

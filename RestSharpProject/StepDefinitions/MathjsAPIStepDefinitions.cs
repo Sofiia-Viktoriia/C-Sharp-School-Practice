@@ -3,6 +3,7 @@ using RestSharp;
 using RestSharpProject.Constants.Common;
 using RestSharpProject.Constants.Mathjs;
 using RestSharpProject.Models.Mathjs;
+using System.Numerics;
 using System.Text.Json;
 
 namespace RestSharpProject.StepDefinitions
@@ -21,15 +22,15 @@ namespace RestSharpProject.StepDefinitions
             _restClient.AddDefaultHeader("User-Agent", "Learning RestSharp");
         }
 
-        [When(@"I send a request to calculate '([^']*)'"), Scope(Tag = "PostRequest")]
-        public void WhenISendPostRequestToCalculate(string expr)
+        [When(@"I send a request to calculate '([^']*)'")]
+        public void WhenISendARequestToCalculate(string expr)
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Post);
             request.AddJsonBody(new RequestBody(expr));
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 
-        [Then(@"response contains the '([^']*)'"), Scope(Tag = "PostRequest")]
+        [Then(@"response contains the '([^']*)'")]
         public void ThenResponseContainsThe(string result)
         {
             VerifyResponseIsSuccess();
@@ -37,18 +38,26 @@ namespace RestSharpProject.StepDefinitions
             Assert.That(response.Result, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
-        [Then(@"response contains the '([^']*)'"), Scope(Tag = "GetRequest")]
-        public void ResponseContainsThe(string result)
+        [Then(@"response contains the correct square root of a ([^']*) value")]
+        public void ResponseContainsTheCorrectSquareRootOfAValue(double value)
         {
             VerifyResponseIsSuccess();
+            string result;
+            if(value >= 0)
+            {
+                result = Complex.Sqrt(value).Real.ToString();
+            } else
+            {
+                result = Complex.Sqrt(value).Imaginary.ToString() + 'i';
+            }
             Assert.That(((RestResponse)_scenarioContext["Response"]).Content, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
-        [When(@"I send a request to calculate '([^']*)'"), Scope(Tag = "GetRequest")]
-        public void WhenISendGetRequestToCalculate(string expr)
+        [When(@"I send a request to get a square root of a ([^']*)")]
+        public void ISendARequestToGetASquareRootOfA(double value)
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Get);
-            request.AddQueryParameter("expr", expr);
+            request.AddQueryParameter("expr", $"sqrt({value})") ;
             _scenarioContext["Response"] = ExecuteRequest(request).Result;
         }
 

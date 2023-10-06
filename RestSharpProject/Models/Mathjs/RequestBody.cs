@@ -7,6 +7,9 @@ namespace RestSharpProject.Models.Mathjs
         [JsonPropertyName("expr")]
         public string Expression { get; set; }
 
+        [JsonPropertyName("precision")]
+        public int Precision { get; set; } = 10;
+
         public RequestBody(string expression)
         {
             Expression = expression;
