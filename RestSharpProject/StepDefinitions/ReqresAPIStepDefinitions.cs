@@ -24,14 +24,14 @@ namespace RestSharpProject.StepDefinitions
         public void WhenISendRequestToGetListOfUsers()
         {
             var request = new RestRequest(EndPoints.Users, Method.Get);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"response body contains list of users")]
         public void ThenResponseBodyContainsListOfUsers()
         {
             VerifyResponseCode(ResponseCodes.Success);
-            UserList userList = JsonSerializer.Deserialize<UserList>(((RestResponse)_scenarioContext["Response"]).Content);
+            UserList userList = JsonSerializer.Deserialize<UserList>(_scenarioContext.Get<RestResponse>().Content);
             Assert.That(userList.Data, Is.Not.Empty, "List does not contain users");
         }
 
@@ -39,7 +39,7 @@ namespace RestSharpProject.StepDefinitions
         public void WhenISendRequestToGetASingleUserWithId(int userId)
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Get);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"user is not found")]
@@ -52,17 +52,17 @@ namespace RestSharpProject.StepDefinitions
         public void ThenResponseBodyContainsUserWithId(int userId)
         {
             VerifyResponseCode(ResponseCodes.Success);
-            UserBodyResponse user = JsonSerializer.Deserialize<UserBodyResponse>(((RestResponse)_scenarioContext["Response"]).Content);
+            UserBodyResponse user = JsonSerializer.Deserialize<UserBodyResponse>(_scenarioContext.Get<RestResponse>().Content);
             Assert.That(user.Data.Id, Is.EqualTo(userId), $"The Id of returned user does not equal {userId}");
         }
 
         [When(@"I send request to create a user with the following data")]
         public void WhenISendRequestToCreateAUserWithTheFollowingData(CreateUpdateUserBody userCreationBody)
         {
-            _scenarioContext["CreateUpdateUserBody"] = userCreationBody;
+            _scenarioContext.Set(userCreationBody);
             var request = new RestRequest(EndPoints.Users, Method.Post);
             request.AddJsonBody(userCreationBody);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"user is created")]
@@ -84,8 +84,8 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Put);
             request.AddJsonBody(userUpdateBody);
-            _scenarioContext["CreateUpdateUserBody"] = userUpdateBody;
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(userUpdateBody);
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [When(@"I send a request to update a user with id (.*) partially")]
@@ -93,15 +93,15 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Patch);
             request.AddJsonBody(userUpdateBody);
-            _scenarioContext["CreateUpdateUserBody"] = userUpdateBody;
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(userUpdateBody);
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [When(@"I send request to delete a user with id (.*)")]
         public void WhenISendRequestToDeleteAUserWithId(int userId)
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Delete);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"user is deleted")]
@@ -115,7 +115,7 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.Registration, Method.Post);
             request.AddJsonBody(registrationBody);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"user is registered")]
@@ -130,21 +130,21 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.Login, Method.Post);
             request.AddJsonBody(loginBody);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Given(@"delay equals (.*) seconds")]
         public void GivenDelayEqualsSeconds(int seconds)
         {
-            _scenarioContext["Delay"] = seconds;
+            _scenarioContext.Set(seconds);
         }
 
         [When(@"I send request to get list of users with delay")]
         public void WhenISendRequestToGetListOfUsersWithDelay()
         {
             var request = new RestRequest(EndPoints.Users, Method.Get);
-            request.AddQueryParameter("delay", (int)_scenarioContext["Delay"]);
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            request.AddQueryParameter("delay", _scenarioContext.Get<int>());
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         private async Task<RestResponse> ExecuteRequest(RestRequest request)
@@ -155,15 +155,15 @@ namespace RestSharpProject.StepDefinitions
 
         private void VerifyResponseCode(int code)
         {
-            RestResponse response = (RestResponse)_scenarioContext["Response"];
+            RestResponse response = _scenarioContext.Get<RestResponse>();
             logger.Info(response.StatusCode + "\n" + response.Content);
             Assert.That((int)response.StatusCode, Is.EqualTo(code), $"Response code does not equal to {code}");
         }
 
         private void VerifyCreateUpdateResponseBody()
         {
-            CreateUpdateUserBody user = JsonSerializer.Deserialize<CreateUpdateUserBody>(((RestResponse)_scenarioContext["Response"]).Content);
-            CreateUpdateUserBody expectedUser = (CreateUpdateUserBody)_scenarioContext["CreateUpdateUserBody"];
+            CreateUpdateUserBody user = JsonSerializer.Deserialize<CreateUpdateUserBody>(_scenarioContext.Get<RestResponse>().Content);
+            CreateUpdateUserBody expectedUser = _scenarioContext.Get<CreateUpdateUserBody>();
             Assert.Multiple(() =>
             {
                 Assert.That(user.Name, Is.EqualTo(expectedUser.Name), $"The Name of returned user does not equal {expectedUser.Name}");

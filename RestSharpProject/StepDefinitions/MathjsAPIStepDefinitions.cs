@@ -27,14 +27,14 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Post);
             request.AddJsonBody(new RequestBody(expr));
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         [Then(@"response contains the '([^']*)'")]
         public void ThenResponseContainsThe(string result)
         {
             VerifyResponseIsSuccess();
-            ResponseBody response = JsonSerializer.Deserialize<ResponseBody>(((RestResponse)_scenarioContext["Response"]).Content);
+            ResponseBody response = JsonSerializer.Deserialize<ResponseBody>(_scenarioContext.Get<RestResponse>().Content);
             Assert.That(response.Result, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
@@ -50,7 +50,7 @@ namespace RestSharpProject.StepDefinitions
             {
                 result = Complex.Sqrt(value).Imaginary.ToString() + 'i';
             }
-            Assert.That(((RestResponse)_scenarioContext["Response"]).Content, Is.EqualTo(result), $"The result of expression does not equal {result}");
+            Assert.That(_scenarioContext.Get<RestResponse>().Content, Is.EqualTo(result), $"The result of expression does not equal {result}");
         }
 
         [When(@"I send a request to get a square root of a ([^']*)")]
@@ -58,7 +58,7 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Get);
             request.AddQueryParameter("expr", $"sqrt({value})") ;
-            _scenarioContext["Response"] = ExecuteRequest(request).Result;
+            _scenarioContext.Set(ExecuteRequest(request).Result);
         }
 
         private async Task<RestResponse> ExecuteRequest(RestRequest request)
@@ -69,7 +69,7 @@ namespace RestSharpProject.StepDefinitions
 
         private void VerifyResponseIsSuccess()
         {
-            RestResponse response = (RestResponse)_scenarioContext["Response"];
+            RestResponse response = _scenarioContext.Get<RestResponse>();
             logger.Info(response.StatusCode + "\n" + response.Content);
             Assert.That((int)response.StatusCode, Is.EqualTo(ResponseCodes.Success), $"Response code does not equal to {ResponseCodes.Success}");
         }
