@@ -8,13 +8,11 @@ Scenario: Getting list of users
 	Then response body contains list of users
 
 Scenario: Getting user that don't exist
-	Given user has id 100
-	When I send request to get a single user
+	When I send request to get a single user with id 100
 	Then user is not found
 
 Scenario Outline: Getting existing user
-	Given user has id <IdValue>
-	When I send request to get a single user
+	When I send request to get a single user with id <IdValue>
 	Then response body contains user with id <IdValue>
 
 Examples: 
@@ -23,46 +21,38 @@ Examples:
 	| 3       |
 	| 10      |
 
-Scenario: Creating new user
-	Given user has the following data
+Scenario: Creating new user	
+	When I send request to create a user with the following data
 		| Name | Job     |
 		| Alex | Teacher |
-	When I send request to create a user
 	Then user is created
 
-Scenario: PUT updating a user
-	Given user has id 2
-	And data for updating user includes
+Scenario: Full updating a user
+	When I send a request to update a user with id 2 fully
 		| Name | Job |
 		| Zeus | God |
-	When I send PUT request to update a user
 	Then user is updated
 
-Scenario: PATCH updating a user
-	Given user has id 2
-	And data for updating user includes
+Scenario: Partial updating a user
+	When I send a request to update a user with id 2 partially
 		| Name      | Job     |
 		| Aphrodite | Goddess |
-	When I send PATCH request to update a user
 	Then user is updated
 
 Scenario: Deleting a user
-	Given user has id 2
-	When I send request to delete a user
+	When I send request to delete a user with id 2
 	Then user is deleted
 
 Scenario: Successful registration
-	Given user has the following registration data
+	When I send request to register with the following data
 		| Email              | Password |
 		| eve.holt@reqres.in | pistol   |
-	When I send request to register
 	Then user is registered
 
-Scenario: Successful login
-	Given user has the following login data
+Scenario: Successful login	
+	When I send request to login with the following credentials
 		| Email              | Password   |
 		| eve.holt@reqres.in | cityslicka |
-	When I send request to login
 	Then user is logged in
 
 Scenario: Getting list of users with delay
