@@ -27,7 +27,7 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Post);
             request.AddJsonBody(new RequestBody(expr));
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"response contains the '([^']*)'")]
@@ -43,10 +43,11 @@ namespace RestSharpProject.StepDefinitions
         {
             VerifyResponseIsSuccess();
             string result;
-            if(value >= 0)
+            if (value >= 0)
             {
                 result = Complex.Sqrt(value).Real.ToString();
-            } else
+            }
+            else
             {
                 result = Complex.Sqrt(value).Imaginary.ToString() + 'i';
             }
@@ -57,14 +58,14 @@ namespace RestSharpProject.StepDefinitions
         public void ISendARequestToGetASquareRootOfA(double value)
         {
             var request = new RestRequest(EndPoints.ExpressionCalculation, Method.Get);
-            request.AddQueryParameter("expr", $"sqrt({value})") ;
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            request.AddQueryParameter("expr", $"sqrt({value})");
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
-        private async Task<RestResponse> ExecuteRequest(RestRequest request)
+        private RestResponse ExecuteRequest(RestRequest request)
         {
             logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
-            return await _restClient.ExecuteAsync(request);
+            return _restClient.Execute(request);
         }
 
         private void VerifyResponseIsSuccess()

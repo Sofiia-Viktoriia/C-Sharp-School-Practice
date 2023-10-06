@@ -24,7 +24,7 @@ namespace RestSharpProject.StepDefinitions
         public void WhenISendRequestToGetListOfUsers()
         {
             var request = new RestRequest(EndPoints.Users, Method.Get);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"response body contains list of users")]
@@ -39,7 +39,7 @@ namespace RestSharpProject.StepDefinitions
         public void WhenISendRequestToGetASingleUserWithId(int userId)
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Get);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"user is not found")]
@@ -62,7 +62,7 @@ namespace RestSharpProject.StepDefinitions
             _scenarioContext.Set(userCreationBody);
             var request = new RestRequest(EndPoints.Users, Method.Post);
             request.AddJsonBody(userCreationBody);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"user is created")]
@@ -85,7 +85,7 @@ namespace RestSharpProject.StepDefinitions
             var request = new RestRequest(EndPoints.UserById(userId), Method.Put);
             request.AddJsonBody(userUpdateBody);
             _scenarioContext.Set(userUpdateBody);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [When(@"I send a request to update a user with id (.*) partially")]
@@ -94,14 +94,14 @@ namespace RestSharpProject.StepDefinitions
             var request = new RestRequest(EndPoints.UserById(userId), Method.Patch);
             request.AddJsonBody(userUpdateBody);
             _scenarioContext.Set(userUpdateBody);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [When(@"I send request to delete a user with id (.*)")]
         public void WhenISendRequestToDeleteAUserWithId(int userId)
         {
             var request = new RestRequest(EndPoints.UserById(userId), Method.Delete);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"user is deleted")]
@@ -115,7 +115,7 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.Registration, Method.Post);
             request.AddJsonBody(registrationBody);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Then(@"user is registered")]
@@ -130,7 +130,7 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.Login, Method.Post);
             request.AddJsonBody(loginBody);
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
         [Given(@"delay equals (.*) seconds")]
@@ -144,13 +144,13 @@ namespace RestSharpProject.StepDefinitions
         {
             var request = new RestRequest(EndPoints.Users, Method.Get);
             request.AddQueryParameter("delay", _scenarioContext.Get<int>());
-            _scenarioContext.Set(ExecuteRequest(request).Result);
+            _scenarioContext.Set(ExecuteRequest(request));
         }
 
-        private async Task<RestResponse> ExecuteRequest(RestRequest request)
+        private RestResponse ExecuteRequest(RestRequest request)
         {
             logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
-            return await _restClient.ExecuteAsync(request);
+            return _restClient.Execute(request);
         }
 
         private void VerifyResponseCode(int code)
