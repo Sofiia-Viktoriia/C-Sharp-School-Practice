@@ -1,136 +1,123 @@
-using NUnit.Framework;
 using RestSharp;
 using RestSharpProject.Constants.Common;
-using RestSharpProject.Constants.Reqres;
 using RestSharpProject.Models.Reqres;
-using System.Text.Json;
+using RestSharpProject.Services;
 
 namespace RestSharpProject.StepDefinitions
 {
     [Binding]
     public class ReqresAPIStepDefinitions
     {
-        private readonly RestClient _restClient;
         private readonly ScenarioContext _scenarioContext;
-        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly ReqresApiService _reqresApiService;
 
-        public ReqresAPIStepDefinitions(ScenarioContext scenarioContext)
+        public ReqresAPIStepDefinitions(ScenarioContext scenarioContext, ReqresApiService reqresApiService)
         {
             _scenarioContext = scenarioContext;
-            _restClient = new RestClient(EndPoints.BaseUrl);
+            _reqresApiService = reqresApiService;
+            _reqresApiService.SetRestClient();
         }
 
         [When(@"I send request to get list of users")]
         public void WhenISendRequestToGetListOfUsers()
         {
-            var request = new RestRequest(EndPoints.Users, Method.Get);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.GetListOfUsers();
         }
 
         [Then(@"response body contains list of users")]
         public void ThenResponseBodyContainsListOfUsers()
         {
-            VerifyResponseCode(ResponseCodes.Success);
-            UserList userList = JsonSerializer.Deserialize<UserList>(_scenarioContext.Get<RestResponse>().Content);
-            Assert.That(userList.Data, Is.Not.Empty, "List does not contain users");
+            _reqresApiService
+                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseContainsListOfUsers();
         }
 
         [When(@"I send request to get a single user with id (.*)")]
         public void WhenISendRequestToGetASingleUserWithId(int userId)
         {
-            var request = new RestRequest(EndPoints.UserById(userId), Method.Get);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.GetSingleUser(userId);
         }
 
         [Then(@"user is not found")]
         public void ThenUserIsNotFound()
         {
-            VerifyResponseCode(ResponseCodes.NotFound);
+            _reqresApiService.VerifyResponseCode(ResponseCodes.NotFound);
         }
 
         [Then(@"response body contains user with id (.*)")]
         public void ThenResponseBodyContainsUserWithId(int userId)
         {
-            VerifyResponseCode(ResponseCodes.Success);
-            UserBodyResponse user = JsonSerializer.Deserialize<UserBodyResponse>(_scenarioContext.Get<RestResponse>().Content);
-            Assert.That(user.Data.Id, Is.EqualTo(userId), $"The Id of returned user does not equal {userId}");
+            _reqresApiService
+                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseContainsUserId(userId);
         }
 
         [When(@"I send request to create a user with the following data")]
         public void WhenISendRequestToCreateAUserWithTheFollowingData(CreateUpdateUserBody userCreationBody)
         {
             _scenarioContext.Set(userCreationBody);
-            var request = new RestRequest(EndPoints.Users, Method.Post);
-            request.AddJsonBody(userCreationBody);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.CreateUser(userCreationBody);
         }
 
         [Then(@"user is created")]
         public void ThenUserIsCreated()
         {
-            VerifyResponseCode(ResponseCodes.Created);
-            VerifyCreateUpdateResponseBody();
+            _reqresApiService
+                .VerifyResponseCode(ResponseCodes.Created)
+                .VerifyResponseContainsUserInfo(_scenarioContext.Get<CreateUpdateUserBody>());
         }
 
         [Then(@"user is updated")]
         public void ThenUserIsUpdated()
         {
-            VerifyResponseCode(ResponseCodes.Success);
-            VerifyCreateUpdateResponseBody();
+            _reqresApiService
+                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseContainsUserInfo(_scenarioContext.Get<CreateUpdateUserBody>());
         }
 
         [When(@"I send a request to update a user with id (.*) fully")]
         public void WhenISendARequestToUpdateAUserWithIdFully(int userId, CreateUpdateUserBody userUpdateBody)
         {
-            var request = new RestRequest(EndPoints.UserById(userId), Method.Put);
-            request.AddJsonBody(userUpdateBody);
             _scenarioContext.Set(userUpdateBody);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.UpdateUser(userId, userUpdateBody, Method.Put);
         }
 
         [When(@"I send a request to update a user with id (.*) partially")]
         public void WhenISendARequestToUpdateAUserWithIdPartially(int userId, CreateUpdateUserBody userUpdateBody)
         {
-            var request = new RestRequest(EndPoints.UserById(userId), Method.Patch);
-            request.AddJsonBody(userUpdateBody);
             _scenarioContext.Set(userUpdateBody);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.UpdateUser(userId, userUpdateBody, Method.Patch);
         }
 
         [When(@"I send request to delete a user with id (.*)")]
         public void WhenISendRequestToDeleteAUserWithId(int userId)
         {
-            var request = new RestRequest(EndPoints.UserById(userId), Method.Delete);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.DeleteUser(userId);
         }
 
         [Then(@"user is deleted")]
         public void ThenUserIsDeleted()
         {
-            VerifyResponseCode(ResponseCodes.Deleted);
+            _reqresApiService.VerifyResponseCode(ResponseCodes.Deleted);
         }
 
         [When(@"I send request to register with the following data")]
         public void WhenISendRequestToRegisterWithTheFollowingData(LoginRegistrationBody registrationBody)
         {
-            var request = new RestRequest(EndPoints.Registration, Method.Post);
-            request.AddJsonBody(registrationBody);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.Register(registrationBody);
         }
 
         [Then(@"user is registered")]
         [Then(@"user is logged in")]
         public void ThenUserIsRegisteredLoggedIn()
         {
-            VerifyResponseCode(ResponseCodes.Success);
+            _reqresApiService.VerifyResponseCode(ResponseCodes.Success);
         }
 
         [When(@"I send request to login with the following credentials")]
         public void WhenISendRequestToLoginWithTheFollowingCredentials(LoginRegistrationBody loginBody)
         {
-            var request = new RestRequest(EndPoints.Login, Method.Post);
-            request.AddJsonBody(loginBody);
-            _scenarioContext.Set(ExecuteRequest(request));
+            _reqresApiService.Login(loginBody);
         }
 
         [Given(@"delay equals (.*) seconds")]
@@ -142,33 +129,7 @@ namespace RestSharpProject.StepDefinitions
         [When(@"I send request to get list of users with delay")]
         public void WhenISendRequestToGetListOfUsersWithDelay()
         {
-            var request = new RestRequest(EndPoints.Users, Method.Get);
-            request.AddQueryParameter("delay", _scenarioContext.Get<int>());
-            _scenarioContext.Set(ExecuteRequest(request));
-        }
-
-        private RestResponse ExecuteRequest(RestRequest request)
-        {
-            logger.Info(request.Method + " " + EndPoints.BaseUrl + request.Resource);
-            return _restClient.Execute(request);
-        }
-
-        private void VerifyResponseCode(int code)
-        {
-            RestResponse response = _scenarioContext.Get<RestResponse>();
-            logger.Info(response.StatusCode + "\n" + response.Content);
-            Assert.That((int)response.StatusCode, Is.EqualTo(code), $"Response code does not equal to {code}");
-        }
-
-        private void VerifyCreateUpdateResponseBody()
-        {
-            CreateUpdateUserBody user = JsonSerializer.Deserialize<CreateUpdateUserBody>(_scenarioContext.Get<RestResponse>().Content);
-            CreateUpdateUserBody expectedUser = _scenarioContext.Get<CreateUpdateUserBody>();
-            Assert.Multiple(() =>
-            {
-                Assert.That(user.Name, Is.EqualTo(expectedUser.Name), $"The Name of returned user does not equal {expectedUser.Name}");
-                Assert.That(user.Job, Is.EqualTo(expectedUser.Job), $"The Job of returned user does not equal {expectedUser.Job}");
-            });
+            _reqresApiService.GetListOfUsersWithDelay(_scenarioContext.Get<int>());
         }
     }
 }
