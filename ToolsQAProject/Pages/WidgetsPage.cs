@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers.Extensions;
 using ToolsQAProject.Pages.Common;
@@ -49,6 +50,8 @@ namespace ToolsQAProject.Pages
         public WidgetsPage AddValueToAutoCompleteField(string value)
         {
             FillAutoCompletingField(value);
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(3));
+            wait.Until(driver => AutoCompleteSuggestionByText(value).Displayed);
             AutoCompleteSuggestionByText(value).Click();
             return this;
         }
