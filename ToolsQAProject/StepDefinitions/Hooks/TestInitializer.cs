@@ -21,7 +21,7 @@ namespace ToolsQAProject.StepDefinitions.Hooks
         public void StartWebDriver()
         {
             var webDriver = _webDriverManager.GetWebDriver();
-            _objectContainer.RegisterInstanceAs<IWebDriver>(webDriver);
+            _objectContainer.RegisterInstanceAs(webDriver);
         }
 
         [AfterScenario]
