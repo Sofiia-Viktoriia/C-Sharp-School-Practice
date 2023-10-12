@@ -19,7 +19,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [When(@"user submits the form with values")]
         public void WhenUserSubmitsTheFormWithValues(StudentRegistrationForm form)
         {
-            _scenarioContext["StudentRegistrationForm"] = form;
+            _scenarioContext.Set(form);
             _formsPage.RefreshPageIfAdsAreDisplayed()
                 .FillFirstName(form.FirstName)
                 .FillLastName(form.LastName)
@@ -38,7 +38,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the sent form overview is populated with entered values")]
         public void ThenTheSentFormOverviewIsPopulatedWithEnteredValues()
         {
-            _formsPage.VerifyModalTableValues((StudentRegistrationForm)_scenarioContext["StudentRegistrationForm"]);
+            _formsPage.VerifyModalTableValues(_scenarioContext.Get<StudentRegistrationForm>());
         }
     }
 }

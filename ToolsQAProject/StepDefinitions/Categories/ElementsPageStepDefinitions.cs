@@ -81,7 +81,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Given(@"the amount of rows is remembered")]
         public void GivenTheAmountOfRowsIsRemembered()
         {
-            _scenarioContext["RowAmount"] = _webTablesSection.GetAmountOfRowsInTable();
+            _scenarioContext.Set(_webTablesSection.GetAmountOfRowsInTable());
         }
 
         [When(@"user deletes the row with the '([^']*)' value equals '([^']*)'")]
@@ -93,7 +93,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Then(@"the amount of rows in the table reduced by (\d+)")]
         public void ThenTheAmountOfRowsInTheTableReducedBy(int reduceNumber)
         {
-            var expectedRowAmount = (int)_scenarioContext["RowAmount"] - reduceNumber;
+            var expectedRowAmount = _scenarioContext.Get<int>() - reduceNumber;
             _webTablesSection.VerifyAmountOfRowsInTable(expectedRowAmount);
         }
 
