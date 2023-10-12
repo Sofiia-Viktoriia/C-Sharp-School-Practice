@@ -52,7 +52,7 @@ namespace ToolsQAProject.Pages.ElementsPage
 
         public WebTablesSection VerifyColumnDoesNotContainValue(string columnName, string columnValue)
         {
-            Assert.That(ColumnValuesByName(columnName).Select(element => element.Text).Contains(columnValue), Is.False, $"The row with the {columnName} value {columnValue} exists");
+            Assert.That(ColumnValuesByName(columnName), Has.None.EqualTo(columnValue), $"The row with the {columnName} value {columnValue} exists");
             return this;
         }
 
