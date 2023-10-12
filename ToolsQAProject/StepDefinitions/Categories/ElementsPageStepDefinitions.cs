@@ -44,7 +44,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [When(@"user expands the '([^']*)' folder")]
         public void WhenUserExpandsTheFolder(string elementName)
         {
-            _checkBoxSection.ExpandFolder(elementName);
+            _checkBoxSection.ClickFolderToggle(elementName);
         }
 
         [When(@"user selects the '([^']*)' element")]

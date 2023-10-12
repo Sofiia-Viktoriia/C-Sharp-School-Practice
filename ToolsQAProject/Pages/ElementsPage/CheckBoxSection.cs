@@ -32,7 +32,7 @@ namespace ToolsQAProject.Pages.ElementsPage
             return this;
         }
 
-        public CheckBoxSection ExpandFolder(string folderName)
+        public CheckBoxSection ClickFolderToggle(string folderName)
         {
             ElementButtonByName(folderName).Click();
             return this;
