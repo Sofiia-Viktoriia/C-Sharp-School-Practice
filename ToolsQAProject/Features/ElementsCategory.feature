@@ -12,8 +12,6 @@ Scenario: Submitting correct fields` values in Text Box section
 		| FullName  | Email             | CurrentAddress | PermanentAddress |
 		| Alex Ones | email@address.com | USA, New York  | Ukraine, Kyiv    |
 	Then the table should contain entered values
-		| FullName  | Email             | CurrentAddress | PermanentAddress |
-		| Alex Ones | email@address.com | USA, New York  | Ukraine, Kyiv    |
 
 Scenario: Selecting elements in Check Box section
 	Given user opens the 'Check Box' section

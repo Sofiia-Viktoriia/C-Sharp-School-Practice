@@ -27,6 +27,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [When(@"user submits the form with the next data")]
         public void WhenUserSubmitsTheFormWithTheNextData(UserForm userForm)
         {
+            _scenarioContext.Set(userForm);
             _textBoxSection
                 .FillFullName(userForm.FullName)
                 .FillEmail(userForm.Email)
@@ -36,9 +37,9 @@ namespace ToolsQAProject.StepDefinitions.Categories
         }
 
         [Then(@"the table should contain entered values")]
-        public void ThenTheTableShouldContainEnteredValues(UserForm result)
+        public void ThenTheTableShouldContainEnteredValues()
         {
-            _textBoxSection.VerifyOutputTableValues(result);
+            _textBoxSection.VerifyOutputTableValues(_scenarioContext.Get<UserForm>());
         }
 
         [When(@"user expands the '([^']*)' folder")]
