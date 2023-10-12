@@ -42,7 +42,7 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyAllSuggestionsContainValue(string value)
         {
-            string[] suggestions = AutoCompleteSuggestions.Select(element => element.Text).ToArray();
+            IEnumerable<string> suggestions = AutoCompleteSuggestions.Select(element => element.Text);
             Assert.That(suggestions, Is.All.Contain(value).IgnoreCase, $"Not all suggestions contain '{value}'");
             return this;
         }
@@ -64,7 +64,7 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyAutoCompleteFieldValuesAreDisplayed(string[] values)
         {
-            string[] actualResult = AutoCompleteFieldValues.Select(element => element.Text).ToArray();
+            IEnumerable<string> actualResult = AutoCompleteFieldValues.Select(element => element.Text);
             Assert.That(values, Is.EquivalentTo(actualResult), "Expected entered values don't equal to the actual result");
             return this;
         }
