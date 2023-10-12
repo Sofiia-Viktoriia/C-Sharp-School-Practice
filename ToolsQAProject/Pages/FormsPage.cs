@@ -137,7 +137,7 @@ namespace ToolsQAProject.Pages
                 City = stateAndCity[(lastSpaceIndex + 1)..]
             };
 
-            Assert.That(form, Is.EqualTo(expectedValues).Using<StudentRegistrationForm>(new StudentRegistrationFormComparer()));
+            Assert.That(form, Is.EqualTo(expectedValues).Using(new StudentRegistrationFormComparer()));
             return this;
         }
 
