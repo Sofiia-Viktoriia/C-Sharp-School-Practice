@@ -61,8 +61,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _checkBoxSection.SelectAllElementsInFolder(folderName);
         }
 
-        [Then(@"the selection result should be equal '([^']*)'")]
-        public void ThenTheSelectionResultShouldBeEqual(string selectionResult)
+        [Then(@"the selection result should be equal to '([^']*)'")]
+        public void ThenTheSelectionResultShouldBeEqualTo(string selectionResult)
         {
             _checkBoxSection.VerifySelectionResult(selectionResult);
         }
@@ -85,8 +85,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _scenarioContext.Set(_webTablesSection.GetAmountOfRowsInTable());
         }
 
-        [When(@"user deletes the row with the '([^']*)' value equals '([^']*)'")]
-        public void WhenUserDeletesTheRowWithTheValueEquals(string columnName, string columnValue)
+        [When(@"user deletes the row with the '([^']*)' value equals to '([^']*)'")]
+        public void WhenUserDeletesTheRowWithTheValueEqualsTo(string columnName, string columnValue)
         {
             _webTablesSection.ClickOnRowDeleteButton(columnName, columnValue);
         }
@@ -98,7 +98,7 @@ namespace ToolsQAProject.StepDefinitions.Categories
             _webTablesSection.VerifyAmountOfRowsInTable(expectedRowAmount);
         }
 
-        [Then(@"the row with the '([^']*)' value equals '([^']*)' should not exist")]
+        [Then(@"the row with the '([^']*)' value equals to '([^']*)' should not exist")]
         public void ThenTheRowWithTheValueEqualsShouldNotExist(string columnName, string columnValue)
         {
             _webTablesSection.VerifyColumnDoesNotContainValue(columnName, columnValue);

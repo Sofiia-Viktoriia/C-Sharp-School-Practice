@@ -25,7 +25,7 @@ Scenario: Selecting elements in Check Box section
 	And user selects all elements in the 'Office' folder
 	And user expands the 'Downloads' folder
 	And user selects the 'Downloads' folder
-	Then the selection result should be equal 'You have selected : desktop notes commands angular veu office public private classified general downloads wordFile excelFile'
+	Then the selection result should be equal to 'You have selected : desktop notes commands angular veu office public private classified general downloads wordFile excelFile'
 
 Scenario: Sorting column values in the table in Web Tables section
 	Given user opens the 'Web Tables' section
@@ -35,9 +35,9 @@ Scenario: Sorting column values in the table in Web Tables section
 Scenario: Deleting the row in the table in Web Tables section
 	Given user opens the 'Web Tables' section
 	And the amount of rows is remembered
-	When user deletes the row with the 'Name' value equals 'Alden'
+	When user deletes the row with the 'Name' value equals to 'Alden'
 	Then the amount of rows in the table reduced by 1
-	And the row with the 'Department' value equals 'Compliance' should not exist
+	And the row with the 'Department' value equals to 'Compliance' should not exist
 
 Scenario Outline: Clicking on the button in Buttons section
 	Given user opens the 'Buttons' section
