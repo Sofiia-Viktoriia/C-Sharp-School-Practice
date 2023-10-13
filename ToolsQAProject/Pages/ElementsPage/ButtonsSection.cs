@@ -42,10 +42,5 @@ namespace ToolsQAProject.Pages.ElementsPage
             Assert.That(ClickingResultByText(resultText).Displayed, Is.True, "The clicking result is not displayed");
             return this;
         }
-
-        protected override ButtonsSection Self()
-        {
-            return this;
-        }
     }
 }

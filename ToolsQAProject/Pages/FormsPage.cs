@@ -140,10 +140,5 @@ namespace ToolsQAProject.Pages
             Assert.That(form, Is.EqualTo(expectedValues).Using(new StudentRegistrationFormComparer()));
             return this;
         }
-
-        protected override FormsPage Self()
-        {
-            return this;
-        }
     }
 }

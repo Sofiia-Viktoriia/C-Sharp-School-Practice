@@ -25,7 +25,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         public CheckBoxSection SelectElement(string elementName)
         {
             var checkbox = ElementCheckboxByName(elementName);
-            if(checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
+            if (checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
             {
                 checkbox.Click();
             }
@@ -53,11 +53,6 @@ namespace ToolsQAProject.Pages.ElementsPage
         public CheckBoxSection VerifySelectionResult(string expectedResult)
         {
             Assert.That(SelectionResult.Text.Replace("\r\n", " "), Is.EqualTo(expectedResult), $"The selection result does not equal to {expectedResult}");
-            return this;
-        }
-
-        protected override CheckBoxSection Self()
-        {
             return this;
         }
     }

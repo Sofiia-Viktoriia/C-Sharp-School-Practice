@@ -69,10 +69,5 @@ namespace ToolsQAProject.Pages.ElementsPage
             Assert.That(result, Is.EqualTo(userForm).Using<UserForm>(new UserFormComparer()));
             return this;
         }
-
-        protected override TextBoxSection Self()
-        {
-            return this;
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         private IWebElement TableRowDeleteButtonByColumnNameAndValue(string columnName, string columnValue) => _webDriver.FindElement(By.XPath("//div[@class='rt-table']//div[@role='row' and " +
             $"./div[count(//div[@class='rt-table']//div[@role='columnheader' and ./div[text()='{columnName}']]/preceding-sibling::div) + 1][text()='{columnValue}']]//div[@class='action-buttons']/span[@title='Delete']"));
 
-        public WebTablesSection(IWebDriver webDriver) : base (webDriver)
+        public WebTablesSection(IWebDriver webDriver) : base(webDriver)
         {
             _webDriver = webDriver;
         }
@@ -53,11 +53,6 @@ namespace ToolsQAProject.Pages.ElementsPage
         public WebTablesSection VerifyColumnDoesNotContainValue(string columnName, string columnValue)
         {
             Assert.That(ColumnValuesByName(columnName), Has.None.EqualTo(columnValue), $"The row with the {columnName} value {columnValue} exists");
-            return this;
-        }
-
-        protected override WebTablesSection Self()
-        {
             return this;
         }
     }

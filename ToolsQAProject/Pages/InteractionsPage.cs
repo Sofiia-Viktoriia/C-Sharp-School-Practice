@@ -37,10 +37,5 @@ namespace ToolsQAProject.Pages
             Assert.That(expectedValues, Is.EqualTo(actualValues), "Selected grid squares do not contain expected values");
             return this;
         }
-
-        protected override InteractionsPage Self()
-        {
-            return this;
-        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System.Collections.ObjectModel;
 using ToolsQAProject.Helpers.Extensions;
 using ToolsQAProject.Pages.Common;
@@ -104,11 +103,6 @@ namespace ToolsQAProject.Pages
         public WidgetsPage VerifyProgressBarValue(string value)
         {
             Assert.That(ProgressBar.Text, Is.EqualTo(value), $"Progress bar value does not equal to {value}");
-            return this;
-        }
-
-        protected override WidgetsPage Self()
-        {
             return this;
         }
     }

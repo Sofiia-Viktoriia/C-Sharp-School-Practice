@@ -19,10 +19,5 @@ namespace ToolsQAProject.Pages.Common
             SectionByName(sectionName).ScrollToElement().Click();
             return this;
         }
-
-        protected override CategoryPage Self()
-        {
-            return this;
-        }
     }
 }

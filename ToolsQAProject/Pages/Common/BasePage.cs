@@ -8,7 +8,7 @@ namespace ToolsQAProject.Pages.Common
         private readonly IWebDriver _webDriver;
         private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
 
-        public BasePage(IWebDriver webDriver)
+        protected BasePage(IWebDriver webDriver)
         {
             _webDriver = webDriver;
         }
@@ -20,9 +20,7 @@ namespace ToolsQAProject.Pages.Common
                 _webDriver.Navigate().Refresh();
             }
 
-            return Self();
+            return (T)this;
         }
-
-        protected abstract T Self();
     }
 }
