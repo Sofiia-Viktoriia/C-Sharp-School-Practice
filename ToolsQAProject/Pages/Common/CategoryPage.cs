@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages.Common
@@ -16,6 +17,8 @@ namespace ToolsQAProject.Pages.Common
 
         public CategoryPage SelectSection(string sectionName)
         {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(3));
+            wait.Until(driver => SectionByName(sectionName).Displayed);
             SectionByName(sectionName).ScrollToElement().Click();
             return this;
         }
