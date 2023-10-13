@@ -8,13 +8,17 @@ namespace ToolsQAProject.Drivers
 {
     public class WebDriverManager
     {
-        private AppSettingsOptions? _appSettings;
+        private readonly AppSettingsOptions _appSettings;
+
+        public WebDriverManager(AppSettingsOptions appSettings)
+        {
+            _appSettings = appSettings;
+        }
 
         public IWebDriver GetWebDriver()
         {
             IWebDriver webDriver;
-            _appSettings = AppSettingsConfig.GetApplicationConfiguration();
-            switch (_appSettings?.BrowserName)
+            switch (_appSettings.BrowserName)
             {
                 case Browser.Chrome:
                     var options = new ChromeOptions();

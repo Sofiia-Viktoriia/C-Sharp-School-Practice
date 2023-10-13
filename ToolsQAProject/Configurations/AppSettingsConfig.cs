@@ -1,21 +1,24 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using BoDi;
+using Microsoft.Extensions.Configuration;
 
 namespace ToolsQAProject.Configurations
 {
-    public static class AppSettingsConfig
+    public class AppSettingsConfig
     {
+        private readonly ObjectContainer _objectContainer;
+        private readonly IConfigurationRoot _configurationRoot;
 
-        private static IConfigurationRoot GetIConfigurationRoot()
+        public AppSettingsConfig(ObjectContainer objectContainer)
         {
-            return new ConfigurationBuilder()
+            _objectContainer = objectContainer;
+            _configurationRoot = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
         }
 
-        public static AppSettingsOptions? GetApplicationConfiguration()
+        public void SetApplicationConfiguration()
         {
-            var iConfig = GetIConfigurationRoot();
-            return iConfig.GetSection(AppSettingsOptions.AppSettings).Get<AppSettingsOptions>();
+            _objectContainer.RegisterInstanceAs(_configurationRoot.GetSection(AppSettingsOptions.AppSettings).Get<AppSettingsOptions>());
         }
     }
 }
