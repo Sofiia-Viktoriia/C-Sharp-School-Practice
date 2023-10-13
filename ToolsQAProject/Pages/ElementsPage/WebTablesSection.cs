@@ -20,14 +20,16 @@ namespace ToolsQAProject.Pages.ElementsPage
             _webDriver = webDriver;
         }
 
-        public int GetAmountOfRowsInTable()
+        public WebTablesSection GetAmountOfRowsInTable(out int rowAmount)
         {
-            return TableRows.Count;
+            rowAmount = TableRows.Count;
+            return this;
         }
 
         public WebTablesSection VerifyAmountOfRowsInTable(int expectedAmount)
         {
-            Assert.That(GetAmountOfRowsInTable(), Is.EqualTo(expectedAmount), $"The amount of table rows does not equal to {expectedAmount}");
+            GetAmountOfRowsInTable(out int rowAmount);
+            Assert.That(rowAmount, Is.EqualTo(expectedAmount), $"The amount of table rows does not equal to {expectedAmount}");
             return this;
         }
 

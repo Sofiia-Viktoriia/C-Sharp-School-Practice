@@ -82,7 +82,8 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [Given(@"the amount of rows is remembered")]
         public void GivenTheAmountOfRowsIsRemembered()
         {
-            _scenarioContext.Set(_webTablesSection.GetAmountOfRowsInTable());
+            _webTablesSection.GetAmountOfRowsInTable(out int rowAmount);
+            _scenarioContext.Set(rowAmount);
         }
 
         [When(@"user deletes the row with the '([^']*)' value equals to '([^']*)'")]
