@@ -110,13 +110,19 @@ namespace ToolsQAProject.StepDefinitions.Categories
             switch (buttonName)
             {
                 case Buttons.DoubleClickMe:
-                    _buttonsSection.DoubleClickOnButton(buttonName);
+                    _buttonsSection
+                        .RefreshPageIfAdsAreDisplayed()
+                        .DoubleClickOnButton(buttonName);
                     break;
                 case Buttons.RightClickMe:
-                    _buttonsSection.RightClickOnButton(buttonName);
+                    _buttonsSection
+                        .RefreshPageIfAdsAreDisplayed()
+                        .RightClickOnButton(buttonName);
                     break;
                 case Buttons.ClickMe:
-                    _buttonsSection.ClickOnButton(buttonName);
+                    _buttonsSection
+                        .RefreshPageIfAdsAreDisplayed()
+                        .ClickOnButton(buttonName);
                     break;
             }
         }

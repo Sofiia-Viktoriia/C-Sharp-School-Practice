@@ -19,20 +19,18 @@ namespace ToolsQAProject.Pages.ElementsPage
 
         public ButtonsSection ClickOnButton(string buttonName)
         {
-            ButtonByName(buttonName).ScrollToElement().Click();
+            ButtonByName(buttonName).Click();
             return this;
         }
 
         public ButtonsSection DoubleClickOnButton(string buttonName)
         {
-            new Actions(_webDriver).MoveToElement(ButtonByName(buttonName))
-                .DoubleClick(ButtonByName(buttonName)).Build().Perform();
+            new Actions(_webDriver).DoubleClick(ButtonByName(buttonName)).Build().Perform();
             return this;
         }
 
         public ButtonsSection RightClickOnButton(string buttonName)
         {
-            RefreshPageIfAdsAreDisplayed();
             new Actions(_webDriver).ContextClick(ButtonByName(buttonName)).Build().Perform();
             return this;
         }
