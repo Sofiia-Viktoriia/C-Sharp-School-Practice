@@ -12,6 +12,8 @@ namespace ToolsQAProject.Pages
     {
         private readonly IWebDriver _webDriver;
         private IWebElement AutoCompleteMultipleValuesInput => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']//input"));
+        private IWebElement AutoCompleteSuggestionsContainer => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
+            "//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]"));
         private ReadOnlyCollection<IWebElement> AutoCompleteSuggestions => _webDriver.FindElements(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
             "//div[contains(concat(' ', @class, ' '), ' auto-complete__menu-list ')]/div"));
         private IWebElement AutoCompleteSuggestionByText(string text) => _webDriver.FindElement(By.XPath("//div[@id='autoCompleteContainer']//div[@id='autoCompleteMultiple']" +
@@ -36,6 +38,8 @@ namespace ToolsQAProject.Pages
 
         public WidgetsPage VerifyAmountOfSuggestions(int expectedAmount)
         {
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(3));
+            wait.Until(driver => AutoCompleteSuggestionsContainer.Displayed);
             Assert.That(AutoCompleteSuggestions.Count, Is.EqualTo(expectedAmount), $"The amount of suggestions does not equal to {expectedAmount}");
             return this;
         }
