@@ -25,7 +25,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         public CheckBoxSection SelectElement(string elementName)
         {
             var checkbox = ElementCheckboxByName(elementName);
-            if (checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
+            if (!checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.CheckedCheckbox))
             {
                 checkbox.Click();
             }
@@ -42,7 +42,7 @@ namespace ToolsQAProject.Pages.ElementsPage
         {
             foreach (IWebElement checkbox in ElementsCheckboxesInFolderByName(folderName))
             {
-                if (checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.UncheckedCheckbox))
+                if (!checkbox.GetAttribute(Attributes.Class).Contains(AttributeValues.CheckedCheckbox))
                 {
                     checkbox.ScrollToElement().Click();
                 }

@@ -2,6 +2,6 @@
 {
     public class AttributeValues
     {
-        public const string UncheckedCheckbox = "rct-icon-uncheck";
+        public const string CheckedCheckbox = "rct-icon-check";
     }
 }
