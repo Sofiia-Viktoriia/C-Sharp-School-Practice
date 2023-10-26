@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System.Globalization;
 using ToolsQAProject.Constants;
 using ToolsQAProject.Entities;
@@ -76,6 +77,8 @@ namespace ToolsQAProject.Pages
             foreach (string subject in subjects)
             {
                 SubjectsInput.ScrollToElement().SendKeys(subject);
+                var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(3));
+                wait.Until(driver => SubjectsSuggestionByValue(subject).Displayed);
                 SubjectsSuggestionByValue(subject).Click();
             }
             return this;
