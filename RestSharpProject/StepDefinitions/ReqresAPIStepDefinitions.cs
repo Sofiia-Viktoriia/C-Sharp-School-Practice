@@ -1,7 +1,7 @@
 using RestSharp;
-using RestSharpProject.Constants.Common;
 using RestSharpProject.Models.Reqres;
 using RestSharpProject.Services;
+using System.Net;
 
 namespace RestSharpProject.StepDefinitions
 {
@@ -28,7 +28,7 @@ namespace RestSharpProject.StepDefinitions
         public void ThenResponseBodyContainsListOfUsers()
         {
             _reqresApiService
-                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseCode(HttpStatusCode.OK)
                 .VerifyResponseContainsListOfUsers();
         }
 
@@ -41,14 +41,14 @@ namespace RestSharpProject.StepDefinitions
         [Then(@"user is not found")]
         public void ThenUserIsNotFound()
         {
-            _reqresApiService.VerifyResponseCode(ResponseCodes.NotFound);
+            _reqresApiService.VerifyResponseCode(HttpStatusCode.NotFound);
         }
 
         [Then(@"response body contains user with id (.*)")]
         public void ThenResponseBodyContainsUserWithId(int userId)
         {
             _reqresApiService
-                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseCode(HttpStatusCode.OK)
                 .VerifyResponseContainsUserId(userId);
         }
 
@@ -63,7 +63,7 @@ namespace RestSharpProject.StepDefinitions
         public void ThenUserIsCreated()
         {
             _reqresApiService
-                .VerifyResponseCode(ResponseCodes.Created)
+                .VerifyResponseCode(HttpStatusCode.Created)
                 .VerifyResponseContainsUserInfo(_scenarioContext.Get<CreateUpdateUserBody>());
         }
 
@@ -71,7 +71,7 @@ namespace RestSharpProject.StepDefinitions
         public void ThenUserIsUpdated()
         {
             _reqresApiService
-                .VerifyResponseCode(ResponseCodes.Success)
+                .VerifyResponseCode(HttpStatusCode.OK)
                 .VerifyResponseContainsUserInfo(_scenarioContext.Get<CreateUpdateUserBody>());
         }
 
@@ -98,7 +98,7 @@ namespace RestSharpProject.StepDefinitions
         [Then(@"user is deleted")]
         public void ThenUserIsDeleted()
         {
-            _reqresApiService.VerifyResponseCode(ResponseCodes.Deleted);
+            _reqresApiService.VerifyResponseCode(HttpStatusCode.NoContent);
         }
 
         [When(@"I send request to register with the following data")]
@@ -111,7 +111,7 @@ namespace RestSharpProject.StepDefinitions
         [Then(@"user is logged in")]
         public void ThenUserIsRegisteredLoggedIn()
         {
-            _reqresApiService.VerifyResponseCode(ResponseCodes.Success);
+            _reqresApiService.VerifyResponseCode(HttpStatusCode.OK);
         }
 
         [When(@"I send request to login with the following credentials")]

@@ -2,6 +2,7 @@
 using RestSharp;
 using RestSharpProject.Constants.Reqres;
 using RestSharpProject.Models.Reqres;
+using System.Net;
 
 namespace RestSharpProject.Services
 {
@@ -97,9 +98,9 @@ namespace RestSharpProject.Services
             return this;
         }
 
-        public ReqresApiService VerifyResponseCode(int code)
+        public ReqresApiService VerifyResponseCode(HttpStatusCode code)
         {
-            Assert.That(_apiService.GetResponseStatusCode(), Is.EqualTo(code), $"Response code does not equal to {code}");
+            Assert.That(_apiService.GetResponseStatusCode(), Is.EqualTo(((int)code)), $"Response code does not equal to {((int)code)}");
             return this;
         }
 

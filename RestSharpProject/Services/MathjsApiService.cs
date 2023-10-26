@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using RestSharp;
-using RestSharpProject.Constants.Common;
 using RestSharpProject.Constants.Mathjs;
 using RestSharpProject.Models.Mathjs;
+using System.Net;
 using System.Numerics;
 
 namespace RestSharpProject.Services
@@ -46,7 +46,7 @@ namespace RestSharpProject.Services
 
         public MathjsApiService VerifyResponseIsSuccess()
         {
-            Assert.That(_apiService.GetResponseStatusCode(), Is.EqualTo(ResponseCodes.Success), $"Response code does not equal to {ResponseCodes.Success}");
+            Assert.That(_apiService.GetResponseStatusCode(), Is.EqualTo(((int)HttpStatusCode.OK)), $"Response code does not equal to {((int)HttpStatusCode.OK)}");
             return this;
         }
 
