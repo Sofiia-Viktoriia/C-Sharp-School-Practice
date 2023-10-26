@@ -66,7 +66,7 @@ namespace ToolsQAProject.Pages.ElementsPage
                 PermanentAddress = UserFormOutputPermanentAddress.Text.TextAfter(Labels.UserFormOutputPermanentAddressMeta)
             };
 
-            Assert.That(result, Is.EqualTo(userForm).Using<UserForm>(new UserFormComparer()));
+            Assert.That(result, Is.EqualTo(userForm).Using(new UserFormComparer()));
             return this;
         }
     }
