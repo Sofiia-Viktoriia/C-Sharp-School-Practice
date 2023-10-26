@@ -20,7 +20,7 @@ namespace RestSharpProject.Services
         {
             _apiService
                 .SetBaseUrl(EndPoints.BaseUrl)
-                .SetHeader("User-Agent", "Learning RestSharp");
+                .SetDefaultHeader("User-Agent", "Learning RestSharp");
             return this;
         }
 
@@ -52,8 +52,8 @@ namespace RestSharpProject.Services
 
         public MathjsApiService VerifyPostCalculationResult(string result)
         {
-            ResponseBody response = _apiService.GetResponseContent<ResponseBody>();
-            Assert.That(response.Result, Is.EqualTo(result), $"The result of expression does not equal {result}");
+            ResponseBody? response = _apiService.GetResponseContent<ResponseBody>();
+            Assert.That(response?.Result, Is.EqualTo(result), $"The result of expression does not equal {result}");
             return this;
         }
 

@@ -106,23 +106,23 @@ namespace RestSharpProject.Services
 
         public ReqresApiService VerifyResponseContainsListOfUsers()
         {
-            Assert.That(_apiService.GetResponseContent<UserList>().Data, Is.Not.Empty, "List does not contain users");
+            Assert.That(_apiService.GetResponseContent<UserList>()?.Data, Is.Not.Empty, "List does not contain users");
             return this;
         }
 
         public ReqresApiService VerifyResponseContainsUserId(int userId)
         {
-            Assert.That(_apiService.GetResponseContent<UserBodyResponse>().Data.Id, Is.EqualTo(userId), $"The Id of returned user does not equal {userId}");
+            Assert.That(_apiService.GetResponseContent<UserBodyResponse>()?.Data.Id, Is.EqualTo(userId), $"The Id of returned user does not equal {userId}");
             return this;
         }
 
         public ReqresApiService VerifyResponseContainsUserInfo(CreateUpdateUserBody expectedInfo)
         {
-            CreateUpdateUserBody user = _apiService.GetResponseContent<CreateUpdateUserBody>();
+            CreateUpdateUserBody? user = _apiService.GetResponseContent<CreateUpdateUserBody>();
             Assert.Multiple(() =>
             {
-                Assert.That(user.Name, Is.EqualTo(expectedInfo.Name), $"The Name of returned user does not equal {expectedInfo.Name}");
-                Assert.That(user.Job, Is.EqualTo(expectedInfo.Job), $"The Job of returned user does not equal {expectedInfo.Job}");
+                Assert.That(user?.Name, Is.EqualTo(expectedInfo.Name), $"The Name of returned user does not equal {expectedInfo.Name}");
+                Assert.That(user?.Job, Is.EqualTo(expectedInfo.Job), $"The Job of returned user does not equal {expectedInfo.Job}");
             });
             return this;
         }
