@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using ToolsQAProject.Helpers.Extensions;
 using ToolsQAProject.Pages.Common;
 
 namespace ToolsQAProject.Pages.ElementsPage

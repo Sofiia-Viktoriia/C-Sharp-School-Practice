@@ -1,12 +1,13 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using ToolsQAProject.Helpers.Extensions;
 
 namespace ToolsQAProject.Pages.Common
 {
     public abstract class BasePage<T> where T : BasePage<T>
     {
         private readonly IWebDriver _webDriver;
-        private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[@id='adplus-anchor']//iframe"));
+        private ReadOnlyCollection<IWebElement> AdsIframe => _webDriver.FindElements(By.XPath("//div[contains(@id,'google_ads_iframe') and .//iframe]"));
 
         protected BasePage(IWebDriver webDriver)
         {
@@ -15,11 +16,10 @@ namespace ToolsQAProject.Pages.Common
 
         public T RefreshPageIfAdsAreDisplayed()
         {
-            while (AdsIframe.Count > 0)
+            foreach (var ads in AdsIframe)
             {
-                _webDriver.Navigate().Refresh();
+                ads.MakeHidden();
             }
-
             return (T)this;
         }
     }
