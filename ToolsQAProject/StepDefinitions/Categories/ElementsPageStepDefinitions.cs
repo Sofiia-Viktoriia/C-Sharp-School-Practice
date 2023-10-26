@@ -108,22 +108,17 @@ namespace ToolsQAProject.StepDefinitions.Categories
         [When(@"user interacts with the '([^']*)' button")]
         public void WhenUserInteractsWithTheButton(string buttonName)
         {
+            _buttonsSection.RefreshPageIfAdsAreDisplayed();
             switch (buttonName)
             {
                 case Buttons.DoubleClickMe:
-                    _buttonsSection
-                        .RefreshPageIfAdsAreDisplayed()
-                        .DoubleClickOnButton(buttonName);
+                    _buttonsSection.DoubleClickOnButton(buttonName);
                     break;
                 case Buttons.RightClickMe:
-                    _buttonsSection
-                        .RefreshPageIfAdsAreDisplayed()
-                        .RightClickOnButton(buttonName);
+                    _buttonsSection.RightClickOnButton(buttonName);
                     break;
                 case Buttons.ClickMe:
-                    _buttonsSection
-                        .RefreshPageIfAdsAreDisplayed()
-                        .ClickOnButton(buttonName);
+                    _buttonsSection.ClickOnButton(buttonName);
                     break;
             }
         }
