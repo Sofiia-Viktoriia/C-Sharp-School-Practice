@@ -27,16 +27,9 @@ namespace RestSharpProject.Services
             return this;
         }
 
-        public ApiService SetPathAndMethod(string path, Method method)
+        public ApiService CreateRequest(string path, Method method)
         {
-            _restRequest.Resource = path;
-            _restRequest.Method = method;
-            return this;
-        }
-
-        public ApiService ResetRequest()
-        {
-            _restRequest = new RestRequest();
+            _restRequest = new RestRequest(path, method);
             return this;
         }
 

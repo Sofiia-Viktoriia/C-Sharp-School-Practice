@@ -19,8 +19,7 @@ namespace RestSharpProject.Services
         public ReqresApiService GetListOfUsers()
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.Users, Method.Get)
+                .CreateRequest(EndPoints.Users, Method.Get)
                 .SendRequest();
             return this;
         }
@@ -28,8 +27,7 @@ namespace RestSharpProject.Services
         public ReqresApiService GetListOfUsersWithDelay(int delay)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.Users, Method.Get)
+                .CreateRequest(EndPoints.Users, Method.Get)
                 .AddParameter("delay", delay.ToString())
                 .SendRequest();
             return this;
@@ -38,8 +36,7 @@ namespace RestSharpProject.Services
         public ReqresApiService GetSingleUser(int userId)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.UserById(userId), Method.Get)
+                .CreateRequest(EndPoints.UserById(userId), Method.Get)
                 .SendRequest();
             return this;
         }
@@ -47,8 +44,7 @@ namespace RestSharpProject.Services
         public ReqresApiService CreateUser(CreateUpdateUserBody userCreationBody)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.Users, Method.Post)
+                .CreateRequest(EndPoints.Users, Method.Post)
                 .AddBody(userCreationBody)
                 .SendRequest();
             return this;
@@ -57,8 +53,7 @@ namespace RestSharpProject.Services
         public ReqresApiService UpdateUser(int userId, CreateUpdateUserBody userUpdateBody, Method method)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.UserById(userId), method)
+                .CreateRequest(EndPoints.UserById(userId), method)
                 .AddBody(userUpdateBody)
                 .SendRequest();
             return this;
@@ -67,8 +62,7 @@ namespace RestSharpProject.Services
         public ReqresApiService DeleteUser(int userId)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.UserById(userId), Method.Delete)
+                .CreateRequest(EndPoints.UserById(userId), Method.Delete)
                 .SendRequest();
             return this;
         }
@@ -76,8 +70,7 @@ namespace RestSharpProject.Services
         public ReqresApiService Register(LoginRegistrationBody registrationBody)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.Registration, Method.Post)
+                .CreateRequest(EndPoints.Registration, Method.Post)
                 .AddBody(registrationBody)
                 .SendRequest();
             return this;
@@ -86,8 +79,7 @@ namespace RestSharpProject.Services
         public ReqresApiService Login(LoginRegistrationBody loginBody)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.Login, Method.Post)
+                .CreateRequest(EndPoints.Login, Method.Post)
                 .AddBody(loginBody)
                 .SendRequest();
             return this;

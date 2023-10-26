@@ -22,8 +22,7 @@ namespace RestSharpProject.Services
         public MathjsApiService PostCalculateExpression(string expr)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.ExpressionCalculation, Method.Post)
+                .CreateRequest(EndPoints.ExpressionCalculation, Method.Post)
                 .AddBody(new RequestBody(expr))
                 .SendRequest();
             return this;
@@ -32,8 +31,7 @@ namespace RestSharpProject.Services
         public MathjsApiService GetCalculateExpression(double value)
         {
             _apiService
-                .ResetRequest()
-                .SetPathAndMethod(EndPoints.ExpressionCalculation, Method.Get)
+                .CreateRequest(EndPoints.ExpressionCalculation, Method.Get)
                 .AddParameter("expr", $"sqrt({value})")
                 .SendRequest();
             return this;
