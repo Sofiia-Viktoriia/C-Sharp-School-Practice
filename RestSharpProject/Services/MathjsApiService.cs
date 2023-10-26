@@ -14,14 +14,9 @@ namespace RestSharpProject.Services
         public MathjsApiService(ApiService apiService)
         {
             _apiService = apiService;
-        }
-
-        public MathjsApiService SetRestClient()
-        {
             _apiService
                 .SetBaseUrl(EndPoints.BaseUrl)
                 .SetDefaultHeader("User-Agent", "Learning RestSharp");
-            return this;
         }
 
         public MathjsApiService PostCalculateExpression(string expr)

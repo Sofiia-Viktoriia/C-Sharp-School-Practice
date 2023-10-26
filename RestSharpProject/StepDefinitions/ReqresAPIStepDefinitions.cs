@@ -15,7 +15,6 @@ namespace RestSharpProject.StepDefinitions
         {
             _scenarioContext = scenarioContext;
             _reqresApiService = reqresApiService;
-            _reqresApiService.SetRestClient();
         }
 
         [When(@"I send request to get list of users")]

@@ -13,12 +13,7 @@ namespace RestSharpProject.Services
         public ReqresApiService(ApiService apiService)
         {
             _apiService = apiService;
-        }
-
-        public ReqresApiService SetRestClient()
-        {
             _apiService.SetBaseUrl(EndPoints.BaseUrl);
-            return this;
         }
 
         public ReqresApiService GetListOfUsers()

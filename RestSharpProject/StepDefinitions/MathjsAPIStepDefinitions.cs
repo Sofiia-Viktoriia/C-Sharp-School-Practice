@@ -10,7 +10,6 @@ namespace RestSharpProject.StepDefinitions
         public MathjsAPIStepDefinitions(MathjsApiService mathjsApiService)
         {
             _mathjsApiService = mathjsApiService;
-            _mathjsApiService.SetRestClient();
         }
 
         [When(@"I send a request to calculate '([^']*)'")]
