@@ -5,10 +5,10 @@ namespace ToolsQAProject.Configurations
 {
     public class AppSettingsConfig
     {
-        private readonly ObjectContainer _objectContainer;
+        private readonly IObjectContainer _objectContainer;
         private readonly IConfigurationRoot _configurationRoot;
 
-        public AppSettingsConfig(ObjectContainer objectContainer)
+        public AppSettingsConfig(IObjectContainer objectContainer)
         {
             _objectContainer = objectContainer;
             _configurationRoot = new ConfigurationBuilder()
