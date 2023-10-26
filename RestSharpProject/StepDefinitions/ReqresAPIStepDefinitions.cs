@@ -120,16 +120,10 @@ namespace RestSharpProject.StepDefinitions
             _reqresApiService.Login(loginBody);
         }
 
-        [Given(@"delay equals (.*) seconds")]
-        public void GivenDelayEqualsSeconds(int seconds)
+        [When(@"I send request to get list of users with (.*) seconds delay")]
+        public void WhenISendRequestToGetListOfUsersWithDelay(int seconds)
         {
-            _scenarioContext.Set(seconds);
-        }
-
-        [When(@"I send request to get list of users with delay")]
-        public void WhenISendRequestToGetListOfUsersWithDelay()
-        {
-            _reqresApiService.GetListOfUsersWithDelay(_scenarioContext.Get<int>());
+            _reqresApiService.GetListOfUsersWithDelay(seconds);
         }
     }
 }

@@ -56,6 +56,5 @@ Scenario: Successful login
 	Then user is logged in
 
 Scenario: Getting list of users with delay
-	Given delay equals 3 seconds
-	When I send request to get list of users with delay
+	When I send request to get list of users with 3 seconds delay
 	Then response body contains list of users
